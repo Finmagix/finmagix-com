@@ -75,10 +75,9 @@
 }
 
 .iconBox svg {
-  width: 15px;
-  height: 15px;
-  stroke: var(--lime);
-  fill: none;
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .name {
