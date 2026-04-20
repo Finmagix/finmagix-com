@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import styles from "./Features.module.css";
 
-type Tier = "Free" | "Recommended" | "Pro";
+type Tier = "Free" | "Recommended Pack" | "Pro";
 
 interface ModuleCard {
   name: string;
@@ -17,7 +17,7 @@ const MODULES: ModuleCard[] = [
   {
     name: "Financial Health Checkup",
     description:
-      "Baseline your overall financial picture across the six core planning areas.",
+      "Your overall financial fitness score across 6 key dimensions",
     tier: "Free",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -31,24 +31,9 @@ const MODULES: ModuleCard[] = [
     ),
   },
   {
-    name: "Cash Flow & Budget",
+    name: "Financial Stress Test",
     description:
-      "See where money actually goes each month and where surplus can be built.",
-    tier: "Free",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M4 7h16M4 12h10M4 17h16"
-          {...stroke}
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: "Emergency Fund",
-    description:
-      "Size the right safety net for your household and map a path to it.",
+      "How long would your finances survive a job loss or emergency?",
     tier: "Free",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -57,29 +42,14 @@ const MODULES: ModuleCard[] = [
           {...stroke}
           strokeLinejoin="round"
         />
+        <path d="M12 9v4M12 16v.5" {...stroke} strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    name: "Debt Strategy",
-    description:
-      "Compare avalanche, snowball, and consolidation to pay off what you owe.",
-    tier: "Recommended",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M4 20V10l8-6 8 6v10M9 20v-6h6v6"
-          {...stroke}
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: "Retirement Planning",
-    description:
-      "Project your retirement trajectory and identify gaps worth closing.",
-    tier: "Recommended",
+    name: "Retirement Readiness Planner",
+    description: "Are you on track to retire when you want to?",
+    tier: "Pro",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="8" {...stroke} />
@@ -88,10 +58,29 @@ const MODULES: ModuleCard[] = [
     ),
   },
   {
-    name: "Tax Optimization",
-    description:
-      "Spot opportunities in deductions, credits, and tax-advantaged accounts.",
-    tier: "Recommended",
+    name: "Longevity Calculator",
+    description: "Will your money last as long as you do?",
+    tier: "Pro",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M4 12c4-6 12-6 16 0"
+          {...stroke}
+          strokeLinecap="round"
+        />
+        <path
+          d="M4 17c4-4 12-4 16 0"
+          {...stroke}
+          strokeLinecap="round"
+        />
+        <circle cx="12" cy="7" r="2" {...stroke} />
+      </svg>
+    ),
+  },
+  {
+    name: "Tax Efficiency Score",
+    description: "Are you paying more tax than you need to?",
+    tier: "Recommended Pack",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M7 4h10l2 4v12H5V8z" {...stroke} strokeLinejoin="round" />
@@ -100,14 +89,14 @@ const MODULES: ModuleCard[] = [
     ),
   },
   {
-    name: "Investment Allocation",
+    name: "Debt Strategy Optimizer",
     description:
-      "Benchmark your portfolio's risk, diversification, and cost profile.",
-    tier: "Recommended",
+      "The fastest, cheapest path out of debt — built around your numbers",
+    tier: "Recommended Pack",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path
-          d="M4 19L10 11L14 15L20 7"
+          d="M4 16l5-5 4 4 7-8"
           {...stroke}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -117,10 +106,10 @@ const MODULES: ModuleCard[] = [
     ),
   },
   {
-    name: "Insurance Coverage",
+    name: "Protection & Insurance Optimizer",
     description:
-      "Check gaps in life, disability, health, and property coverage vs. benchmarks.",
-    tier: "Recommended",
+      "Are your family and income properly protected against the unexpected?",
+    tier: "Recommended Pack",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path
@@ -133,21 +122,9 @@ const MODULES: ModuleCard[] = [
     ),
   },
   {
-    name: "Education Funding",
+    name: "Estate & Legacy Planner",
     description:
-      "Plan for college or future tuition goals using 529 and alternative vehicles.",
-    tier: "Pro",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M3 9l9-5 9 5-9 5-9-5z" {...stroke} strokeLinejoin="round" />
-        <path d="M7 11v5c3 2 7 2 10 0v-5" {...stroke} strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    name: "Estate & Legacy",
-    description:
-      "Check if your wishes are documented and your heirs protected.",
+      "Make sure your assets go where you intend — not to probate",
     tier: "Pro",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -157,29 +134,62 @@ const MODULES: ModuleCard[] = [
     ),
   },
   {
-    name: "Real Estate",
+    name: "College Savings Planner",
     description:
-      "Weigh rent-vs-buy, refinance, and home equity against your other goals.",
-    tier: "Pro",
+      "Are you on track to cover college costs for each child?",
+    tier: "Recommended Pack",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M3 11l9-7 9 7v9H3z" {...stroke} strokeLinejoin="round" />
-        <path d="M10 20v-6h4v6" {...stroke} strokeLinecap="round" />
+        <path d="M3 9l9-5 9 5-9 5-9-5z" {...stroke} strokeLinejoin="round" />
+        <path d="M7 11v5c3 2 7 2 10 0v-5" {...stroke} strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    name: "Small Business & Equity",
+    name: "Social Security Optimizer",
     description:
-      "Model business cashflow, RSUs, and equity against your household plan.",
+      "When should you claim? Worth up to $180,000 in lifetime difference",
+    tier: "Recommended Pack",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="8" {...stroke} />
+        <path
+          d="M9 10a2 2 0 014 0c0 2-3 2-3 4M12 16.5v.01"
+          {...stroke}
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "FIRE Calculator",
+    description:
+      "What would it actually take for you to retire early?",
+    tier: "Recommended Pack",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M12 3c1 3 4 4 4 8a4 4 0 01-8 0c0-2 2-3 2-5 2 1 2 3 2 3"
+          {...stroke}
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "Wealth Builder",
+    description:
+      "Is your investment strategy working for your goals and time horizon?",
     tier: "Pro",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path
-          d="M3 8h18v12H3zM8 8V5h8v3"
+          d="M4 19L10 11L14 15L20 7"
           {...stroke}
+          strokeLinecap="round"
           strokeLinejoin="round"
         />
+        <path d="M15 7h5v5" {...stroke} strokeLinecap="round" />
       </svg>
     ),
   },
@@ -187,7 +197,7 @@ const MODULES: ModuleCard[] = [
 
 function tierClass(tier: Tier) {
   if (tier === "Free") return styles.tierFree;
-  if (tier === "Recommended") return styles.tierRecommended;
+  if (tier === "Recommended Pack") return styles.tierRecommended;
   return styles.tierPro;
 }
 
