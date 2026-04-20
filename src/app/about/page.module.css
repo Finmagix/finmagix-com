@@ -1,6 +1,7 @@
+/* ─── SECTION 1: Hero ─────────────────────────────────────────── */
 .hero {
   background: var(--deep);
-  padding: 72px 24px;
+  padding: 88px 24px 72px;
 }
 
 .heroInner {
@@ -11,10 +12,16 @@
 .heroH1 {
   font-family: var(--font-dm-serif), Georgia, serif;
   color: #fff;
-  font-size: 42px;
-  line-height: 1.15;
-  margin: 12px 0 16px;
-  max-width: 680px;
+  font-size: 34px;
+  line-height: 1.1;
+  margin: 12px 0 18px;
+  max-width: 820px;
+}
+
+@media (min-width: 900px) {
+  .heroH1 {
+    font-size: 48px;
+  }
 }
 
 .heroSub {
@@ -22,138 +29,84 @@
   font-size: 17px;
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.65;
-  max-width: 560px;
+  max-width: 580px;
 }
 
+/* ─── SECTION 2: Mission ──────────────────────────────────────── */
 .mission {
   background: var(--cream);
-  padding: 72px 24px;
+  padding: 80px 24px;
 }
 
 .missionInner {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
+  gap: 48px;
 }
 
 @media (min-width: 768px) {
   .missionInner {
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
   }
 }
 
-.missionH3 {
+.missionH2 {
   font-family: var(--font-dm-serif), Georgia, serif;
-  font-size: 22px;
+  font-size: 28px;
   color: var(--deep);
-  margin-bottom: 12px;
+  margin: 0;
+}
+
+.divider {
+  width: 40px;
+  height: 2px;
+  background: var(--lime);
+  margin: 14px 0;
+  border: none;
 }
 
 .missionP {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   color: #5a6a5e;
-  line-height: 1.7;
+  line-height: 1.75;
+  margin: 0;
 }
 
-.team {
-  background: #fff;
-  padding: 72px 24px;
+.missionPBlock + .missionPBlock {
+  margin-top: 14px;
 }
 
-.teamInner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.teamH2 {
-  font-family: var(--font-dm-serif), Georgia, serif;
-  font-size: 34px;
-  color: var(--deep);
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.teamGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-@media (min-width: 768px) {
-  .teamGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.teamCard {
-  background: var(--cream);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 24px;
-}
-
-.avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--deep);
-  color: var(--lime);
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-}
-
-.teamName {
-  font-family: var(--font-dm-serif), Georgia, serif;
-  font-size: 18px;
-  color: var(--deep);
-  margin-bottom: 4px;
-}
-
-.teamTitle {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 13px;
-  color: var(--sage);
-  margin-bottom: 10px;
-}
-
-.teamBio {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 13px;
-  color: #5a6a5e;
-  line-height: 1.6;
-}
-
+/* ─── SECTION 3: Values ───────────────────────────────────────── */
 .values {
-  background: var(--cream);
-  padding: 72px 24px;
+  background: #fff;
+  padding: 80px 24px;
 }
 
 .valuesInner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.valuesHeader {
+  text-align: center;
+  margin-bottom: 48px;
 }
 
 .valuesH2 {
   font-family: var(--font-dm-serif), Georgia, serif;
-  font-size: 34px;
+  font-size: 36px;
   color: var(--deep);
-  text-align: center;
-  margin-bottom: 40px;
+  margin: 12px 0 0;
+  line-height: 1.2;
 }
 
 .valuesGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
 @media (min-width: 768px) {
@@ -163,35 +116,167 @@
 }
 
 .valueCard {
-  background: #fff;
+  background: var(--cream);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 24px;
+  padding: 28px;
 }
 
-.valueTitle {
+.valueIcon {
+  width: 48px;
+  height: 48px;
+  background: var(--deep);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.valueIcon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.valueH3 {
   font-family: var(--font-dm-serif), Georgia, serif;
   font-size: 20px;
   color: var(--deep);
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  line-height: 1.3;
 }
 
-.valueDesc {
+.valueP {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-size: 14px;
   color: #5a6a5e;
   line-height: 1.65;
+  margin: 0;
 }
 
-.disclaimerStrip {
-  background: #fff;
-  padding: 24px;
+/* ─── SECTION 4: By the numbers ───────────────────────────────── */
+.stats {
+  background: var(--deep);
+  padding: 72px 24px;
   text-align: center;
-  border-top: 1px solid var(--border);
 }
 
-.disclaimerStripText {
+.statsInner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.statsH2 {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-size: 34px;
+  color: #fff;
+  margin: 0 0 48px;
+  line-height: 1.2;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statCell {
+  background: var(--deep);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statNumber {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-size: 44px;
+  color: var(--lime);
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 6px;
+  line-height: 1.4;
+  max-width: 220px;
+}
+
+/* ─── SECTION 5: Join the mission ─────────────────────────────── */
+.join {
+  background: var(--cream);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.joinInner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.joinH2 {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-size: 34px;
+  color: var(--deep);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.joinP {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 16px;
+  color: #5a6a5e;
+  max-width: 520px;
+  margin: 14px auto 28px;
+  line-height: 1.7;
+}
+
+.joinBtnRow {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.workOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 40px;
+  border: 1px solid var(--sage);
+  background: transparent;
+  color: var(--deep);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+}
+
+.workOutline:hover {
+  background: var(--sage);
+  color: #fff;
+}
+
+.joinDisclaimer {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-size: 12px;
-  color: #7a8a7e;
+  color: #9aaa9e;
+  margin: 0;
 }

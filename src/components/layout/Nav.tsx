@@ -39,7 +39,7 @@ const COMPANY_GROUP: DropdownGroup = {
   label: "Company",
   items: [
     { label: "About Us", href: "/about" },
-    { label: "Our Team", href: "/about#team" },
+    { label: "Our Advisors", href: "/advisors" },
     { label: "Contact Us", href: "/contact" },
     { label: "Blog", href: "/blog" },
   ],
