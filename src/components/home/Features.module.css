@@ -1,0 +1,126 @@
+.section {
+  background: var(--cream);
+  padding: 88px 24px;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.h2 {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-size: 38px;
+  color: var(--deep);
+  line-height: 1.15;
+  margin: 12px 0;
+}
+
+.sub {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 16px;
+  color: #7a8a7e;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: var(--sage);
+  transform: translateY(-1px);
+}
+
+.iconBox {
+  width: 34px;
+  height: 34px;
+  background: var(--deep);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.iconBox svg {
+  width: 15px;
+  height: 15px;
+  stroke: var(--lime);
+  fill: none;
+}
+
+.name {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--deep);
+  margin-bottom: 5px;
+}
+
+.desc {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 12px;
+  color: #7a8a7e;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.tier {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tierFree {
+  background: #f0f7f0;
+  color: var(--sage);
+}
+
+.tierRecommended {
+  background: #fff8e6;
+  color: #8a6a00;
+}
+
+.tierPro {
+  background: #f0f0ff;
+  color: #3a3a8a;
+}
