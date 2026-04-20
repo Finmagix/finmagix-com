@@ -5,9 +5,23 @@ import PricingFaq from "./PricingFaq";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Pricing — Finmagix",
+  title: "Pricing | Finmagix",
   description:
     "Start free. Upgrade when you're ready. Monthly or annual plans, cancel anytime.",
+  openGraph: {
+    title: "Pricing | Finmagix",
+    description:
+      "Start free. Upgrade when you're ready. Monthly or annual plans, cancel anytime.",
+    url: "https://finmagix.com/pricing",
+    siteName: "Finmagix",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pricing | Finmagix",
+    description:
+      "Start free. Upgrade when you're ready. Monthly or annual plans, cancel anytime.",
+  },
 };
 
 type Mark = "check" | "dash" | string;

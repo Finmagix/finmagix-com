@@ -18,7 +18,11 @@ const dmSerif = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Finmagix — Know Your Complete Financial Picture",
+  metadataBase: new URL("https://finmagix.com"),
+  title: {
+    default: "Finmagix — Know Your Complete Financial Picture",
+    template: "%s",
+  },
   description:
     "12 CFP-standard financial planning modules. Personalized roadmap. AI-powered insights. Start free.",
   openGraph: {
@@ -28,6 +32,12 @@ export const metadata: Metadata = {
     url: "https://finmagix.com",
     siteName: "Finmagix",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Finmagix — Know Your Complete Financial Picture",
+    description:
+      "12 CFP-standard financial planning modules. Personalized roadmap. AI-powered insights. Start free.",
   },
 };
 

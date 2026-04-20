@@ -4,9 +4,23 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Our Advisors — Finmagix",
+  title: "Our Advisors | Finmagix",
   description:
     "Meet the experts behind Finmagix. Advisor profiles coming soon.",
+  openGraph: {
+    title: "Our Advisors | Finmagix",
+    description:
+      "Meet the experts behind Finmagix. Advisor profiles coming soon.",
+    url: "https://finmagix.com/advisors",
+    siteName: "Finmagix",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Advisors | Finmagix",
+    description:
+      "Meet the experts behind Finmagix. Advisor profiles coming soon.",
+  },
 };
 
 export default function AdvisorsPage() {

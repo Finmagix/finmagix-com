@@ -5,9 +5,23 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "See Finmagix in action",
+  title: "Demo | Finmagix",
   description:
     "A complete financial plan in under 20 minutes. A walkthrough of Finmagix from sign-up to your personalized financial roadmap.",
+  openGraph: {
+    title: "Demo | Finmagix",
+    description:
+      "A complete financial plan in under 20 minutes. A walkthrough of Finmagix from sign-up to your personalized financial roadmap.",
+    url: "https://finmagix.com/demo",
+    siteName: "Finmagix",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Demo | Finmagix",
+    description:
+      "A complete financial plan in under 20 minutes.",
+  },
 };
 
 /* ───────── Step mockups ─────────────────────────────────────────── */

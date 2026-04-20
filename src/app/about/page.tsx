@@ -5,9 +5,23 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "About Finmagix",
+  title: "About | Finmagix",
   description:
     "Financial fitness should be measurable, understandable, and accessible to everyone. Our mission, approach, and principles.",
+  openGraph: {
+    title: "About | Finmagix",
+    description:
+      "Financial fitness should be measurable, understandable, and accessible to everyone.",
+    url: "https://finmagix.com/about",
+    siteName: "Finmagix",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About | Finmagix",
+    description:
+      "Financial fitness should be measurable, understandable, and accessible to everyone.",
+  },
 };
 
 interface ValueCardData {

@@ -5,9 +5,23 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Partnerships — Finmagix",
+  title: "Partnerships | Finmagix",
   description:
     "White-label or co-branded financial planning tools for credit unions, community banks, employers, and CFP firms.",
+  openGraph: {
+    title: "Partnerships | Finmagix",
+    description:
+      "White-label or co-branded financial planning tools for credit unions, community banks, employers, and CFP firms.",
+    url: "https://finmagix.com/partners",
+    siteName: "Finmagix",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Partnerships | Finmagix",
+    description:
+      "White-label or co-branded financial planning tools for credit unions, community banks, employers, and CFP firms.",
+  },
 };
 
 interface WhyCardData {

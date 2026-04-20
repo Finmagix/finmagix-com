@@ -3,9 +3,23 @@ import ContactForm from "./ContactForm";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Contact — Finmagix",
+  title: "Contact | Finmagix",
   description:
     "Questions, partnerships, or feedback — we respond within one business day.",
+  openGraph: {
+    title: "Contact | Finmagix",
+    description:
+      "Questions, partnerships, or feedback — we respond within one business day.",
+    url: "https://finmagix.com/contact",
+    siteName: "Finmagix",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | Finmagix",
+    description:
+      "Questions, partnerships, or feedback — we respond within one business day.",
+  },
 };
 
 interface InfoCard {
