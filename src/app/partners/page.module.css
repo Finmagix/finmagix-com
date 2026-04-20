@@ -165,40 +165,29 @@
 }
 
 .tier {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+  max-width: 680px;
+  margin: 0 auto;
   padding: 48px 0;
-  align-items: center;
   scroll-margin-top: 88px;
-}
-
-@media (min-width: 900px) {
-  .tier {
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-  }
+  position: relative;
 }
 
 .tier + .tier {
   border-top: 1px solid var(--border);
 }
 
-.tierReversed .tierContent {
-  order: 2;
+.tierContent {
+  text-align: left;
 }
 
-.tierReversed .tierDetail {
-  order: 1;
-}
-
-@media (max-width: 899px) {
-  .tierReversed .tierContent {
-    order: 1;
-  }
-  .tierReversed .tierDetail {
-    order: 2;
-  }
+.anchorOffset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
 .tierLabel {
@@ -257,85 +246,6 @@
   flex-shrink: 0;
   color: var(--lime);
   margin-top: 2px;
-}
-
-.tierDetail {
-  background: var(--deep);
-  border-radius: 16px;
-  padding: 28px;
-  color: #fff;
-}
-
-.tierDetailLabel {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0;
-}
-
-.tierDetailPriceRow {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.tierDetailPrice {
-  font-family: var(--font-dm-serif), Georgia, serif;
-  font-size: 36px;
-  color: var(--lime);
-  line-height: 1;
-}
-
-.tierDetailPeriod {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.tierDetailBilled {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.45);
-  margin-top: 4px;
-}
-
-.tierDetailDivider {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 18px 0;
-}
-
-.tierIncludes {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.tierIncludeItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.tierIncludeDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--lime);
-  flex-shrink: 0;
-}
-
-.tiersAltBg {
-  background: var(--cream);
 }
 
 .tiersWhiteBg {

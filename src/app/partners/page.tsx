@@ -87,13 +87,7 @@ interface TierData {
   title: string;
   description: string;
   features: string[];
-  price: string;
-  period: string;
-  billed: string;
-  includes: string[];
   ctaLabel: string;
-  reversed?: boolean;
-  altBg?: boolean;
 }
 
 const TIERS: TierData[] = [
@@ -109,15 +103,6 @@ const TIERS: TierData[] = [
       "Member analytics dashboard",
       "Dedicated onboarding support",
     ],
-    price: "$8",
-    period: "per member / month",
-    billed: "billed annually",
-    includes: [
-      "All 12 planning modules",
-      "White-label branding",
-      "Analytics dashboard",
-      "Onboarding support",
-    ],
     ctaLabel: "Request a demo →",
   },
   {
@@ -132,18 +117,7 @@ const TIERS: TierData[] = [
       "HR dashboard and utilization metrics",
       "Custom SSO integration available",
     ],
-    price: "$10",
-    period: "per employee / month",
-    billed: "billed annually",
-    includes: [
-      "All 12 planning modules",
-      "Anonymous usage reporting",
-      "HR dashboard",
-      "Custom SSO integration",
-    ],
     ctaLabel: "Schedule a call →",
-    reversed: true,
-    altBg: true,
   },
   {
     id: ["advisors"],
@@ -156,15 +130,6 @@ const TIERS: TierData[] = [
       "All 12 planning modules",
       "Client PDF reports with your branding",
       "Bulk client management dashboard",
-    ],
-    price: "$299",
-    period: "per advisor / month",
-    billed: "billed annually",
-    includes: [
-      "White-label client portal",
-      "All 12 planning modules",
-      "Branded client PDF reports",
-      "Bulk client management",
     ],
     ctaLabel: "Learn more →",
   },
@@ -370,28 +335,17 @@ export default function PartnersPage() {
           <div className={styles.tiersHeader}>
             <h2 className={styles.tiersH2}>Partnership options</h2>
             <p className={styles.tiersSub}>
-              Flexible pricing for every type of institution.
+              Flexible partnership structures for every type of institution.
             </p>
           </div>
 
           {TIERS.map((tier) => (
-            <div
-              key={tier.label}
-              id={tier.id[0]}
-              className={`${styles.tier} ${
-                tier.reversed ? styles.tierReversed : ""
-              }`}
-            >
+            <div key={tier.label} id={tier.id[0]} className={styles.tier}>
               {tier.id.slice(1).map((anchor) => (
                 <span
                   key={anchor}
                   id={anchor}
-                  style={{
-                    position: "absolute",
-                    width: 1,
-                    height: 1,
-                    overflow: "hidden",
-                  }}
+                  className={styles.anchorOffset}
                   aria-hidden="true"
                 />
               ))}
@@ -411,29 +365,6 @@ export default function PartnersPage() {
                   {tier.ctaLabel}
                 </Button>
               </div>
-
-              <aside className={styles.tierDetail}>
-                <p className={styles.tierDetailLabel}>Starting from</p>
-                <div className={styles.tierDetailPriceRow}>
-                  <span className={styles.tierDetailPrice}>{tier.price}</span>
-                  <span className={styles.tierDetailPeriod}>
-                    {tier.period}
-                  </span>
-                </div>
-                <p className={styles.tierDetailBilled}>{tier.billed}</p>
-                <hr className={styles.tierDetailDivider} />
-                <ul className={styles.tierIncludes}>
-                  {tier.includes.map((inc) => (
-                    <li key={inc} className={styles.tierIncludeItem}>
-                      <span
-                        className={styles.tierIncludeDot}
-                        aria-hidden="true"
-                      />
-                      {inc}
-                    </li>
-                  ))}
-                </ul>
-              </aside>
             </div>
           ))}
         </div>
