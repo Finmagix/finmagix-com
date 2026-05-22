@@ -51,15 +51,21 @@ This file tracks deferred work, design-system shortcuts, and cleanup items speci
 
 **Effort.** ~4 hours including copy review. **Cleanup session.** Future scope-brief session after beta + Stripe milestones.
 
-### `/platform` page exists as a minimal stub
+### Three route stubs landed in Session 01 to avoid 404s on chrome links
 
-**What.** Session 01 created `src/app/platform/page.tsx` as a minimal placeholder so the home's "See all twelve modules" link (and any other internal references) don't 404. The full Platform page build (long-form narrative from `prototype/uploads/Our_Platform.docx`, five numbered steps with product screenshots, "What we won't do" callout, etc.) is migration step 4.
+**What.** Session 01 added three minimal placeholder pages so the new NavBar / Footer don't 404 in preview. Each contains a "we're working on it" message + a link back to the relevant existing page. These are scope-honoring stubs, not real content.
 
-**Where.** `src/app/platform/page.tsx`. Source content: `prototype/uploads/Our_Platform.docx` + `prototype/site/pages/pricing-demo.jsx` (which contains the platform page logic).
+| Route | File | Real content lives in |
+|---|---|---|
+| `/platform` | `src/app/platform/page.tsx` | `prototype/uploads/Our_Platform.docx` + `prototype/site/pages/pricing-demo.jsx` (the prototype's platform page logic). Migration order step 4. |
+| `/privacy-and-security` | `src/app/privacy-and-security/page.tsx` | `prototype/uploads/Finmagix_Lite_Beta_Legal_Documents.docx`. Legal-pages migration step (step 10). Counsel-supplied body required before public launch. |
+| `/disclaimer` | `src/app/disclaimer/page.tsx` | Same docx. Bare-minimum disclaimer copy is in the stub today; full 16-section legal text waits for counsel. |
 
-**Why it matters.** Stub is intentionally minimal to avoid scope creep in Session 01. Full build is its own session per the handoff migration order.
+**Why three stubs landed in Session 01** (the brief originally proposed only `/platform`): the new Footer links to `/privacy-and-security` and `/disclaimer` as part of the legal strip. Pointing the Footer at existing `/privacy` would deceive users (the label says "Privacy & Security Policy" but the page is privacy-only). Dropping the links would deviate from the handoff's footer structure. Stubs preserve the canonical URLs and let founder QA the chrome without 404s.
 
-**Effort.** ~6-8 hours for the full Platform page build. **Cleanup session.** Step 4 of migration order — next session after Session 01.
+**Effort to fully build out.** `/platform` ~6-8 hours; `/privacy-and-security` and `/disclaimer` ~2-3 hours each plus external counsel review. **Cleanup sessions.** Steps 4 + 10 of migration order.
+
+**Redirects still TBD.** Per handoff: `/demo → /platform`, `/privacy → /privacy-and-security`, `/security → /privacy-and-security`. These are migration order step 3 — `next.config.ts` redirects, separate session.
 
 ---
 
