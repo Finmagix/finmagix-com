@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Design package — extracted prototype is reference, not production code.
+    // Matches the /prototype/ + *.zip entries in .gitignore.
+    "prototype/**",
   ]),
 ]);
 

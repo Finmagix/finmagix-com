@@ -1,6 +1,135 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Finmagix Lite Design System — Foundation Tokens
+   Source: prototype/site/tokens.css (Claude Design handoff, May 2026).
+   Imported globally via app/layout.tsx. Fonts are loaded by
+   next/font/google in layout.tsx; the font-family tokens below
+   reference the CSS variables that next/font generates.
+
+   This file is the design-system source of truth for the marketing site.
+   See docs/tech-debt-marketing.md for the design-system-dedupe item:
+   long-term these tokens move to a shared @finmagix/design-system package
+   consumed by both lite.finmagix.com and finmagix.com.
+   ============================================================ */
+
 :root {
+  /* ----------------------------------------------------------
+     Color — Surfaces
+     ---------------------------------------------------------- */
+  --surface-canvas:            #FAF7F2;  /* main page background, warm cream */
+  --surface-raised:            #FFFFFF;  /* cards on canvas */
+  --surface-sunken:            #F2EEE6;  /* inputs, inset wells */
+  --surface-inverse:           #0F2A1F;  /* dark forest green, prominent moments */
+  --surface-tier-free:         #FFFFFF;
+  --surface-tier-recommended:  #FBF6EC;  /* subtle warm beige */
+  --surface-tier-pro:          #F6EFE0;  /* subtle deeper warm */
+
+  /* ----------------------------------------------------------
+     Color — Ink (text)
+     ---------------------------------------------------------- */
+  --ink-primary:               #1F1A14;  /* warm near-black, body + headings */
+  --ink-secondary:             #4F4538;  /* supporting text */
+  --ink-tertiary:              #7C7363;  /* muted: footers, disclosures */
+  --ink-inverse-primary:       #F5F0E3;  /* warm off-white on dark surfaces */
+  --ink-inverse-secondary:     #B7B09F;  /* supporting on dark */
+
+  /* ----------------------------------------------------------
+     Color — Accent
+     ---------------------------------------------------------- */
+  --accent-primary:            #2C5A3E;  /* deep forest green */
+  --accent-primary-hover:      #234A33;
+  --accent-primary-pressed:    #1B3B28;
+  --accent-warm:               #B5613D;  /* muted terracotta, tier badges only */
+
+  /* ----------------------------------------------------------
+     Color — Semantic (muted across the board)
+     ---------------------------------------------------------- */
+  --semantic-info:             #3D5C73;  /* muted blue-grey */
+  --semantic-caution:          #9F7530;  /* muted amber, disclosures only */
+  --semantic-success:          #4E7458;  /* muted sage, never bright lime */
+  --semantic-error:            #9F4538;  /* muted clay red, never stoplight */
+  --semantic-complete:         #6F9078;  /* module-completion checkmark, soft sage */
+
+  /* Subtle tinted backgrounds for semantic states */
+  --semantic-info-bg:          #EEF1F4;
+  --semantic-caution-bg:       #F6EFDF;
+  --semantic-success-bg:       #ECF1EC;
+  --semantic-error-bg:         #F4E8E5;
+  --semantic-complete-bg:      #ECF1ED;
+
+  /* Tier badge tints */
+  --tier-free-bg:              #F2EEE6;
+  --tier-free-ink:             #4F4538;
+  --tier-recommended-bg:       #F4E7D5;
+  --tier-recommended-ink:      #815230;
+  --tier-pro-bg:               #E9DAC1;
+  --tier-pro-ink:              #6E4523;
+
+  /* Borders (derived from ink, low opacity) */
+  --border-subtle:             rgba(31, 26, 20, 0.08);
+  --border-default:            rgba(31, 26, 20, 0.14);
+  --border-strong:             rgba(31, 26, 20, 0.24);
+
+  /* Focus ring */
+  --focus-ring:                #2C5A3E;
+  --focus-ring-offset:         #FAF7F2;
+
+  /* ----------------------------------------------------------
+     Spacing — 8px base
+     ---------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ----------------------------------------------------------
+     Radius
+     ---------------------------------------------------------- */
+  --radius-sm: 6px;   /* inputs, small chips */
+  --radius-md: 12px;  /* buttons, badges */
+  --radius-lg: 16px;  /* cards */
+  --radius-xl: 24px;  /* hero blocks */
+  --radius-pill: 999px;
+
+  /* ----------------------------------------------------------
+     Elevation — subtle, warm-tinted shadows
+     ---------------------------------------------------------- */
+  --elevation-0: 0 0 0 1px var(--border-subtle);
+  --elevation-1: 0 1px 2px 0 rgba(31, 26, 20, 0.06);
+  --elevation-2: 0 2px 8px -1px rgba(31, 26, 20, 0.08),
+                 0 1px 2px 0 rgba(31, 26, 20, 0.04);
+  --elevation-3: 0 12px 28px -8px rgba(31, 26, 20, 0.16),
+                 0 4px 10px -2px rgba(31, 26, 20, 0.08);
+
+  /* ----------------------------------------------------------
+     Motion — no bouncy / elastic / spring
+     ---------------------------------------------------------- */
+  --motion-duration-instant: 100ms;
+  --motion-duration-quick:   200ms;
+  --motion-duration-calm:    400ms;
+  --motion-easing-standard:  cubic-bezier(0.22, 1, 0.36, 1);   /* ease-out */
+  --motion-easing-soft:      cubic-bezier(0.4, 0, 0.2, 1);     /* ease-in-out */
+
+  /* ----------------------------------------------------------
+     Type families — reference next/font CSS variables.
+     Fallback chains preserve legibility if next/font fails.
+     ---------------------------------------------------------- */
+  --font-serif: var(--font-fraunces), Georgia, 'Iowan Old Style', serif;
+  --font-sans:  var(--font-dm-sans), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:  var(--font-geist-mono), 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* ============================================================
+     LEGACY tokens — preserved for WS-1/2/3 pages not yet migrated.
+     Each page retires its dependency on these as it gets its own
+     redesign session. See docs/tech-debt-marketing.md under
+     "Other pages still on WS-2/WS-3 styling."
+     ============================================================ */
   --deep:   #0d1f0f;
   --forest: #1a3d1e;
   --sage:   #3d6b42;
@@ -12,45 +141,45 @@
   --border: #e2ded5;
 }
 
+/* ============================================================
+   Base elements
+   ============================================================ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  background-color: var(--surface-canvas);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
+/* iOS: prevent input zoom; design floor of 44px tap targets */
+input, textarea, select {
+  font-size: 16px;
+  font-family: var(--font-sans);
 }
 
-body {
-  background: var(--cream);
-  color: var(--deep);
-  font-family: var(--font-dm-sans), system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-dm-serif), Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  margin: 0;
-  color: var(--deep);
-}
-
-h4,
-h5,
-h6 {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  margin: 0;
-}
-
-p {
-  margin: 0;
+button {
+  font-family: var(--font-sans);
+  min-height: 44px;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
 }
 
 a {
@@ -58,20 +187,232 @@ a {
   text-decoration: none;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-img,
-svg {
+img, svg {
   display: block;
   max-width: 100%;
 }
 
+p { margin: 0; }
+
+/* Skip link — keyboard-focused accessibility shortcut */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  background: var(--accent-primary);
+  color: var(--ink-inverse-primary);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  z-index: 1000;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+}
+.skip:focus { left: 8px; }
+
+/* LEGACY — preserved h1/h2/h3 rule for WS-1/2/3 pages.
+   New marketing pages use .t-hero / .t-section-title / .t-page-title
+   utility classes instead. */
+h1, h2, h3 {
+  font-family: var(--font-dm-serif), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  margin: 0;
+  color: var(--deep);
+}
+
+h4, h5, h6 {
+  font-family: var(--font-sans);
+  margin: 0;
+}
+
+/* ============================================================
+   Layout helpers — used by every marketing surface
+   ============================================================ */
+.wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.wrap--narrow { max-width: 760px; }
+.wrap--medium { max-width: 920px; }
+
+.section { padding: 72px 0; }
+.section--tight { padding: 48px 0; }
+
+@media (max-width: 720px) {
+  .section { padding: 56px 0; }
+  .section--tight { padding: 36px 0; }
+  .wrap { padding: 0 20px; }
+}
+
+/* ============================================================
+   Semantic type styles — marketing scale (bigger than app scale)
+   ============================================================ */
+.t-hero {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 5.8vw, 68px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  margin: 0;
+}
+.t-hero > span { display: block; }
+
+.t-section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 96;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.t-page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 4.6vw, 56px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 120;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.t-lede {
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--ink-secondary);
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.t-card-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 36;
+  margin: 0;
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-primary);
+}
+.t-body-secondary { color: var(--ink-secondary); }
+.t-small { font-size: 13px; line-height: 1.5; color: var(--ink-tertiary); }
+
+/* ============================================================
+   Eyebrow + section labels
+   ============================================================ */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--accent-primary);
+}
+.eyebrow--centered { justify-content: center; }
+.eyebrow--centered::before { display: none; }
+
+/* "You decide" / "with you in charge" emphasis — used in hero sub + empathy */
+.you-decide {
+  font-style: italic;
+  color: var(--accent-primary);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  min-height: 44px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--motion-duration-quick) var(--motion-easing-standard),
+              box-shadow var(--motion-duration-quick) var(--motion-easing-standard),
+              color var(--motion-duration-quick) var(--motion-easing-standard);
+  user-select: none;
+}
+.btn--primary {
+  background: var(--accent-primary);
+  color: var(--ink-inverse-primary);
+}
+.btn--primary:hover { background: var(--accent-primary-hover); }
+.btn--primary:active { background: var(--accent-primary-pressed); }
+
+.btn--secondary {
+  color: var(--accent-primary);
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--accent-primary);
+}
+.btn--secondary:hover { background: var(--semantic-success-bg); }
+
+.btn--tertiary {
+  color: var(--accent-primary);
+  background: transparent;
+  padding: 12px 6px;
+}
+.btn--tertiary:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.btn--lg {
+  padding: 16px 26px;
+  font-size: 16px;
+  min-height: 52px;
+}
+.btn--block { width: 100%; }
+
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--surface-canvas), 0 0 0 4px var(--accent-primary);
+}
+
+/* ============================================================
+   LEGACY animation — preserved for WS-1/2/3 pages.
+   See docs/tech-debt-marketing.md
+   ============================================================ */
 @keyframes finmagix-pulse {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
     transform: scale(1);
   }
