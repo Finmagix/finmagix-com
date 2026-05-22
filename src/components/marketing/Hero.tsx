@@ -5,6 +5,7 @@
 // docs/tech-debt-marketing.md "Hero photograph is a placeholder").
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRightIcon } from "../Icons";
 
 const LITE_SIGNUP_URL = "https://lite.finmagix.com/signup";
@@ -38,9 +39,9 @@ export default function Hero() {
               Try the free checkup
               <ArrowRightIcon size={16} />
             </a>
-            <a href="/#modules" className="btn btn--secondary btn--lg">
+            <Link href="/#modules" className="btn btn--secondary btn--lg">
               See what&apos;s inside
-            </a>
+            </Link>
           </div>
 
           <div className="hero__trust">
