@@ -47,3 +47,21 @@ export function XIcon(props: IconProps) {
     </Icon>
   );
 }
+
+export function ArrowRightIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </Icon>
+  );
+}
+
+export function ArrowUpRightIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <line x1="7" y1="17" x2="17" y2="7" />
+      <polyline points="7 7 17 7 17 17" />
+    </Icon>
+  );
+}
