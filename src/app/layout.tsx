@@ -6,7 +6,7 @@ import {
   Geist_Mono,
 } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/layout/Nav";
+import NavBar from "@/components/NavBar";
 import Footer from "@/components/layout/Footer";
 
 // Primary serif — headlines, section titles, card titles
@@ -88,7 +88,7 @@ export default function RootLayout({
         <a className="skip" href="#main">
           Skip to content
         </a>
-        <Nav />
+        <NavBar />
         <main id="main">{children}</main>
         <Footer />
       </body>

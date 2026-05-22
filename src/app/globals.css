@@ -408,6 +408,107 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   Top navigation (NavBar)
+   Sticky header with period-mark wordmark, primary nav links,
+   sign-in + primary CTA, hamburger menu for ≤ 920px viewports.
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 247, 242, 0.92);
+  backdrop-filter: saturate(140%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 24px;
+}
+.nav__brand {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 36;
+  color: var(--ink-primary);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.nav__brand--mark {
+  color: var(--accent-primary);
+  margin-left: 1px;
+  font-weight: 600;
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav__links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.nav__links a:hover { color: var(--ink-primary); }
+.nav__links a.is-active { color: var(--accent-primary); }
+.nav__cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav__signin {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.nav__signin:hover { color: var(--ink-primary); }
+.nav__hamburger {
+  display: none;
+  background: transparent;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink-primary);
+}
+
+.mobile-menu {
+  display: none;
+  padding: 12px 24px 28px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-canvas);
+}
+.mobile-menu a {
+  display: block;
+  padding: 14px 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.mobile-menu a:last-of-type { border-bottom: 0; }
+.mobile-menu__cta {
+  margin-top: 20px;
+  display: block;
+}
+
+@media (max-width: 920px) {
+  .nav__links { display: none; }
+  .nav__cta .nav__signin { display: none; }
+  .nav__cta .btn { display: none; }
+  .nav__hamburger { display: inline-flex; }
+  .mobile-menu.is-open { display: block; }
+}
+
+/* ============================================================
    LEGACY animation — preserved for WS-1/2/3 pages.
    See docs/tech-debt-marketing.md
    ============================================================ */
