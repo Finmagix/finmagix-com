@@ -7,7 +7,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
-import Footer from "@/components/layout/Footer";
+import Footer from "@/components/Footer";
 
 // Primary serif — headlines, section titles, card titles
 // Variable font with opsz axis enables size-appropriate optical sizing

@@ -509,6 +509,105 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   Footer
+   Three link columns + brand column, legal strip, persistent
+   disclosure. Mounted in shared layout, so every page inherits it.
+   ============================================================ */
+.footer {
+  background: var(--surface-sunken);
+  border-top: 1px solid var(--border-subtle);
+  padding: 72px 0 32px;
+  margin-top: 56px;
+}
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.footer__brand {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink-primary);
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 36;
+}
+.footer__brand-mark {
+  color: var(--accent-primary);
+}
+.footer__tagline {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--ink-secondary);
+  max-width: 280px;
+  line-height: 1.55;
+}
+.footer__col h4 {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+  margin: 0 0 20px;
+}
+.footer__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer__col a {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.footer__col a:hover { color: var(--ink-primary); }
+.footer__legal {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.footer__legal-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--ink-tertiary);
+}
+.footer__legal-links a {
+  color: var(--ink-tertiary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.footer__legal-links a:hover { color: var(--ink-primary); }
+.footer__copyright {
+  font-size: 12px;
+  color: var(--ink-tertiary);
+}
+.footer__disclosure {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  line-height: 1.55;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .footer__cols { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer__brand-col { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .footer__cols { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    LEGACY animation — preserved for WS-1/2/3 pages.
    See docs/tech-debt-marketing.md
    ============================================================ */
