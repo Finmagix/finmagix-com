@@ -962,6 +962,185 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   Home — Modules section (3 featured cards in Option A layout)
+   ============================================================ */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.module-grid--four {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 900px) {
+  .module-grid, .module-grid--four { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+@media (max-width: 560px) {
+  .module-grid, .module-grid--four { grid-template-columns: 1fr; }
+}
+
+.module-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 200px;
+  transition: border-color var(--motion-duration-quick) var(--motion-easing-standard),
+              box-shadow var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.module-card:hover {
+  border-color: var(--border-default);
+  box-shadow: var(--elevation-1);
+}
+.module-card--recommended { background: var(--surface-tier-recommended); }
+.module-card--pro { background: var(--surface-tier-pro); }
+.module-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.module-card__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-canvas);
+  color: var(--accent-primary);
+  border: 1px solid var(--border-subtle);
+}
+.module-card--recommended .module-card__icon,
+.module-card--pro .module-card__icon {
+  background: rgba(255, 255, 255, 0.6);
+}
+.module-card__title {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--ink-primary);
+  margin: 0;
+  font-variation-settings: 'opsz' 36;
+}
+.module-card__body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ============================================================
+   Tier badges — Free, Recommended, Pro tags on module cards
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge--free { background: var(--tier-free-bg); color: var(--tier-free-ink); }
+.badge--recommended { background: var(--tier-recommended-bg); color: var(--tier-recommended-ink); }
+.badge--pro { background: var(--tier-pro-bg); color: var(--tier-pro-ink); }
+
+/* ============================================================
+   Home — Partner strip (dark forest-green band with chips)
+   ============================================================ */
+.partner-strip {
+  background: var(--surface-inverse);
+  color: var(--ink-inverse-primary);
+  border-radius: var(--radius-xl);
+  padding: 56px 56px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.partner-strip h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--ink-inverse-primary);
+  margin: 0 0 16px;
+  font-variation-settings: 'opsz' 60;
+  text-wrap: balance;
+}
+.partner-strip p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-inverse-secondary);
+  margin: 0;
+}
+.partner-strip__chips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.partner-strip__chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: 1px solid rgba(245, 240, 227, 0.18);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-inverse-primary);
+  transition: background-color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.partner-strip__chip:hover { background: rgba(245, 240, 227, 0.06); }
+.partner-strip__chip span { color: var(--ink-inverse-secondary); }
+.partner-strip .btn--secondary {
+  color: var(--ink-inverse-primary);
+  box-shadow: inset 0 0 0 1.5px rgba(245, 240, 227, 0.4);
+}
+.partner-strip .btn--secondary:hover {
+  background: rgba(245, 240, 227, 0.06);
+}
+
+@media (max-width: 900px) {
+  .partner-strip { grid-template-columns: 1fr; padding: 40px 32px; gap: 32px; }
+}
+
+/* ============================================================
+   Home — Closing CTA (centered, restated value)
+   NOTE: The prototype site.css had a missing opening brace for the
+   .closing-cta selector at line 938; reconstructed here per intent.
+   ============================================================ */
+.closing-cta {
+  text-align: center;
+  padding: 96px 0 120px;
+}
+.closing-cta__title { margin: 0 auto 20px; max-width: 720px; }
+.closing-cta__body {
+  margin: 0 auto 28px;
+  max-width: 560px;
+  font-size: 17px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+}
+.closing-cta__cta { display: inline-flex; gap: 12px; }
+.closing-cta__trust {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--ink-tertiary);
+}
+
+/* ============================================================
    Footer
    Three link columns + brand column, legal strip, persistent
    disclosure. Mounted in shared layout, so every page inherits it.

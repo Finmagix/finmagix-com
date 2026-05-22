@@ -65,3 +65,53 @@ export function ArrowUpRightIcon(props: IconProps) {
     </Icon>
   );
 }
+
+// Module icons — used by ModuleCard for the 3 featured modules on home
+// (health/stress/tax) and for the full set on /platform and /pricing
+// when those pages get built. Add more as needed; keep tree-shakable.
+export function ActivityIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </Icon>
+  );
+}
+
+export function ShieldIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    </Icon>
+  );
+}
+
+export function ReceiptIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1L4 2Z" />
+      <path d="M8 7h8" />
+      <path d="M8 11h8" />
+      <path d="M8 15h5" />
+    </Icon>
+  );
+}
+
+// Icon resolver — used by ModuleCard when iterating over module data.
+// Returns null for unknown names; consumer can fall back to a placeholder.
+const iconMap = {
+  Activity: ActivityIcon,
+  Shield: ShieldIcon,
+  Receipt: ReceiptIcon,
+  ArrowRight: ArrowRightIcon,
+  ArrowUpRight: ArrowUpRightIcon,
+  Menu: MenuIcon,
+  X: XIcon,
+} as const;
+
+export type IconName = keyof typeof iconMap;
+
+export function IconByName({ name, size }: { name: IconName; size?: number }) {
+  const Cmp = iconMap[name];
+  if (!Cmp) return null;
+  return <Cmp size={size} />;
+}
