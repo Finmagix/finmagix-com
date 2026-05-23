@@ -1,6 +1,135 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Finmagix Lite Design System — Foundation Tokens
+   Source: prototype/site/tokens.css (Claude Design handoff, May 2026).
+   Imported globally via app/layout.tsx. Fonts are loaded by
+   next/font/google in layout.tsx; the font-family tokens below
+   reference the CSS variables that next/font generates.
+
+   This file is the design-system source of truth for the marketing site.
+   See docs/tech-debt-marketing.md for the design-system-dedupe item:
+   long-term these tokens move to a shared @finmagix/design-system package
+   consumed by both lite.finmagix.com and finmagix.com.
+   ============================================================ */
+
 :root {
+  /* ----------------------------------------------------------
+     Color — Surfaces
+     ---------------------------------------------------------- */
+  --surface-canvas:            #FAF7F2;  /* main page background, warm cream */
+  --surface-raised:            #FFFFFF;  /* cards on canvas */
+  --surface-sunken:            #F2EEE6;  /* inputs, inset wells */
+  --surface-inverse:           #0F2A1F;  /* dark forest green, prominent moments */
+  --surface-tier-free:         #FFFFFF;
+  --surface-tier-recommended:  #FBF6EC;  /* subtle warm beige */
+  --surface-tier-pro:          #F6EFE0;  /* subtle deeper warm */
+
+  /* ----------------------------------------------------------
+     Color — Ink (text)
+     ---------------------------------------------------------- */
+  --ink-primary:               #1F1A14;  /* warm near-black, body + headings */
+  --ink-secondary:             #4F4538;  /* supporting text */
+  --ink-tertiary:              #7C7363;  /* muted: footers, disclosures */
+  --ink-inverse-primary:       #F5F0E3;  /* warm off-white on dark surfaces */
+  --ink-inverse-secondary:     #B7B09F;  /* supporting on dark */
+
+  /* ----------------------------------------------------------
+     Color — Accent
+     ---------------------------------------------------------- */
+  --accent-primary:            #2C5A3E;  /* deep forest green */
+  --accent-primary-hover:      #234A33;
+  --accent-primary-pressed:    #1B3B28;
+  --accent-warm:               #B5613D;  /* muted terracotta, tier badges only */
+
+  /* ----------------------------------------------------------
+     Color — Semantic (muted across the board)
+     ---------------------------------------------------------- */
+  --semantic-info:             #3D5C73;  /* muted blue-grey */
+  --semantic-caution:          #9F7530;  /* muted amber, disclosures only */
+  --semantic-success:          #4E7458;  /* muted sage, never bright lime */
+  --semantic-error:            #9F4538;  /* muted clay red, never stoplight */
+  --semantic-complete:         #6F9078;  /* module-completion checkmark, soft sage */
+
+  /* Subtle tinted backgrounds for semantic states */
+  --semantic-info-bg:          #EEF1F4;
+  --semantic-caution-bg:       #F6EFDF;
+  --semantic-success-bg:       #ECF1EC;
+  --semantic-error-bg:         #F4E8E5;
+  --semantic-complete-bg:      #ECF1ED;
+
+  /* Tier badge tints */
+  --tier-free-bg:              #F2EEE6;
+  --tier-free-ink:             #4F4538;
+  --tier-recommended-bg:       #F4E7D5;
+  --tier-recommended-ink:      #815230;
+  --tier-pro-bg:               #E9DAC1;
+  --tier-pro-ink:              #6E4523;
+
+  /* Borders (derived from ink, low opacity) */
+  --border-subtle:             rgba(31, 26, 20, 0.08);
+  --border-default:            rgba(31, 26, 20, 0.14);
+  --border-strong:             rgba(31, 26, 20, 0.24);
+
+  /* Focus ring */
+  --focus-ring:                #2C5A3E;
+  --focus-ring-offset:         #FAF7F2;
+
+  /* ----------------------------------------------------------
+     Spacing — 8px base
+     ---------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ----------------------------------------------------------
+     Radius
+     ---------------------------------------------------------- */
+  --radius-sm: 6px;   /* inputs, small chips */
+  --radius-md: 12px;  /* buttons, badges */
+  --radius-lg: 16px;  /* cards */
+  --radius-xl: 24px;  /* hero blocks */
+  --radius-pill: 999px;
+
+  /* ----------------------------------------------------------
+     Elevation — subtle, warm-tinted shadows
+     ---------------------------------------------------------- */
+  --elevation-0: 0 0 0 1px var(--border-subtle);
+  --elevation-1: 0 1px 2px 0 rgba(31, 26, 20, 0.06);
+  --elevation-2: 0 2px 8px -1px rgba(31, 26, 20, 0.08),
+                 0 1px 2px 0 rgba(31, 26, 20, 0.04);
+  --elevation-3: 0 12px 28px -8px rgba(31, 26, 20, 0.16),
+                 0 4px 10px -2px rgba(31, 26, 20, 0.08);
+
+  /* ----------------------------------------------------------
+     Motion — no bouncy / elastic / spring
+     ---------------------------------------------------------- */
+  --motion-duration-instant: 100ms;
+  --motion-duration-quick:   200ms;
+  --motion-duration-calm:    400ms;
+  --motion-easing-standard:  cubic-bezier(0.22, 1, 0.36, 1);   /* ease-out */
+  --motion-easing-soft:      cubic-bezier(0.4, 0, 0.2, 1);     /* ease-in-out */
+
+  /* ----------------------------------------------------------
+     Type families — reference next/font CSS variables.
+     Fallback chains preserve legibility if next/font fails.
+     ---------------------------------------------------------- */
+  --font-serif: var(--font-fraunces), Georgia, 'Iowan Old Style', serif;
+  --font-sans:  var(--font-dm-sans), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:  var(--font-geist-mono), 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* ============================================================
+     LEGACY tokens — preserved for WS-1/2/3 pages not yet migrated.
+     Each page retires its dependency on these as it gets its own
+     redesign session. See docs/tech-debt-marketing.md under
+     "Other pages still on WS-2/WS-3 styling."
+     ============================================================ */
   --deep:   #0d1f0f;
   --forest: #1a3d1e;
   --sage:   #3d6b42;
@@ -12,45 +141,45 @@
   --border: #e2ded5;
 }
 
+/* ============================================================
+   Base elements
+   ============================================================ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  background-color: var(--surface-canvas);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
+/* iOS: prevent input zoom; design floor of 44px tap targets */
+input, textarea, select {
+  font-size: 16px;
+  font-family: var(--font-sans);
 }
 
-body {
-  background: var(--cream);
-  color: var(--deep);
-  font-family: var(--font-dm-sans), system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-dm-serif), Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  margin: 0;
-  color: var(--deep);
-}
-
-h4,
-h5,
-h6 {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  margin: 0;
-}
-
-p {
-  margin: 0;
+button {
+  font-family: var(--font-sans);
+  min-height: 44px;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
 }
 
 a {
@@ -58,20 +187,1064 @@ a {
   text-decoration: none;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-img,
-svg {
+img, svg {
   display: block;
   max-width: 100%;
 }
 
+p { margin: 0; }
+
+/* Skip link — keyboard-focused accessibility shortcut */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  background: var(--accent-primary);
+  color: var(--ink-inverse-primary);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  z-index: 1000;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+}
+.skip:focus { left: 8px; }
+
+/* LEGACY — preserved h1/h2/h3 rule for WS-1/2/3 pages.
+   New marketing pages use .t-hero / .t-section-title / .t-page-title
+   utility classes instead. */
+h1, h2, h3 {
+  font-family: var(--font-dm-serif), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  margin: 0;
+  color: var(--deep);
+}
+
+h4, h5, h6 {
+  font-family: var(--font-sans);
+  margin: 0;
+}
+
+/* ============================================================
+   Layout helpers — used by every marketing surface
+   ============================================================ */
+.wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.wrap--narrow { max-width: 760px; }
+.wrap--medium { max-width: 920px; }
+
+.section { padding: 72px 0; }
+.section--tight { padding: 48px 0; }
+
+@media (max-width: 720px) {
+  .section { padding: 56px 0; }
+  .section--tight { padding: 36px 0; }
+  .wrap { padding: 0 20px; }
+}
+
+/* ============================================================
+   Semantic type styles — marketing scale (bigger than app scale)
+   ============================================================ */
+.t-hero {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 5.8vw, 68px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  margin: 0;
+}
+.t-hero > span { display: block; }
+
+.t-section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 96;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.t-page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 4.6vw, 56px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 120;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.t-lede {
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--ink-secondary);
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.t-card-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 36;
+  margin: 0;
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-primary);
+}
+.t-body-secondary { color: var(--ink-secondary); }
+.t-small { font-size: 13px; line-height: 1.5; color: var(--ink-tertiary); }
+
+/* ============================================================
+   Eyebrow + section labels
+   ============================================================ */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--accent-primary);
+}
+.eyebrow--centered { justify-content: center; }
+.eyebrow--centered::before { display: none; }
+
+/* "You decide" / "with you in charge" emphasis — used in hero sub + empathy */
+.you-decide {
+  font-style: italic;
+  color: var(--accent-primary);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  min-height: 44px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--motion-duration-quick) var(--motion-easing-standard),
+              box-shadow var(--motion-duration-quick) var(--motion-easing-standard),
+              color var(--motion-duration-quick) var(--motion-easing-standard);
+  user-select: none;
+}
+.btn--primary {
+  background: var(--accent-primary);
+  color: var(--ink-inverse-primary);
+}
+.btn--primary:hover { background: var(--accent-primary-hover); }
+.btn--primary:active { background: var(--accent-primary-pressed); }
+
+.btn--secondary {
+  color: var(--accent-primary);
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--accent-primary);
+}
+.btn--secondary:hover { background: var(--semantic-success-bg); }
+
+.btn--tertiary {
+  color: var(--accent-primary);
+  background: transparent;
+  padding: 12px 6px;
+}
+.btn--tertiary:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.btn--lg {
+  padding: 16px 26px;
+  font-size: 16px;
+  min-height: 52px;
+}
+.btn--block { width: 100%; }
+
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--surface-canvas), 0 0 0 4px var(--accent-primary);
+}
+
+/* ============================================================
+   Top navigation (NavBar)
+   Sticky header with period-mark wordmark, primary nav links,
+   sign-in + primary CTA, hamburger menu for ≤ 920px viewports.
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 247, 242, 0.92);
+  backdrop-filter: saturate(140%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 24px;
+}
+.nav__brand {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 36;
+  color: var(--ink-primary);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.nav__brand--mark {
+  color: var(--accent-primary);
+  margin-left: 1px;
+  font-weight: 600;
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav__links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.nav__links a:hover { color: var(--ink-primary); }
+.nav__links a.is-active { color: var(--accent-primary); }
+.nav__cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav__signin {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.nav__signin:hover { color: var(--ink-primary); }
+.nav__hamburger {
+  display: none;
+  background: transparent;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink-primary);
+}
+
+.mobile-menu {
+  display: none;
+  padding: 12px 24px 28px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-canvas);
+}
+.mobile-menu a {
+  display: block;
+  padding: 14px 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.mobile-menu a:last-of-type { border-bottom: 0; }
+.mobile-menu__cta {
+  margin-top: 20px;
+  display: block;
+}
+
+@media (max-width: 920px) {
+  .nav__links { display: none; }
+  .nav__cta .nav__signin { display: none; }
+  .nav__cta .btn { display: none; }
+  .nav__hamburger { display: inline-flex; }
+  .mobile-menu.is-open { display: block; }
+}
+
+/* ============================================================
+   Home — Hero
+   Two-column grid: text + photograph. Photograph eager-loaded
+   for LCP (above the fold).
+   ============================================================ */
+.hero {
+  padding: 72px 0 56px;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.hero__text > * { margin: 0; }
+.hero__text > * + * { margin-top: 24px; }
+.hero__text > .t-hero + .t-lede { margin-top: 40px; }
+.hero__sub { max-width: 540px; }
+.t-hero { padding-bottom: 8px; }
+.hero__ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+.hero__trust {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--ink-tertiary);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+}
+.hero__trust .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ink-tertiary);
+  opacity: 0.5;
+  display: inline-block;
+}
+.hero__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--surface-sunken);
+  box-shadow: var(--elevation-1);
+}
+.hero__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  display: block;
+}
+
+@media (max-width: 920px) {
+  .hero { padding: 48px 0 32px; }
+  .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ============================================================
+   Home — Empathy band
+   "Who this is for" — narrow band with tier-recommended fill.
+   ============================================================ */
+.empathy {
+  background: var(--surface-tier-recommended);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.empathy__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+}
+.empathy__eyebrow { margin-bottom: 0; }
+.empathy__copy {
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 1.5vw, 19px);
+  line-height: 1.55;
+  color: var(--ink-primary);
+  text-wrap: pretty;
+}
+.empathy__copy p { margin: 0; }
+.empathy__copy p + p { margin-top: 16px; }
+.empathy__copy strong {
+  font-weight: 600;
+  color: var(--ink-primary);
+  background: linear-gradient(to top, var(--tier-recommended-bg) 38%, transparent 38%);
+  padding: 0 2px;
+}
+
+@media (max-width: 920px) {
+  .empathy__inner { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ============================================================
+   Home — Value props (three columns)
+   ============================================================ */
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.value {
+  background: var(--surface-canvas);
+  padding: 36px 32px 40px;
+}
+.value__num {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-primary);
+  letter-spacing: 0.02em;
+  font-feature-settings: 'tnum' 1;
+  margin-bottom: 28px;
+}
+.value__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--ink-primary);
+  margin: 0 0 14px;
+  font-variation-settings: 'opsz' 36;
+  text-wrap: balance;
+}
+.value__body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .values { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Section head — eyebrow + title + sub, two-column on desktop
+   Shared by HowItWorks, ModulesSection, etc.
+   ============================================================ */
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+  margin-bottom: 56px;
+  align-items: end;
+}
+.section-head__title { max-width: 540px; }
+.section-head__sub { max-width: 540px; }
+
+@media (max-width: 900px) {
+  .section-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 36px; }
+}
+
+/* ============================================================
+   Home — How it works (3 numbered steps)
+   ============================================================ */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 56px;
+}
+.step__num {
+  font-family: var(--font-serif);
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--accent-primary);
+  font-variation-settings: 'opsz' 96;
+  margin-bottom: 20px;
+}
+.step__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--ink-primary);
+  margin: 0 0 12px;
+  font-variation-settings: 'opsz' 36;
+}
+.step__body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  margin: 0;
+}
+.step__time {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr; gap: 32px; }
+  .step__num { font-size: 44px; margin-bottom: 12px; }
+}
+
+/* ============================================================
+   Home — Under the hood (engine transparency)
+   Full-bleed dark forest-green card. Per Option B compliance posture
+   (founder decision May 2026): the H2 contains NO "AI" / "intelligent" /
+   "smart" terms. AI is named only in body copy (the lede paragraph).
+   See docs/CLAUDE_CODE_HANDOFF.md "Compliance check" caveat.
+   ============================================================ */
+.engine {
+  background: var(--surface-inverse);
+  color: var(--ink-inverse-primary);
+  border-radius: var(--radius-xl);
+  padding: 80px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.engine::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(183, 201, 184, 0.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.engine::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(183, 201, 184, 0.08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.engine__layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 72px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.engine__title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  color: var(--ink-inverse-primary);
+  margin: 0;
+  text-wrap: balance;
+}
+.engine__title em {
+  font-style: italic;
+  color: #B7C9B8;
+  font-weight: 400;
+}
+.engine__lede {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-inverse-secondary);
+  margin: 0;
+  max-width: 480px;
+}
+.engine__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid rgba(245, 240, 227, 0.14);
+  border-bottom: 1px solid rgba(245, 240, 227, 0.14);
+}
+.engine__bullet {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 28px 4px;
+  border-bottom: 1px solid rgba(245, 240, 227, 0.10);
+  transition: padding-left var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.engine__bullet:last-child { border-bottom: 0; }
+.engine__bullet:hover { padding-left: 12px; }
+.engine__bullet-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 400;
+  color: #B7C9B8;
+  font-variation-settings: 'opsz' 60;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.01em;
+}
+.engine__bullet-text {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--ink-inverse-primary);
+  font-variation-settings: 'opsz' 36;
+  text-wrap: balance;
+}
+
+@media (max-width: 920px) {
+  .engine { padding: 48px 28px; border-radius: var(--radius-lg); }
+  .engine__layout { grid-template-columns: 1fr; gap: 40px; }
+  .engine__bullet { padding: 24px 4px; gap: 20px; }
+  .engine__bullet:hover { padding-left: 4px; }
+  .engine__bullet-num { font-size: 22px; }
+}
+
+/* ============================================================
+   Home — Testimonial section (Allen Mueller, CFA / 7 Saturdays Financial)
+   Light cream band, square portrait left, serif pull quote right.
+   The quote contains "actionable recommendations based on the user's
+   goals" — third-party language. Do NOT propagate that phrasing to
+   first-party copy elsewhere on the site.
+   ============================================================ */
+.testimonial-section {
+  background: var(--surface-tier-recommended);
+  padding: 96px 0;
+}
+.testimonial {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 72px;
+  align-items: center;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.testimonial__media {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.testimonial__photo {
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-sunken);
+  box-shadow: var(--elevation-1);
+  position: relative;
+}
+.testimonial__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.testimonial__credit {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-default);
+}
+.testimonial__name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--ink-primary);
+  margin: 0;
+  font-variation-settings: 'opsz' 36;
+}
+.testimonial__creds {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-top: 4px;
+}
+.testimonial__firm {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink-secondary);
+  margin-top: 6px;
+}
+.testimonial__body {
+  position: relative;
+}
+.testimonial__eyebrow {
+  margin-bottom: 28px;
+}
+.testimonial__quote {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-family: var(--font-serif);
+}
+.testimonial__mark {
+  position: absolute;
+  top: -36px;
+  left: -8px;
+  font-family: var(--font-serif);
+  font-size: 140px;
+  line-height: 1;
+  color: var(--accent-primary);
+  opacity: 0.18;
+  font-variation-settings: 'opsz' 144;
+  font-style: italic;
+  pointer-events: none;
+  user-select: none;
+}
+.testimonial__quote p {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--ink-primary);
+  margin: 0;
+  font-variation-settings: 'opsz' 36;
+  text-wrap: pretty;
+  position: relative;
+}
+.testimonial__quote p + p { margin-top: 22px; }
+.testimonial__quote em {
+  font-style: italic;
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+@media (max-width: 920px) {
+  .testimonial-section { padding: 64px 0; }
+  .testimonial { grid-template-columns: 1fr; gap: 36px; max-width: 540px; }
+  .testimonial__photo { max-width: 280px; }
+  .testimonial__mark { font-size: 96px; top: -24px; }
+}
+
+/* ============================================================
+   Home — Modules section (3 featured cards in Option A layout)
+   ============================================================ */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.module-grid--four {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 900px) {
+  .module-grid, .module-grid--four { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+@media (max-width: 560px) {
+  .module-grid, .module-grid--four { grid-template-columns: 1fr; }
+}
+
+.module-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 200px;
+  transition: border-color var(--motion-duration-quick) var(--motion-easing-standard),
+              box-shadow var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.module-card:hover {
+  border-color: var(--border-default);
+  box-shadow: var(--elevation-1);
+}
+.module-card--recommended { background: var(--surface-tier-recommended); }
+.module-card--pro { background: var(--surface-tier-pro); }
+.module-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.module-card__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-canvas);
+  color: var(--accent-primary);
+  border: 1px solid var(--border-subtle);
+}
+.module-card--recommended .module-card__icon,
+.module-card--pro .module-card__icon {
+  background: rgba(255, 255, 255, 0.6);
+}
+.module-card__title {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--ink-primary);
+  margin: 0;
+  font-variation-settings: 'opsz' 36;
+}
+.module-card__body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ============================================================
+   Tier badges — Free, Recommended, Pro tags on module cards
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge--free { background: var(--tier-free-bg); color: var(--tier-free-ink); }
+.badge--recommended { background: var(--tier-recommended-bg); color: var(--tier-recommended-ink); }
+.badge--pro { background: var(--tier-pro-bg); color: var(--tier-pro-ink); }
+
+/* ============================================================
+   Home — Partner strip (dark forest-green band with chips)
+   ============================================================ */
+.partner-strip {
+  background: var(--surface-inverse);
+  color: var(--ink-inverse-primary);
+  border-radius: var(--radius-xl);
+  padding: 56px 56px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.partner-strip h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--ink-inverse-primary);
+  margin: 0 0 16px;
+  font-variation-settings: 'opsz' 60;
+  text-wrap: balance;
+}
+.partner-strip p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-inverse-secondary);
+  margin: 0;
+}
+.partner-strip__chips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.partner-strip__chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: 1px solid rgba(245, 240, 227, 0.18);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-inverse-primary);
+  transition: background-color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.partner-strip__chip:hover { background: rgba(245, 240, 227, 0.06); }
+.partner-strip__chip span { color: var(--ink-inverse-secondary); }
+.partner-strip .btn--secondary {
+  color: var(--ink-inverse-primary);
+  box-shadow: inset 0 0 0 1.5px rgba(245, 240, 227, 0.4);
+}
+.partner-strip .btn--secondary:hover {
+  background: rgba(245, 240, 227, 0.06);
+}
+
+@media (max-width: 900px) {
+  .partner-strip { grid-template-columns: 1fr; padding: 40px 32px; gap: 32px; }
+}
+
+/* ============================================================
+   Home — Closing CTA (centered, restated value)
+   NOTE: The prototype site.css had a missing opening brace for the
+   .closing-cta selector at line 938; reconstructed here per intent.
+   ============================================================ */
+.closing-cta {
+  text-align: center;
+  padding: 96px 0 120px;
+}
+.closing-cta__title { margin: 0 auto 20px; max-width: 720px; }
+.closing-cta__body {
+  margin: 0 auto 28px;
+  max-width: 560px;
+  font-size: 17px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+}
+.closing-cta__cta { display: inline-flex; gap: 12px; }
+.closing-cta__trust {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--ink-tertiary);
+}
+
+/* ============================================================
+   Footer
+   Three link columns + brand column, legal strip, persistent
+   disclosure. Mounted in shared layout, so every page inherits it.
+   ============================================================ */
+.footer {
+  background: var(--surface-sunken);
+  border-top: 1px solid var(--border-subtle);
+  padding: 72px 0 32px;
+  margin-top: 56px;
+}
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.footer__brand {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink-primary);
+  letter-spacing: -0.01em;
+  font-variation-settings: 'opsz' 36;
+}
+.footer__brand-mark {
+  color: var(--accent-primary);
+}
+.footer__tagline {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--ink-secondary);
+  max-width: 280px;
+  line-height: 1.55;
+}
+.footer__col h4 {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-tertiary);
+  margin: 0 0 20px;
+}
+.footer__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer__col a {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.footer__col a:hover { color: var(--ink-primary); }
+.footer__legal {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.footer__legal-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--ink-tertiary);
+}
+.footer__legal-links a {
+  color: var(--ink-tertiary);
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.footer__legal-links a:hover { color: var(--ink-primary); }
+.footer__copyright {
+  font-size: 12px;
+  color: var(--ink-tertiary);
+}
+.footer__disclosure {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  line-height: 1.55;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .footer__cols { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer__brand-col { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .footer__cols { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   LEGACY animation — preserved for WS-1/2/3 pages.
+   See docs/tech-debt-marketing.md
+   ============================================================ */
 @keyframes finmagix-pulse {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
     transform: scale(1);
   }

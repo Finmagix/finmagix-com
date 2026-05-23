@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design package — extracted prototype + source zips (reference, not production)
+/prototype/
+*.zip

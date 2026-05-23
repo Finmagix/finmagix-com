@@ -19,7 +19,7 @@ Replace the live finmagix.com marketing site with a redesigned version that:
 1. **Inherits the Finmagix Lite design system 1:1.** Same tokens, same fonts, same component primitives. A user clicking "Try the free checkup" should feel like they walked through a door, not changed buildings.
 2. **Reuses the *content* of every existing finmagix.com page** (Pricing, Demo, Partners, About, Advisors, Contact, Blog, Privacy, Terms, Disclaimer, Security). The IA is preserved per § 4 of the marketing brief; copy is rewritten only where the substitution table (§ 3.2) or Part 4 compliance lines require it. The **Home page is the one exception** — it is fully rebuilt per the marketing brief § 5, replacing the existing finmagix.com home.
 3. **Removes every Part 4 violation** from the current site (Appendix A of the marketing brief).
-4. **Adds the persistent disclosure footer** to every page and the missing `/how-finmagix-makes-money` page.
+4. **Adds the persistent disclosure footer** to every page.
 
 After this session: the marketing site ships at finmagix.com with all 11 pages in Section 4.1 of the brief rendered against Finmagix Lite tokens, every Part 4 violation gone, the home page rebuilt, and other pages restyled with their original content carried across through the design system.
 
@@ -28,7 +28,7 @@ After this session: the marketing site ships at finmagix.com with all 11 pages i
 - `strategy.md` Part 1 — who we serve (avoidant adult, three minutes to prove worth).
 - `strategy.md` Part 4 — the line we will not cross. **The hardest constraint in this session.** No directive language, no CFP-equivalence claims, no false precision on numbers, no streaks/XP/peer-comparison, no automated-execution promises. The current finmagix.com has multiple violations (Appendix A) — they go.
 - `strategy.md` Part 5.3 — "no paywalls, only pricing." Every module visible to every visitor with sample output. Pricing page must reflect this; module cards must not show locks.
-- `strategy.md` Part 5.8 — How Finmagix makes money. A page must exist for this and be linked from every footer.
+- `strategy.md` Part 5.8 — How Finmagix makes money. **Reframed in May 2026:** the standalone `/how-finmagix-makes-money` page was removed at founder direction. The subscriptions-only commitment is now stated inline on About (§ 03) and on the Platform page (§ "What we won't do"). The substance of Part 5.8 is preserved; the route is not.
 - `strategy.md` Part 6 — what we will not build. No gamification surfaces. The redesign must not introduce any. The current `/social-security` card on the existing site uses "Worth up to $180,000 in lifetime difference" — that's exactly the kind of false-precision number Part 6 forbids. It is removed (or surfaced with full assumptions).
 - `strategy.md` Part 7 — voice. The substitution table in § 3.2 of the marketing brief is the enforced microcopy gate. Apply across every page.
 - `strategy.md` Part 8 — what good looks like. The marketing voice has slightly more latitude (per § 3 of the brief), but the compliance posture is identical.
@@ -54,6 +54,12 @@ This session creates new tech-debt items (acknowledge, do not resolve here):
 This is the most important section of the document for this session. The marketing site is the surface where Part 4 violations cost the most.
 
 **Part 4 lines touched:**
+
+> **Important caveat on the "Under the hood" home-page section.** The marketing brief (§ 3.3) and `strategy.md` Part 4 both forbid leading with AI as the pitch. The section sits *mid-page*, not in the hero, and names AI honestly inside the body copy without putting it in the H2. The hero eyebrow remains the CFP-frameworks framing; the hero H1 contains no AI mention. Founder decision (May 2026) selected this "Option B" treatment over both a stricter "no AI on the home page at all" version (Option A) and an "AI-led hero" version (Option C — which was rejected because it would have required rolling back Appendix A of the marketing brief and updating `strategy.md` Part 4). Copy in the section must continue to pass these tests:
+> - Does the H2 contain the word "AI" or "intelligent" or "smart"? (Should fail. AI lives in body copy only.)
+> - Does it tell the user what to do? (Should fail. Section is descriptive, not directive.)
+> - Does it claim "personalized" or "tailored" anything? (Should fail. Wording is "grounded in your actual situation," not "personalized for you.")
+> - Would removing the section change the *positioning* of the home page? (Should fail. The positioning is CFP-coverage + plain language + you-decide. The engine section supports the third claim, not a fourth.)
 
 | Forbidden | Where it appears on current finmagix.com | Replacement |
 |---|---|---|
@@ -91,36 +97,80 @@ marketing/components/marketing/Hero.tsx           NEW
 marketing/components/marketing/EmpathyBand.tsx    NEW
 marketing/components/marketing/ValueProps.tsx     NEW
 marketing/components/marketing/HowItWorks.tsx    NEW
+marketing/components/marketing/UnderTheHood.tsx   NEW — engine transparency section; full-bleed dark forest-green card; see § 5 of brief and Compliance check below
+marketing/components/marketing/Testimonial.tsx    NEW — Allen Mueller, CFA / 7 Saturdays Financial; portrait + serif pull quote; see § 6 of home-page direction
 marketing/components/marketing/ModulesPreview.tsx NEW — featured-3 layout (Option A in brief § 5.4)
 marketing/components/marketing/ModuleCard.tsx     NEW or import from lite — icon + title + blurb + tier badge; no price; no lock
 marketing/components/marketing/PartnerStrip.tsx   NEW
 marketing/components/marketing/ClosingCTA.tsx     NEW
-marketing/public/hero/family.jpg                  NEW asset — placeholder photo per § 7 of brief; replace before launch
+marketing/public/hero/family.jpg                  NEW asset — porch family photo (real, supplied), 880×395 cropped from source
+marketing/public/testimonials/allen-mueller.jpg   NEW asset — supplied portrait, 600×600 cropped square
+marketing/public/advisors/william-tincup.jpg      NEW asset — supplied portrait, 600×600 cropped square
+marketing/public/platform/quiet-index.png         NEW asset — supplied dashboard capture for /platform step 02 (source: site/product-quiet-index.png in the prototype)
+marketing/public/platform/fitness-overview.png    NEW asset — supplied six-dimension charts for /platform step 03 (source: site/product-fitness-overview.png)
+marketing/public/platform/finmagicians-read.png   NEW asset — supplied Finmagician's-read capture for /platform step 04 (source: site/product-finmagicians-read.png)
+marketing/public/platform/bigger-picture.png      NEW asset — supplied cross-module summary for /platform step 05 (source: site/product-bigger-picture.png)
+marketing/public/finmagix-logo.svg                NEW asset — primary wordmark (source: site/finmagix-logo.svg). Used for OG image, partner deck handoff.
+marketing/public/finmagix-logo-inverse.svg        NEW asset — inverse wordmark for dark surfaces (source: site/finmagix-logo-inverse.svg)
+marketing/app/favicon.svg                         NEW asset — favicon (source: site/favicon.svg); linked from <head> in marketing/app/layout.tsx
 
 # Other pages (RESTYLE — content largely preserved, voice + Part 4 fixes applied, design system swapped in)
-marketing/app/pricing/page.tsx                    REWRITE — three tier cards + FAQ; ALL TWELVE MODULES VISIBLE PER STRATEGY 5.3; "no paywalls, only pricing" line; link to /how-finmagix-makes-money
-marketing/app/demo/page.tsx                       REWRITE — interactive sample-output walkthrough of Financial Health Checkup with progressive disclosure (§ 6.2)
-marketing/app/partners/page.tsx                   REWRITE — four sections with anchors (#credit-unions #community-banks #employers #advisors); preserve current per-partner pricing unless founder updates
-marketing/app/blog/page.tsx                       REWRITE — editorial archive; no engagement counters, no trending tags
-marketing/app/about/page.tsx                      REWRITE — 600–900 word strategic story; structure per § 6.5
-marketing/app/advisors/page.tsx                   REWRITE — names, photos, credentials, brief bios; explicit "what advisors do / what they don't" callout per § 6.6
-marketing/app/contact/page.tsx                    REWRITE — email, optional form, business hours, response-time expectation
-marketing/app/privacy/page.tsx                    REWRITE — plain-language summary at top, full legal body below (counsel-supplied)
-marketing/app/terms/page.tsx                      REWRITE — same structure as /privacy
-marketing/app/disclaimer/page.tsx                 REWRITE — same structure; this is the most-linked legal page; explicit "Finmagix is not a financial advisor, fiduciary, tax preparer, broker, or insurance agent"
-marketing/app/security/page.tsx                   NEW or REWRITE — separate from /privacy; encryption, access controls, incident response
+marketing/app/pricing/page.tsx                    REWRITE — three tier cards + FAQ; ALL TWELVE MODULES VISIBLE PER STRATEGY 5.3; "no paywalls, only pricing" line
+marketing/app/platform/page.tsx                   NEW — "Finmagix Platform" page (replaces the old Interactive Demo). Long-form narrative page driven by Our_Platform.docx (see § 6.2 below). Keep /demo as a permanent 301 alias.
+marketing/app/partners/page.tsx                   REWRITE — four sections with anchors (#credit-unions #community-banks #employers #advisors); preserve current per-partner pricing unless founder updates. All section CTAs say "Talk to us" and route to /contact (with optional deep-link hash to pre-select institution).
+marketing/app/about/page.tsx                      REWRITE — long-form narrative split into **4 numbered sections + a mission close** (Why we built it · What we believe · How Finmagix is different · Who's behind it · Mission). Two earlier sections (How we hold the line · How we make money) were removed in May 2026; see § 6.5. Top-nav and footer label: "About us".
+marketing/app/advisors/page.tsx                   REWRITE — feature-card layout. William Tincup is the named advisor as of May 2026 (workplace/HR/talent-acquisition analyst); profile card with portrait, credentials (MBA, SHRM-SCP, SPHR), role line, and a 4-paragraph bio. See § 6.6.
+marketing/app/contact/page.tsx                    REWRITE — partners-only contact: drop the general /hello@/ email; keep partners@finmagix.com; subhead is "We read every message. We respond to most within two days. Love to hear from you and discuss how we can partner with you." Form includes a new **Institution dropdown** (Employers · Benefits Providers · Credit Unions · Community Banks · Non For Profits · Others); URL hash (`#employers` etc.) deep-links and pre-selects.
+marketing/app/privacy-and-security/page.tsx       NEW — combined Privacy and Security Policy. /privacy and /security both redirect to this canonical URL. Footer link is "Privacy & Security Policy" (single combined link).
+marketing/app/terms/page.tsx                      REWRITE — full Terms of Service from Finmagix_Lite_Beta_Legal_Documents.docx; plain-language summary + 19 numbered sections; structured TOC sidebar.
+marketing/app/disclaimer/page.tsx                 REWRITE — full Educational and Financial Information Disclaimer from the same docx; 16 numbered sections; explicit "Finmagix is not a financial advisor, fiduciary, tax preparer, broker, or insurance agent."
 
-# New page that must exist (per strategy 5.8)
-marketing/app/how-finmagix-makes-money/page.tsx   NEW — full transparency page; subscriptions only, no commissions, no data sales; linked from every footer
-
-# Routing fix
-(wherever the existing nav config lives)          EDIT — "Security" link points to /security, not /privacy
+# Pages REMOVED (per founder direction, May 2026)
+#   /how-finmagix-makes-money   — removed; subscriptions-only framing now lives inside About § 03 (*"Pricing is static and transparent"*) and on the Platform page
+#   /blog                       — removed for now; will return later (data in BLOG_POSTS preserved for restore)
+#   /security                   — merged into /privacy-and-security; kept as a redirect
+#   /demo                       — replaced by /platform; kept as a redirect
 
 # Telemetry / SEO (light touch)
-marketing/app/sitemap.ts                          UPDATE — add all 11 pages + /how-finmagix-makes-money
+marketing/app/sitemap.ts                          UPDATE — add the 9 live pages: / · /platform · /pricing · /partners · /about · /advisors · /contact · /privacy-and-security · /terms · /disclaimer. Exclude /demo, /security, /blog, /how-finmagix-makes-money.
 marketing/app/robots.ts                           CHECK — sane defaults; allow crawl
 (open-graph image)                                NEW — neutral OG card; not a dashboard screenshot
 ```
+
+## Visual identity — logo (May 2026)
+
+The Finmagix wordmark was redesigned in May 2026 following a 20-direction exploration. **Direction 04 — period mark — was selected.**
+
+**Wordmark spec:**
+- Word: `Finmagix.` (one word, sentence case, followed by a forest-green period)
+- Typeface: Fraunces, weight 500–600, optical size 36–60 depending on size, letter-spacing -0.005em
+- Colors: ink `#1F1A14` for the letters, `--accent-primary` (`#2C5A3E`) for the period
+- The previous italic-green `magix` treatment (`Fin` + italic green `magix`) is **retired**. Do not reintroduce. Anywhere the old markup appears in production (header brand, footer brand, any duplicate elsewhere), replace it with the new pattern below.
+
+**Production assets (carry over verbatim — these are the sources):**
+- `site/finmagix-logo.svg` — primary wordmark, 600×160 viewBox, text-based, Fraunces referenced via embedded `@import`. For maximum portability across design tools, open this file in Illustrator / Figma and convert the text to outlines before handoff to partners.
+- `site/finmagix-logo-inverse.svg` — same wordmark on dark backgrounds, cream letters + sage period.
+- `site/favicon.svg` — 32×32 mark, serif `F` + forest-green dot. Falls back to Times New Roman / Georgia where Fraunces isn't installed (acceptable at favicon size).
+
+**Header / footer pattern in code (Next.js):**
+
+```tsx
+// NavBar.tsx and Footer.tsx
+<a href="/" aria-label="Finmagix home" className="nav__brand">
+  Finmagix<span className="nav__brand--mark">.</span>
+</a>
+```
+
+```css
+.nav__brand        { font-family: var(--font-serif); font-weight: 600;
+                     font-variation-settings: 'opsz' 36; letter-spacing: -0.01em;
+                     color: var(--ink-primary); }
+.nav__brand--mark  { color: var(--accent-primary); margin-left: 1px; font-weight: 600; }
+```
+
+The wordmark is **always rendered as live HTML text** in the header and footer — not as an `<img>`. This keeps it crisp at every zoom, accessible to screen readers and find-on-page, and trivial to recolor in dark sections (the period inherits `var(--accent-primary)`, which the dark band can rebind to sage if needed). The SVG files are for: favicon, OG image, partner-deck handoff, and anywhere outside the running page where the Fraunces webfont isn't loaded.
+
+**Exploration file** (do not ship): the prototype's `/Finmagix Logo Options.html` is a 20-direction sketchbook with light + dark previews and SVG/PNG downloads per card. It exists only to record what was tried and why 04 was chosen.
 
 ## Production-state assumptions
 
@@ -143,8 +193,9 @@ marketing/app/robots.ts                           CHECK — sane defaults; allow
   - `"$180,000"` unaccompanied by an assumptions tooltip or footnote
   - `"Action available"`, `"Tax savings found"`
   - `"Get started in seconds"`
-- `/security` exists and is what the "Security" nav link points to.
-- `/how-finmagix-makes-money` exists and is linked from the footer of every page.
+- `/privacy-and-security` exists and is the single canonical legal page for both privacy and security. `/privacy` and `/security` both 301 to it. Footer shows ONE link labeled "Privacy & Security Policy".
+- `/platform` exists and is linked from BOTH the top nav and footer Product column. `/demo` 301s to it.
+- `/blog` and `/how-finmagix-makes-money` do NOT exist (removed May 2026).
 - The home page does **not** contain a dashboard screenshot, an "AI" badge, or a media-logo strip ("As seen in…") unless the logos are accurate and recent.
 - Founder reads the home page out loud at conversational pace, and it lands. (Per § 11.3 of the brief — this is the actual test, not just a Lighthouse number.)
 - Counsel reviews and approves the four legal pages (`/privacy`, `/terms`, `/disclaimer`, `/security`) before public launch. If counsel hasn't reviewed yet at end of session, ship behind a feature flag, not to production.
@@ -175,9 +226,11 @@ Sections (top to bottom):
 2. **Empathy band** — narrow band with light tier-recommended-surface fill; two paragraphs ending in *"You do the deciding."*. The $250k + CFP line stays per founder decision.
 3. **Three value props** — *complete picture / CFP-inspired structure / you decide always.*
 4. **How it works** — three numbered steps, "From sign-up to your first useful look in under twenty minutes."
-5. **Modules preview** — three featured modules + "See all twelve & pricing" link (Option A per brief § 5.4). No prices on cards.
-6. **Partner strip** — narrow dark band, two sentences + "Explore partnerships →". (Optional; show on by default.)
-7. **Closing CTA** — restated value, free-to-start framing, single primary CTA.
+5. **Under the hood (engine transparency)** — full-bleed dark forest-green card. Heading: *"The engine behind the modules."* Lede: *"A frontier AI does the analysis work. CFP and CFA advisors wrote the rules it has to follow. You get the structured thinking of a planner — without the $250,000 minimum."* Three serif bullets numbered 01/02/03 on the right: (1) Twelve areas of your financial life, one platform; (2) AI-assisted analysis grounded in your actual situation; (3) Trade-offs laid out clearly — the deciding stays with you. Powered-by-Claude tag at the bottom of the left column. **This is the deliberate compliance posture on AI: it names AI honestly inside the body but does not lead with it.** The hero still does NOT mention AI. The H2 of this section does NOT contain the word "AI." Per founder decision (May 2026) after weighing Option A (no-AI mention), Option B (AI named in body, not heading — selected), Option C (lead with AI — rejected, would have required pulling Appendix A from the marketing brief and updating the strategy doc).
+6. **Testimonial — Allen Mueller, CFA, MBA, Founder of 7 Saturdays Financial.** Light cream band (`--surface-tier-recommended`). Square portrait on the left with name + credentials + firm beneath it; large serif quote on the right with a faded green opening quote mark. Three paragraphs of testimonial copy, with selected phrases ("breakthrough tool," "without a sales pitch") set in green italic for emphasis. **Compliance note for Claude Code:** the quote contains the phrase *"actionable recommendations based on the user's goals"* — first-party Finmagix copy does not use "recommendations" in this sense (substitution table § 3.2). A third-party testimonial may use language we wouldn't use ourselves, because it's their experience. Do not edit the quote. Do not echo the phrase in surrounding first-party copy. If counsel pushes back at launch, the fallback is to truncate the quote to start from *"It also highlights key risk management items…"* — the second paragraph stands alone.
+7. **Modules preview** — three featured modules + "See all twelve & pricing" link (Option A per brief § 5.4). No prices on cards.
+8. **Partner strip** — narrow dark band, two sentences + "Explore partnerships →". (Optional; show on by default.)
+9. **Closing CTA** — restated value, free-to-start framing, single primary CTA.
 
 The prototype in the design directory shows all of these wired up, with the four-headline ladder and other tweakable variants encoded.
 
@@ -191,19 +244,30 @@ Existing structure: three tier cards. Keep. Apply Finmagix Lite tokens.
 - Tier card CTAs are non-directive: "Start free" / "Try Recommended" / "Try Pro" — never "Buy now," "Upgrade now," "Subscribe."
 - Each paid tier has a "Cancel any time, no questions" line.
 - Below tiers: a 4-question FAQ strip (preserved or rewritten per substitution table).
-- At the bottom: link to `/how-finmagix-makes-money`.
+- (Previously: link to `/how-finmagix-makes-money` at the bottom. That page was removed in May 2026 — do not re-add the link. The subscriptions-only framing is now in About § 03 and on the Platform page.)
 
-### `/demo` — Interactive demo
+### `/platform` — Finmagix Platform (replaces /demo)
 
-Existing structure: a walk-through of the Health Checkup. Keep concept. Apply Finmagix Lite tokens.
+**Replaces the old Interactive Demo.** This is now the long-form narrative product page. Content comes from `Our_Platform.docx` and is reproduced verbatim in the prototype. Keep `/demo` as a permanent redirect/alias so old links don't break.
 
-**Required changes from existing site:**
-- The demo must show **progressive disclosure** per strategy 5.4 and 7.2: headline observation + two-or-three paths shown briefly, with "See the assumptions" expand-on-demand.
-- The five-section analysis framework (scope / observations / paths / sensitivity drivers / what's not covered) must be visible and labeled.
-- The "what this doesn't cover" section is **not optional**. Per strategy Part 4: every analysis output makes its own limits visible.
-- The disclosure footer line appears under the sample output, linking to `/disclaimer`.
-- End-of-demo CTA: "Try the real thing — free" linking to `lite.finmagix.com/signup`.
-- The demo does **not** require sign-up to view.
+**Page sections (top to bottom):**
+1. **Hero** — centered, large serif H1 *"Like having a friend who actually understands money."* with *"understands money"* in green italic. Subtitle: *"— and won't make you feel dumb for asking."* Lede paragraph naming the 85%, CFP/CFA framing, then **Start free** CTA (→ lite.finmagix.com/signup).
+2. **"You've probably tried other things"** — empathy band on `--surface-tier-recommended`. Two paragraphs with *"It is."* and *"We're trying to fix that."* set as serif italic emphasis lines between them.
+3. **"What Finmagix Lite is"** — short two-column framing block with *"Just kind structure, honest perspective…"* as the emphasis close.
+4. **"How it works"** — five numbered steps on a `--surface-sunken` band. Steps 02, 03, 04, **and 05** each carry a real product screenshot inside mock browser chrome (`lite.finmagix.com` in the URL bar) with a serif caption:
+   - Step 02: *Your Quiet Index* (dashboard) — `site/product-quiet-index.png`
+   - Step 03: *Six-dimension fitness charts* — `site/product-fitness-overview.png`
+   - Step 04: *AI-generated summary / Finmagician's read* — `site/product-finmagicians-read.png`
+   - Step 05: *Cross-module summary* — `site/product-bigger-picture.png`
+   These captures were supplied by the founder in May 2026 and auto-trimmed against the app's canvas color (uniform-edge trim with 6px breathing room). Step 04's heading was updated in the same revision: *"Read the Finmagician's read."* → *"Read the Finmagician's (your AI friend's) analysis."* If future screenshots replace any of these, keep the tight auto-trim convention so the visual rhythm down the page stays consistent.
+5. **"What's inside"** — three-tier card grid (Free / Recommended / Pro) with prices and the modules-in-each-tier line per the docx.
+6. **"What we won't do"** — full-bleed `--surface-inverse` band. Five-line `×` list (Tell you what to buy / Pick stocks / Take commissions / Pretend to be your fiduciary / Sell your data). The section ends at the bulleted list; the earlier *"makes money one way: subscriptions…"* footnote callout was **removed in May 2026** per founder direction. Do not reintroduce.
+7. **"The promise"** — centered pull quote on `--surface-tier-recommended` with the founder-supplied promise text, **Start free** CTA, and the CFP/CFA "inspired by" disclosure line.
+
+**Notes:**
+- The old DemoPage component (sample Health Checkup walkthrough with progressive disclosure) is **not** carried forward. If the founder wants progressive-disclosure demos in the future, treat them as a separate page (e.g. `/demo/health-checkup`) and not the primary product story.
+- The original docx referenced a "How Finmagix makes money" nav link inside the *What we won't do* callout. Since that page was removed in May 2026, the link is dropped — but the *substance* (subscriptions only) is preserved in the callout text. Do not re-add the link.
+- Do NOT lead the hero with AI. Per § 5 (Under the hood) compliance posture, AI is named *inside* the body of the Under-the-hood section on `/`, not on the platform page hero. The platform page hero is product-language only.
 
 ### `/partners` — Partners
 
@@ -215,42 +279,66 @@ Existing structure: four sections (credit unions, community banks, employers, CF
 - Per-section CTA: "Talk to us" linking to a partner-specific contact form (or `/contact?intent=partner_<id>` if a unified form already exists).
 - If partner logos appear, they must be **real, current, approved partners**. Placeholder logos are removed. If no real logos available, no logo strip — better to omit than fake.
 
-### `/about` — About
+### `/about` — About us
 
-Existing structure: founder story + team. Keep concept. Apply Finmagix Lite tokens.
+**Founder-supplied copy is the contract.** The May 2026 revision **reduced the page from six numbered sections to four, plus a mission close.** The dark `--surface-inverse` *"How we hold the line"* band was removed entirely — its substance lives on `/platform` in the *"What we won't do"* section, and duplicating it on About muddied the narrative. The standalone *"How we make money"* section was also dropped because subscriptions-only is now stated inside the new section 03 (*"Pricing is static and transparent"*) and on the Platform page.
 
-**Required changes from existing site:**
-- 600–900 word strategic story per § 6.5 of brief.
-- Sections: *Why we built this* / *What we believe* / *How we hold the line* / *Who's behind it*.
-- "How we hold the line" must summarize the strategy Part 3 & Part 4 commitments in plain language. This is the page where Finmagix explains, publicly, what it will *not* do.
-- No "founder letter" framing unless it's actually a letter. No performative humility.
+**Top-nav and footer label:** *"About us"* (sentence case — changed from "About" in May 2026). Internal route still `/about`.
+
+**Page sections (top to bottom):**
+1. **Hero** — *"Built for the 85% the financial industry has overlooked."* with *"85%"* in green italic. Two-paragraph lede ending in the strong line *"…AI-powered insight to the people the advisory industry has overlooked."*
+2. **01 — Why we built Finmagix** — H2 *"Traditional advisory has a minimum."* The six-figure-minimum framing + the three-line *"You are not bad with money / unsophisticated / behind"* affirmation block (rendered as struck-through pseudo-bullets to visually *negate* the labels). Closes with *"You've been busy living a real life. You deserve a tool that respects that."*
+3. **02 — What we believe** — H2 *"Avoidance is exhaustion, not irresponsibility."* One opening paragraph + three card-list items (capable adults / structured thinking / you decide always). Background `--surface-tier-recommended`.
+4. **03 — How Finmagix is different** — H2 *"Not another budgeting app."* Four bolded-lead paragraphs: what's covered / show the work / pricing is static and transparent / **inspired by CFP Board and CFA Institute standards** (with the explicit *"We are not a CFP or CFA — and we don't claim to be"* disclosure). The CFP/CFA credit-where-due framing now lives here; do not move it elsewhere.
+5. **04 — Who's behind Finmagix** — H2 *"A small team. Real experience."* Three short paragraphs + an advisor callout card linking to `/advisors`. (Renumbered from 05; *"Honest about size."* was trimmed from the H2 line in May 2026.)
+6. **Mission close** — centered serif headline *"Make financial clarity available to the people who've been told they don't deserve it."* with *"don't deserve it"* in green italic. Three struck-through *"Not lectures / Not sales pitches / Not one-size-fits-all answers"* lines. Closing lede ending in *"…the dignity of making your own decisions about it."* + **Try the free checkup** CTA.
+
+**Sections REMOVED in May 2026 (do not bring back):**
+- *04 — How we hold the line* (dark band, `×` list of four "We do not" lines, *"rewrite, redesign, or don't ship"* pullquote). Substance moved to `/platform` *"What we won't do."*
+- *05 — How we make money* (the *"Subscriptions. That's the whole business."* block). Substance is now one sentence inside the new section 03 plus the Platform page.
+
+**Background alternation rhythm:** Hero (cream canvas) → 01 (cream) → 02 (`--surface-tier-recommended`) → 03 (cream) → 04 (cream) → Mission (`--surface-tier-recommended`). Section 04 was flipped back to the cream surface in May 2026 when section 05 was removed, so the page doesn't end on two consecutive tier-recommended bands.
+
+**Compliance note:** the founder's About copy uses *"AI-powered insight"* as a value statement in the hero lede. This is softer than the substitution table allows in CTA / directive surfaces, but the founder has explicitly approved it on About (the strategy-storytelling surface, in the founder's voice). Do not propagate the same phrasing to module surfaces, button labels, or any in-app text.
 
 ### `/advisors` — Advisors
 
-Existing structure: names + photos + bios. Keep concept. Apply Finmagix Lite tokens.
+**Single feature card layout.** William Tincup is the named advisor as of May 2026. The page does **not** carry a placeholder bench of fictitious CFP/CFAs.
 
-**Required changes from existing site:**
-- Each advisor entry has **credentials and a specific bio**, not vague "guides our principles" language.
-- **Explicit callout** on the page: "What our advisors do, precisely" — listing what they do (review principles, prohibited zones, framework) and what they don't (review individual analyses). Per strategy Part 4: no appearance of professional review without actual professional review.
+**Page structure:**
+1. **Header** — *"The professionals who shape our principles — and challenge our thinking."*
+2. **Subhead** — *"Our Advisors make us better every day, helping us build on our mission."* (Note: this is the simplified copy approved May 2026. Earlier draft text about "They review our framework / They do not review every individual analysis output" was REMOVED per founder direction.)
+3. **William Tincup feature card** — square portrait left, profile right:
+   - Name: William Tincup
+   - Credentials: MBA, SHRM-SCP, SPHR
+   - Role line (mono): *Editor, Analyst, Advisor & Host · WRKdefined* / *Venture Partner · Evergreen Mountain Equity Partners & Future Wrk Ventures*
+   - Four-paragraph bio covering his HR/workplace analyst background, board-advisor work across 25+ HR-tech companies, his angle for Finmagix (workplace-financial-wellness category positioning), and his academic background. Full text in the prototype.
+4. (Previously: a "Growing the bench" note and a "What our advisors do, precisely" do/do-not callout. **Both removed in May 2026** per founder direction; do not bring them back.)
 
-### `/contact` — Contact
+**Photo:** supplied by founder, served at `marketing/public/advisors/william-tincup.jpg` (600×600). Casual portrait, not corporate headshot — fits the anti-fintech-suits aesthetic.
 
-Existing structure: form + email. Keep. Apply Finmagix Lite tokens.
+### `/contact` — Contact (partner-focused)
 
-**Required changes from existing site:**
-- Email address is **legible**, not obfuscated. (Obfuscation is a relic of a different web.)
-- Response-time expectation stated: "We respond to most messages within two business days."
-- Business hours stated if applicable.
-- Two email addresses: `hello@finmagix.com` (general) and `partners@finmagix.com` (B2B). Confirm with founder.
+**Repositioned in May 2026 as a partner-contact surface.** The general user-support email and `hello@finmagix.com` were removed per founder direction. Page is now optimized for B2B (employers, benefits providers, credit unions, community banks, nonprofits) plus general partnership inquiries.
 
-### `/blog` — Blog index
+**Page structure:**
+- **Header:** *"Drop us a line."*
+- **Subhead:** *"We read every message. We respond to most within two days. Love to hear from you and discuss how we can partner with you."* (exact copy, founder-approved)
+- **Left rail:** **For partnerships** label + `partners@finmagix.com` (monospace, legible, not obfuscated). Business hours: Mon–Fri 9am–5pm ET. (Note: do NOT add a general `hello@` email back; that was removed deliberately.)
+- **Right rail:** Form with fields, in this order:
+  - Your name (text)
+  - Email (email)
+  - **Institution** — select dropdown with: Employers · Benefits Providers · Credit Unions · Community Banks · Non For Profits · Others. **This is required.** The form should pre-select an option when the URL has a matching hash (e.g. `/contact#employers` selects Employers; `/contact#credit-unions` selects Credit Unions). Map: `employers→Employers`, `benefits-providers→Benefits Providers`, `credit-unions→Credit Unions`, `community-banks→Community Banks`, `non-profits→Non For Profits`, `advisors→Others`.
+  - What's this about? (text, optional)
+  - Message (textarea, required)
+  - Submit button labeled **Send**
+- **Success state:** *"Got it. We'll get back to you within two business days. Thanks for reaching out."*
 
-Existing structure: card grid of posts. Keep. Apply Finmagix Lite tokens.
+**Partner-page wiring:** every "Talk to us" CTA on `/partners` routes to `/contact` and should append the section hash so the Institution field pre-fills.
 
-**Required changes from existing site:**
-- **No engagement counters**, trending tags, related-posts rabbit hole, social-share buttons. Per § 8.3 of brief.
-- Each card: image (if any) + tag + title + deck + date + reading time. Nothing else.
-- The blog tone matches the rest of the site: plain language, no urgency, no FOMO.
+### `/blog` — REMOVED (May 2026)
+
+The blog page, route, and footer link were removed in May 2026 per founder direction. *"We will add it later."* The `BLOG_POSTS` data array is preserved in the prototype's `data.js` so the page can be restored later in a single PR — when that happens, restore the route, the `BlogPage` component, the top-nav link, and the footer Company-column link in the same change.
 
 ### `/privacy`, `/terms`, `/disclaimer`, `/security` — Legal pages
 
@@ -264,9 +352,13 @@ Existing structure for `/privacy`, `/terms`, `/disclaimer`: full legal text. Kee
 - **`/disclaimer`** is the most-linked legal page. It must explicitly name what Finmagix is not: not a financial advisor, not a fiduciary, not a tax preparer, not a broker, not an insurance agent.
 - All four: standard footer, no CTAs, no upsells.
 
-### `/how-finmagix-makes-money` — Transparency
+### `/how-finmagix-makes-money` — REMOVED (May 2026)
 
-**This page must exist** per strategy 5.8. If it doesn't on the current site, create it. Content: subscriptions only; no commissions; no data sales; no affiliate links; no advertising. Linked from every footer.
+This page was removed per founder direction. The subscriptions-only framing now lives in two places:
+- **About § 03 — How Finmagix is different**, bolded line: *"Pricing is static and transparent. Free, Recommended, and Pro contain the same modules for every user. No hidden gates."*
+- **`/platform` § 6 — What we won't do**, the `×` list ending at *"Sell your data."*
+
+Do not recreate this page. Do not link to it from any footer or pricing surface. If a future founder decision restores it, treat that as a separate scope-brief PR.
 
 ---
 
@@ -278,7 +370,8 @@ The substitution table in § 3.2 of the marketing brief is the canonical referen
 # Patterns that should return ZERO hits in the marketing site source:
 grep -ri "CFP-standard\|CFP Standard" marketing/                # → "inspired by CFP frameworks"
 grep -ri "CFP-grade\|advisor-quality" marketing/                # → "CFP-inspired structure"
-grep -ri "AI-powered financial planning" marketing/             # → drop entirely
+grep -ri "AI-powered financial planning" marketing/             # → drop entirely (the eyebrow violation)
+grep -ri "smart \|intelligent \|smarter than\|smarter advisor" marketing/  # → no "smart AI" framing; engine section uses behavior verbs, not adjectives
 grep -ri "we recommend\|you should\|recommended next step" marketing/   # → "some people in your spot start with"
 grep -ri "optimized plan\|personalized roadmap" marketing/      # → "modules to focus on" / "structured thinking"
 grep -ri "next steps:" marketing/                               # → "things worth thinking about:"
@@ -330,18 +423,18 @@ Per § 10.2 of the marketing brief and `engineering-standards.md` § 4.5:
 
 ## Migration order
 
-Recommended sequence to ship without breaking anything live:
+Recommended sequence to ship without breaking anything live (updated May 2026):
 
-1. **Set up the marketing app shell.** Tokens, fonts, NavBar, Footer, persistent Disclosure. Verify by rendering a blank `/` with the chrome only.
-2. **Build the home page.** Most-leveraged surface. Until it's right, the rest is decoration. Get founder approval before continuing.
-3. **Ship `/how-finmagix-makes-money`** — small page, but the footer link breaks until it exists.
-4. **Fix the `/security` route.** New page + nav-link fix. Removes the visible routing bug on the current site.
-5. **Build `/pricing` and `/demo`.** These are the next-most-leveraged conversion surfaces.
-6. **Migrate `/partners`.** Apply tokens, restyle, preserve content.
-7. **Migrate `/about` and `/advisors`.** Lower-traffic, but the strategic story is on `/about` — it deserves care.
-8. **Migrate `/blog`** (index only; individual post template if time).
-9. **Migrate `/contact`.**
-10. **Migrate the four legal pages.** Plain-language summaries are the engineering deliverable; the legal body comes from counsel.
+1. **Set up the marketing app shell.** Tokens, fonts, NavBar, Footer, persistent disclosure footer, and the new period-mark wordmark (see *Visual identity* section above). Top nav links: Home / Finmagix Platform / Modules (anchor) / Pricing / For partners. Footer: Product (Finmagix Platform · How it works · Modules · Pricing · Privacy & Security) · Partners · Company (**About us** · Our advisors · Contact). No Blog. No How-we-make-money. No standalone Security. **Wordmark in both NavBar and Footer renders as live HTML text:** `Finmagix<span class="...--mark">.</span>`. Favicon at `marketing/app/favicon.svg`.
+2. **Build the home page** including the *Under the hood* and *Allen Mueller testimonial* sections. Most-leveraged surface. Founder approves copy before continuing.
+3. **Set up redirects** before adding new routes: `/demo` → `/platform`, `/privacy` → `/privacy-and-security`, `/security` → `/privacy-and-security`. Configure as permanent 301s in `next.config.js` / `middleware.ts`.
+4. **Build `/platform`** — long-form narrative page replacing the old Interactive Demo. All four product screenshots (steps 02–05) are supplied; carry them across from `site/product-*.png` to `marketing/public/platform/*.png`.
+5. **Build `/pricing`** with the all-twelve-modules visibility + FAQ. Founder copy review.
+6. **Migrate `/partners`** with the per-section "Talk to us" buttons that deep-link into `/contact#<institution>`.
+7. **Build `/contact`** with the new Institution dropdown and partners-only email.
+8. **Build `/about`** as the long-form narrative page (founder-supplied copy verbatim, six numbered sections + mission close).
+9. **Build `/advisors`** with the William Tincup feature card.
+10. **Build the three legal pages** (`/terms`, `/disclaimer`, `/privacy-and-security`) from `Finmagix_Lite_Beta_Legal_Documents.docx`. Ship with the *Version 0.9 · pre-counsel-review draft* stamp visible until counsel sign-off.
 
 Each step is its own PR. Founder reviews copy on each before merge per `engineering-standards.md` § 5.1.
 
