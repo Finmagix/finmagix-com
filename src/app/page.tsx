@@ -7,8 +7,7 @@
 // for the skip-to-content target.
 
 import Hero from "@/components/marketing/Hero";
-import EmpathyBand from "@/components/marketing/EmpathyBand";
-import ValueProps from "@/components/marketing/ValueProps";
+import ProofStrip from "@/components/marketing/ProofStrip";
 import HowItWorks from "@/components/marketing/HowItWorks";
 import UnderTheHood from "@/components/marketing/UnderTheHood";
 import Testimonial from "@/components/marketing/Testimonial";
@@ -20,8 +19,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <EmpathyBand />
-      <ValueProps />
+      <ProofStrip />
       <HowItWorks />
       <UnderTheHood />
       <Testimonial />

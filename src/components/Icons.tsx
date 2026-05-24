@@ -96,6 +96,48 @@ export function ReceiptIcon(props: IconProps) {
   );
 }
 
+// Proof-strip icons — added 2026-05-24 for the consolidated hero rebuild.
+// SVG paths sourced from prototype/site/icons.jsx (Lucide-style, 1.5px).
+
+export function UsersIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </Icon>
+  );
+}
+
+export function ScrollTextIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M15 12h-5" />
+      <path d="M15 8h-5" />
+      <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+      <path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
+    </Icon>
+  );
+}
+
+export function SparklesIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+    </Icon>
+  );
+}
+
+export function CompassIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <circle cx="12" cy="12" r="10" />
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+    </Icon>
+  );
+}
+
 // Icon resolver — used by ModuleCard when iterating over module data.
 // Returns null for unknown names; consumer can fall back to a placeholder.
 const iconMap = {
@@ -106,6 +148,10 @@ const iconMap = {
   ArrowUpRight: ArrowUpRightIcon,
   Menu: MenuIcon,
   X: XIcon,
+  Users: UsersIcon,
+  ScrollText: ScrollTextIcon,
+  Sparkles: SparklesIcon,
+  Compass: CompassIcon,
 } as const;
 
 export type IconName = keyof typeof iconMap;

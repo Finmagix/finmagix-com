@@ -1,8 +1,23 @@
-// Home hero. Counsel-approved H1 + eyebrow per Session 01 founder decision.
-// See docs/CLAUDE_CODE_HANDOFF.md § 5 (Home structure) and the prototype's
-// site/pages/home.jsx Hero component. Photograph is the placeholder from
-// prototype/site/hero-family.jpg (tracked as deferred work in
-// docs/tech-debt-marketing.md "Hero photograph is a placeholder").
+// Home hero — consolidated rebuild 2026-05-24.
+//
+// Per founder mini-brief (replaces the Session 01 Hero):
+//   - H1 changed from counsel-approved "What a CFP would cover. Without
+//     the CFP." to "Top financial advice was built for the wealthy. We
+//     built it for everyone else." Founder explicitly opted out of
+//     counsel re-review for this swap (Flag 1, founder discretion).
+//     Documented in docs/sessions/session-01-finmagix-com-redesign-home.md
+//     under Compliance notes.
+//   - Eyebrow keeps the original framing but swaps "frameworks" → "principles"
+//     to align with the footer Disclosure wording.
+//   - Sub-copy is more direct: "Twelve modules covering every part of
+//     your financial life — grounded in the same CFP and CFA frameworks
+//     the professionals use, in plain language, with you in charge."
+//   - CTAs unchanged (primary "Try the free checkup" → lite signup,
+//     secondary "See what's inside" → #modules anchor).
+//   - Trust line shortened to "Free to start · No credit card · About
+//     five minutes" (was four parts; now three).
+//   - Photograph unchanged — same family.jpg, same eager-load, same
+//     16:10 aspect ratio, same object-position.
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,17 +30,19 @@ export default function Hero() {
     <section className="hero">
       <div className="wrap hero__grid">
         <div className="hero__text">
-          <div className="eyebrow">Inspired by CFP and CFA planning frameworks</div>
+          <div className="eyebrow">
+            Inspired by CFP and CFA planning principles
+          </div>
 
           <h1 className="t-hero">
-            <span>What a CFP would cover.</span>
+            <span>Top financial advice was built for the wealthy.</span>
             <span style={{ color: "var(--accent-primary)" }}>
-              Without the CFP.
+              We built it for everyone else.
             </span>
           </h1>
 
           <p className="t-lede hero__sub">
-            Twelve areas of structured financial thinking — retirement, tax, debt, estate, college, Social Security, and more — in plain language,{" "}
+            Twelve modules covering every part of your financial life — grounded in the same CFP and CFA frameworks the professionals use, in plain language,{" "}
             <span className="you-decide">with you in charge</span>.
           </p>
 
@@ -49,7 +66,7 @@ export default function Hero() {
             <span className="dot" aria-hidden="true"></span>
             <span>No credit card</span>
             <span className="dot" aria-hidden="true"></span>
-            <span>About five minutes to a first useful look</span>
+            <span>About five minutes</span>
           </div>
         </div>
 
