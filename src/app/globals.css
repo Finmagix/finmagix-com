@@ -704,6 +704,91 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   Home — Platform preview (dashboard screenshot below HowItWorks)
+   Browser-chrome wrapper around the product capture + serif caption.
+   Added 2026-05-24 per founder mini-brief. See PlatformPreview.tsx
+   header for compliance notes.
+   ============================================================ */
+.platform-preview__figure {
+  margin: 0;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.platform-preview__caption {
+  margin-top: 20px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink-secondary);
+  text-align: center;
+  font-variation-settings: 'opsz' 24;
+  text-wrap: balance;
+}
+
+/* Mock browser chrome — sits around product screenshots on
+   /platform and home. Subtle, flat, no skeuomorphic gradients. */
+.browser-chrome {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-raised);
+  box-shadow: var(--elevation-2);
+}
+.browser-chrome__bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.browser-chrome__dots {
+  display: inline-flex;
+  gap: 6px;
+}
+.browser-chrome__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  opacity: 0.5;
+}
+.browser-chrome__url {
+  justify-self: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  padding: 4px 14px;
+  background: var(--surface-canvas);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  max-width: 320px;
+}
+.browser-chrome__spacer {
+  /* Mirrors the dots width so the URL stays visually centered.
+     Hidden visually; aria-hidden on the element. */
+  display: inline-block;
+  width: 42px;
+}
+.browser-chrome__body {
+  display: block;
+  background: var(--surface-canvas);
+}
+.browser-chrome__body img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 540px) {
+  .browser-chrome__url { font-size: 11px; padding: 3px 10px; }
+  .browser-chrome__spacer { display: none; }
+  .browser-chrome__bar { grid-template-columns: auto 1fr; gap: 12px; }
+}
+
+/* ============================================================
    Home — Under the hood (engine transparency)
    Full-bleed dark forest-green card. Per Option B compliance posture
    (founder decision May 2026): the H2 contains NO "AI" / "intelligent" /

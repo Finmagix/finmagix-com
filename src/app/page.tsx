@@ -9,6 +9,7 @@
 import Hero from "@/components/marketing/Hero";
 import ProofStrip from "@/components/marketing/ProofStrip";
 import HowItWorks from "@/components/marketing/HowItWorks";
+import PlatformPreview from "@/components/marketing/PlatformPreview";
 import UnderTheHood from "@/components/marketing/UnderTheHood";
 import Testimonial from "@/components/marketing/Testimonial";
 import ModulesPreview from "@/components/marketing/ModulesPreview";
@@ -21,6 +22,7 @@ export default function Home() {
       <Hero />
       <ProofStrip />
       <HowItWorks />
+      <PlatformPreview />
       <UnderTheHood />
       <Testimonial />
       <ModulesPreview />
