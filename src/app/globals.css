@@ -1933,6 +1933,86 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   Partners page — 4 partner sections with anchors
+   Per founder Session 02 decision C: per-partner B2B pricing
+   REMOVED from display. No .partner-price rule shipped.
+   ============================================================ */
+.partners-toc {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 24px;
+}
+.partners-toc a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  transition: background-color var(--motion-duration-quick) var(--motion-easing-standard),
+              color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.partners-toc a:hover {
+  background: var(--surface-sunken);
+  color: var(--ink-primary);
+}
+
+.partner-section {
+  border-top: 1px solid var(--border-subtle);
+  padding: 56px 0;
+}
+.partner-section:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+.partner-section__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+}
+.partner-section h2 {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 500;
+  margin: 0 0 12px;
+  font-variation-settings: 'opsz' 60;
+}
+.partner-section ul.benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.partner-section ul.benefits li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-left: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-primary);
+}
+.partner-section ul.benefits .check {
+  color: var(--accent-primary);
+  margin-top: 4px;
+  flex-shrink: 0;
+  display: inline-flex;
+}
+.partner-section__cta {
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .partner-section__inner { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ============================================================
    Advisor feature card (William Tincup on /advisors)
    ============================================================ */
 .advisor-feature {
