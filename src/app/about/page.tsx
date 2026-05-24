@@ -136,7 +136,7 @@ export default function AboutPage() {
             </div>
             <div className="about-block__body">
               <p>
-                <strong>Finmagix Lite covers what actually drives outcomes</strong> — financial health, taxes, debt, retirement, longevity, insurance, college, Social Security, FIRE, estate, and wealth building. Each is a structured module that produces a real analysis.
+                <strong>Finmagix covers what actually drives outcomes</strong> — financial health, taxes, debt, retirement, longevity, insurance, college, Social Security, FIRE, estate, and wealth building. Each is a structured module that produces a real analysis.
               </p>
               <p>
                 <strong>Every analysis shows the work.</strong> What we looked at. What we assumed. What the options are. What each one trades off. You get a structured way to think — not a verdict.

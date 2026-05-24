@@ -55,7 +55,7 @@ export default function PlatformPreview() {
             <div className="browser-chrome__body">
               <Image
                 src="/product/quiet-index.png"
-                alt="The Finmagix Lite dashboard, headed 'Welcome back, Dan.', showing a Quiet Index summary (11 of 12 modules explored, scores averaging 44 across a 10 to 90 range), a horizontal bar chart of module scores, and a 'Get your summary' card with a Generate button."
+                alt="The Finmagix dashboard, headed 'Welcome back, Dan.', showing a Quiet Index summary (11 of 12 modules explored, scores averaging 44 across a 10 to 90 range), a horizontal bar chart of module scores, and a 'Get your summary' card with a Generate button."
                 width={870}
                 height={657}
                 sizes="(max-width: 920px) 100vw, 960px"

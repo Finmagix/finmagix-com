@@ -28,7 +28,7 @@ import { ArrowRightIcon } from "@/components/Icons";
 export const metadata: Metadata = {
   title: "Sign in",
   description:
-    "Sign in to Finmagix Lite — the plain-language financial-thinking platform.",
+    "Sign in to Finmagix — the plain-language financial-thinking platform.",
 };
 
 const LITE_LOGIN_URL = "https://lite.finmagix.com/login";
@@ -78,7 +78,7 @@ export default function SignInPage() {
       }
       footerDisclosure={
         <>
-          <strong>Finmagix Lite</strong> is an educational financial-wellness platform — not a financial advisor, fiduciary, broker, or insurance agent. Inspired by CFP Board and CFA Institute frameworks; not certified by either. For educational purposes only.
+          <strong>Finmagix</strong> is an educational financial-wellness platform — not a financial advisor, fiduciary, broker, or insurance agent. Inspired by CFP Board and CFA Institute frameworks; not certified by either. For educational purposes only.
         </>
       }
     >

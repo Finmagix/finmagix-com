@@ -58,7 +58,22 @@ function Block({ block }: { block: LegalBlock }) {
   return null;
 }
 
-export default function LegalPage({ doc }: { doc: LegalDoc }) {
+type LegalPageProps = {
+  doc: LegalDoc;
+  /** When true, omits the cream "The plain-language version" summary
+   *  callout above the legal sections. Set per-page when the founder
+   *  wants the page to start straight into the numbered sections. */
+  hideSummary?: boolean;
+  /** When true, omits the green-bordered intro callout that sits above
+   *  the numbered sections. */
+  hideIntro?: boolean;
+};
+
+export default function LegalPage({
+  doc,
+  hideSummary = false,
+  hideIntro = false,
+}: LegalPageProps) {
   return (
     <>
       {/* Header */}
@@ -98,18 +113,20 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
             </aside>
 
             <article className="legal-article">
-              <div className="legal-summary">
-                <h2 className="legal-summary__title">
-                  The plain-language version
-                </h2>
-                <ul>
-                  {doc.summary.map((s, i) => (
-                    <li key={i}>{s}</li>
-                  ))}
-                </ul>
-              </div>
+              {!hideSummary && (
+                <div className="legal-summary">
+                  <h2 className="legal-summary__title">
+                    The plain-language version
+                  </h2>
+                  <ul>
+                    {doc.summary.map((s, i) => (
+                      <li key={i}>{s}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
-              {doc.intro && (
+              {!hideIntro && doc.intro && (
                 <div
                   className={`legal-callout${
                     doc.intro.strong ? " legal-callout--strong" : ""

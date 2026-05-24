@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Finmagix Lite Design System — Foundation Tokens
+   Finmagix Design System — Foundation Tokens
    Source: prototype/site/tokens.css (Claude Design handoff, May 2026).
    Imported globally via app/layout.tsx. Fonts are loaded by
    next/font/google in layout.tsx; the font-family tokens below
