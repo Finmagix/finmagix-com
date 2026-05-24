@@ -534,7 +534,13 @@ h4, h5, h6 {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
   gap: 64px;
-  align-items: center;
+  /* Top-align rather than center: the text column (eyebrow + 4-line
+     H1 + lede + CTAs + trust) is much taller than the 16:10 photo,
+     so centering pushed the photo's visual mass down to the sub-
+     paragraph. Top-aligned, the photo sits alongside the H1 — which
+     is what "centered with the text" reads as visually, because the
+     H1 is the visual anchor of the column. */
+  align-items: start;
 }
 .hero__text {
   display: flex;
@@ -576,6 +582,10 @@ h4, h5, h6 {
   overflow: hidden;
   background: var(--surface-sunken);
   box-shadow: var(--elevation-1);
+  /* Small optical offset so the photo's top edge aligns with the
+     eyebrow's baseline rather than its cap-height — the columns feel
+     "in conversation" without the rigid feeling of perfect snap. */
+  margin-top: 8px;
 }
 .hero__image-wrap img {
   width: 100%;
@@ -725,9 +735,37 @@ h4, h5, h6 {
    above — see comment on the token block for the design-system
    exception.
    ============================================================ */
+/* Outer layout — desk-portrait on the left, intro + table on the right.
+   Stretch-aligned so the photo cell matches the content cell height
+   exactly (no aspect-ratio guess against a variable-length table).
+   Capped at 1120px so it fits inside .wrap (1180px – 48px padding)
+   with breathing room. Below 960px the grid collapses to a single
+   column with the photo stacked on top in a wider 16:10 crop. */
+.comparison__layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 56px;
+  align-items: stretch;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.comparison__media {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--surface-sunken);
+  box-shadow: var(--elevation-1);
+  /* min-height keeps the cell visible if the content column is ever
+     unusually short. With the current 5-row table + intro it's a
+     no-op (content drives the row height), but it guards against
+     future copy changes. */
+  min-height: 480px;
+}
+
 .comparison__intro {
   max-width: 640px;
-  margin: 0 auto 32px;
+  margin: 0 0 32px;
   text-align: left;
 }
 .comparison__intro .eyebrow { margin-bottom: 12px; }
@@ -737,9 +775,11 @@ h4, h5, h6 {
   max-width: 46ch;
 }
 
+/* Inner wrap — was a centered 760px island when the section was a
+   single column. Now it's a grid cell, so it fills its column. */
 .comparison__wrap {
-  max-width: 760px;
-  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 .comparison__table {
@@ -843,6 +883,32 @@ h4, h5, h6 {
   fill: none;
 }
 
+/* Tablet — narrower photo, tighter gap so the layout still breathes
+   on ~1000-1100px viewports. */
+@media (max-width: 1100px) {
+  .comparison__layout {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 48px;
+  }
+  .comparison__media { min-height: 440px; }
+}
+
+/* Stack at ≤960px — photo on top, content below. Photo gets a wider
+   16:10 crop that reads as a horizontal "lead image" rather than a
+   tall portrait. The min-height fallback is removed so aspect-ratio
+   takes over. */
+@media (max-width: 960px) {
+  .comparison__layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 760px;
+  }
+  .comparison__media {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+}
+
 @media (max-width: 560px) {
   .comparison__cell {
     min-height: 56px;
@@ -853,6 +919,11 @@ h4, h5, h6 {
   .comparison__logo { height: 18px; }
   .comparison__table {
     grid-template-columns: minmax(0, 1.5fr) minmax(72px, 1fr) minmax(72px, 1fr);
+  }
+  /* Tighter photo on phones — slightly squarer crop reads as more
+     portrait-like at small widths. */
+  .comparison__media {
+    aspect-ratio: 4 / 3;
   }
 }
 

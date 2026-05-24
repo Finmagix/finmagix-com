@@ -14,6 +14,14 @@
 // styling keeps every cell in its intended slot. (This is the
 // alignment bug the original Claude Design brief warned about.)
 //
+// 2026-05-24 PHOTO ADDED — desk-portrait.jpg sits in a left column
+// to use the otherwise-empty horizontal space beside the 760px-wide
+// content column. The outer `.comparison__layout` is a 2-col grid
+// that stretches both cells to the same height, so the photo lines
+// up with the intro+table on the right without an aspect-ratio
+// guess. Below 960px it collapses to a single column with the photo
+// stacked on top in a wider 16:10 crop.
+//
 // COPY GATE (per Claude Design brief, locked):
 //   Row 1 "Built on CFP & CFA principles" is APPROVED wording.
 //     Do NOT change to "CFP-grade," "CFP-certified," "advisor-quality,"
@@ -33,6 +41,7 @@
 // design-system exception per founder mini-brief decision 1b.
 
 import { Fragment } from "react";
+import Image from "next/image";
 
 // Yes icon — solid teal disc + white check
 function YesIcon() {
@@ -109,22 +118,37 @@ export default function Comparison() {
   return (
     <section className="section comparison" data-screen-label="comparison">
       <div className="wrap">
-        <div className="comparison__wrap">
-          <div className="comparison__intro">
-            <div className="eyebrow">A different kind of money tool</div>
-            <h2 className="t-section-title comparison__title">
-              Not another budgeting app
-            </h2>
-            <p className="t-lede comparison__sub">
-              Budgets track the past. Finmagix helps you decide what&apos;s next.
-            </p>
+        <div className="comparison__layout">
+          {/* Left column — desk-portrait. Decorative-but-informative:
+              alt copy intentionally avoids any claim about user
+              outcomes (Part 4). Sizes hint to next/image so it
+              serves a ~380px crop on desktop, full-width on mobile. */}
+          <div className="comparison__media">
+            <Image
+              src="/comparison/desk-portrait.jpg"
+              alt="A person at a home desk with a laptop, in the kind of everyday moment when a money question shows up."
+              fill
+              sizes="(max-width: 960px) 100vw, 380px"
+              style={{ objectFit: "cover", objectPosition: "center 38%" }}
+            />
           </div>
 
-          <div
-            className="comparison__table"
-            role="table"
-            aria-label="Product feature comparison: Finmagix versus budgeting and spend apps"
-          >
+          <div className="comparison__wrap">
+            <div className="comparison__intro">
+              <div className="eyebrow">A different kind of money tool</div>
+              <h2 className="t-section-title comparison__title">
+                Not another budgeting app
+              </h2>
+              <p className="t-lede comparison__sub">
+                Budgets track the past. Finmagix helps you decide what&apos;s next.
+              </p>
+            </div>
+
+            <div
+              className="comparison__table"
+              role="table"
+              aria-label="Product feature comparison: Finmagix versus budgeting and spend apps"
+            >
             {/* HEADER ROW — exactly 3 cells, no wrappers between them. */}
             <div
               className="comparison__cell comparison__head comparison__head--feat"
@@ -180,6 +204,7 @@ export default function Comparison() {
                 </Fragment>
               );
             })}
+            </div>
           </div>
         </div>
       </div>
