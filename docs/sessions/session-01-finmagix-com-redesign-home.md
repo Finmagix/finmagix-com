@@ -180,6 +180,59 @@ f. **Eyebrow swap is visible.** New eyebrow reads *"Inspired by CFP and CFA plan
 
 ---
 
+## Mid-session addition — Comparison section (2026-05-24)
+
+After the consolidated-hero + ProofStrip + PlatformPreview revisions, founder added a third mini-brief asking for a comparison section on the home page. Implemented in `e1636ac` (+ the docs commit landing this update).
+
+### What changed
+
+1. **New `Comparison` section** between `ProofStrip` and `HowItWorks`. Section count: 9 → 10. Reference mockup: `C:\Users\amita\Downloads\finmagix-comparison_1.html` (Claude Design 13:11). Mockup translated into our component + token conventions; raw HTML/inline styles not copied verbatim. (`e1636ac`)
+
+2. **Structure** — left-aligned section intro (kicker / H2 / sub) sitting above a 3-column comparison table. Table uses semantic `role="table"` + `role="columnheader"` + `role="cell"` markup with `aria-label` on the icons so the comparison is screen-reader navigable.
+
+3. **Copy** (5 rows, locked order):
+   1. *Built on CFP & CFA principles* — APPROVED Part 4 wording; not to be changed to "CFP-grade" / "CFP-certified" / etc.
+   2. *AI by design* — APPROVED but flagged as least-defensible row (most budget apps now market AI features). Tech-debt entry tracks the watch item.
+   3. *Decision tool, not just tracking*
+   4. *Complete picture, every age*
+   5. *Free Financial Fitness Test* — marketing label; canonical in-app name is "Financial Health Checkup." Dual naming founder-confirmed intentional. Tech-debt entry tracks.
+
+4. **No in-component disclaimer line** — founder removed it in the brief. Page-level disclosure via the persistent `<Disclosure variant="footer" />` in shared layout satisfies the Principle 6 obligation.
+
+5. **Highlight implementation** — uses a grid-placed `<div class="comparison__band">` with `grid-column: 2; grid-row: 1 / -1`, avoiding the absolute-positioning alignment bug the Claude Design brief warned about.
+
+### New design-system + compliance flags
+
+12. **Teal tokens introduced as a localized design-system exception** (founder decision 1b). New `--teal-deep / --teal-mid / --teal-tint` variables in `:root`. The home now has two visible accent colors: forest green everywhere else, teal in the Comparison. The Finmagix wordmark inside the comparison's middle-column header retains its forest-green period (brand identity). Tracked as a watch item in `docs/tech-debt-marketing.md` — "Comparison section introduces teal tokens outside the design system."
+
+13. **Logo asset deviation** (founder decision 3b). The public `logos/finmagix-logo.svg` is a bare SVG (no embedded styles); rendering it via `<img>` would show browser-default serif text. Resolved by inlining the SVG element inside `Comparison.tsx` with our design-system tokens (`var(--font-serif)`, `var(--ink-primary)`, `var(--accent-primary)`). Matches the "use the SVG" decision while rendering correctly via the next/font-loaded Fraunces.
+
+14. **Row 5 — no CTA wired** (founder decision 4a). The mockup shows row 5 as text + icons only, no link. The canonical Health Checkup is reachable via the home Hero's primary CTA, the Closing CTA, and the NavBar CTA — those satisfy the "wire to Health Checkup" intent the brief raised conditionally. Tech-debt note tracks the dual-naming question separately.
+
+15. **Dark mode deferred** (founder decision 2a). Section ships in light mode only, consistent with the rest of the site. Site-wide dark-mode support would be its own cross-cutting session.
+
+16. **"AI by design" appears on home twice now** — once in `ProofStrip` (proof point 3) and once in `Comparison` (row 2). Both are deliberate per separate founder decisions. The earlier `ProofStrip` instance is documented as a strategy.md Part 7 override; the Comparison row is documented as the least-defensible comparison row. Watch item: if AI prominence grows further, revisit Part 7 wholesale rather than accumulating individual exceptions.
+
+### Reviewer checklist — Comparison-specific
+
+When you re-QA `preview.finmagix.com` after the re-merge, in addition to the earlier checklists:
+
+g. **Comparison section appears between ProofStrip and HowItWorks.** Section eyebrow reads *"A different kind of money tool"*, H2 reads *"Not another budgeting app"*, sub reads *"Budgets track the past. Finmagix helps you decide what's next."*
+
+h. **Middle (Finmagix) column is visually framed** in teal — light teal background fill + 2px teal border, rounded corners. Columns to either side stay neutral.
+
+i. **Finmagix wordmark in the middle column header** renders in Fraunces with a forest-green period (brand identity — NOT teal). About 22px tall. Width auto.
+
+j. **Icons:** Finmagix column has filled teal discs with white checks; budgeting column has hairline grey rings with muted x marks. Each gets a screen-reader-readable "Yes" or "No" label.
+
+k. **5 rows, in this order:** CFP & CFA principles → AI by design → Decision tool not just tracking → Complete picture, every age → Free Financial Fitness Test. The first row's title is slightly bolder (lead-weight) than the rest.
+
+l. **Mobile 380px check:** all 3 columns stay visible and aligned. Column ratios narrow but no overflow. Logo shrinks to ~18px tall.
+
+m. **No disclaimer line under the table** — the in-component disclaimer is deliberately gone. The persistent footer disclosure still appears at the bottom of the page.
+
+---
+
 ## Reviewer checklist (for founder)
 
 Five-ish things to click, read, or sanity-check on `preview.finmagix.com` before approving the merge to `main`:
@@ -229,6 +282,8 @@ Branch `session-01-finmagix-com-redesign-home` after mid-session revisions (2026
 
 ```
 (docs commit landing this update)
+e1636ac  feat: add Comparison section — "Not another budgeting app"
+0de195e  docs: record mid-session revisions + AI-by-design strategy override
 11c8e6f  feat: add PlatformPreview section — dashboard screenshot below HowItWorks
 8aa70d6  feat: replace top sections with consolidated hero + proof strip
 f588c87  docs: session 01 report
