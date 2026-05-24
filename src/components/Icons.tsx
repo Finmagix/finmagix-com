@@ -183,6 +183,25 @@ export function BriefcaseIcon(props: IconProps) {
   );
 }
 
+// Auth-pages icons — added 2026-05-24 for /sign-in + /sign-up redesign.
+export function ArrowLeftIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M19 12H5" />
+      <path d="m12 19-7-7 7-7" />
+    </Icon>
+  );
+}
+
+export function MailIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </Icon>
+  );
+}
+
 // Icon resolver — used by ModuleCard when iterating over module data.
 // Returns null for unknown names; consumer can fall back to a placeholder.
 const iconMap = {
