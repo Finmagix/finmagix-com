@@ -69,6 +69,44 @@ This file tracks deferred work, design-system shortcuts, and cleanup items speci
 
 ---
 
+## Strategy / compliance — deliberate overrides to revisit
+
+### "AI by design" proof point on home — overrides strategy.md Part 7
+
+**What.** The 2026-05-24 mini-brief rebuild of the home top sections introduced a 4-item ProofStrip immediately below the hero. Proof point 3 is "AI by design" with the supporting line *"Modern technology does the heavy lifting; you make every call."*
+
+**Why it matters.** `strategy.md` Part 7 states the home page **does not lead with AI** ("AI is infrastructure, not the pitch"). The Session 01 handoff's Compliance check table reinforces this — "AI-powered" as the pitch is in the forbidden column. The new "AI by design" proof point names AI prominently on the home, above the fold (or close to it), in a position structurally analogous to the value-prop strip that previously did not mention AI at all.
+
+**Why it's not silent drift.** Founder approved this deliberately in the 2026-05-24 mini-brief. The brief explicitly states: *"this is a deliberate founder override of strategy.md Part 7 and the redesign brief Section 3.3, both of which state the home page does not lead with AI."* Recorded as deliberate, not absorbed.
+
+**Why the override is structurally bounded.** The "you make every call" half of the supporting line is load-bearing for the no-directive compliance posture (Part 4 — "We will not produce single-answer optimized plans" / "The voice can be warm; the structure stays optional"). That clause **must not be softened or removed** without re-opening the override decision.
+
+**Where.** `src/components/marketing/ProofStrip.tsx` — the third item in the `proofs` array. `docs/sessions/session-01-finmagix-com-redesign-home.md` Compliance notes section.
+
+**Resolution paths (pick one in a future session):**
+- (a) **Amend `strategy.md` Part 7** to reflect the new posture — AI may be named on home in a single bounded surface, with the "you make every call" non-directive guardrail required. Requires founder sign-off + counsel review.
+- (b) **Revisit the proof point** — replace "AI by design" with a non-AI proof point or move the AI mention back into the body-only Under the hood section (where it currently lives twice: in the body lede + the bullets). Requires founder sign-off.
+- (c) **Hold the override indefinitely** — accept the strategy/page disagreement as a known beta-posture deviation, document quarterly.
+
+**Effort.** (a) ~30 min strategy edit + counsel review; (b) ~15 min code edit + new proof copy; (c) ~0 (already current state). **Cleanup session.** Open — flag for the next quarterly Part 4/7 review.
+
+### Home reintroduces a dashboard screenshot (partial reversal of Session 01 decision)
+
+**What.** The 2026-05-24 mini-brief added a `PlatformPreview` section below `HowItWorks`, displaying `public/product/quiet-index.png` inside a mock browser chrome.
+
+**Why it matters.** The original Session 01 brief (May 2026) explicitly removed dashboard imagery from the home in response to Part 4 violations on the OLD WS-1 mockup. The new screenshot is materially different from the old one (no "$6,200/yr" pill, no "Action available" pill, no false-precision figures), and it sits mid-page rather than as the hero. The framing surrounding it is observational ("what it looks like"), not promotional.
+
+**Why it's not silent drift.** Founder approved adding this section in the 2026-05-24 mini-brief response after seeing a compliance-difference table comparing the new image to the old mockup. Documented in session report.
+
+**Watch items for future review:**
+- If the screenshot is ever re-captured, verify no new directive UI elements (pills, "Get started now" CTAs, "$X" promises) sneak in.
+- If marketing copy around the screenshot drifts toward "Finmagix improves your finances" / "saves you money" framing, that's the override creeping; revert to observational.
+- The bar-chart red bars in the screenshot imply "lower scores need attention" — a visual directive cue from the in-app UI. If future product design changes the color semantics (e.g., neutral grey for low scores), update the screenshot to match.
+
+**Effort.** Watch-item only; no immediate action. **Cleanup session.** Reviewed alongside any future home-page session that touches the PlatformPreview section.
+
+---
+
 ## Medium priority (address as sessions progress)
 
 ### Design-system primitives duplicated in-session

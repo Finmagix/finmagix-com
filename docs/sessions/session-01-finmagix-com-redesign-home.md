@@ -106,6 +106,80 @@ Items resolved in this session:
 
 ---
 
+## Mid-session founder revisions (2026-05-24)
+
+After the original Session 01 work was merged into `preview` and the founder QA'd `preview.finmagix.com`, the founder issued a mini-brief replacing the top sections and adding a new mid-page screenshot. Implemented in three commits (`8aa70d6`, `11c8e6f`, plus the docs commit landing this update).
+
+### What changed in the mid-session revision
+
+1. **Top sections consolidated.** What was three sections (Hero + EmpathyBand + ValueProps) became two tighter sections (consolidated Hero + new 4-item ProofStrip). Section count went 9 → 8 → 9 again (the PlatformPreview addition below restored the count). (`8aa70d6`)
+
+2. **New H1.** *"What a CFP would cover. Without the CFP."* → *"Top financial advice was built for the wealthy. We built it for everyone else."* Second sentence in `var(--accent-primary)` green. Framing shifts from "what" (scope of coverage) to "who" (wealth-class critique).
+
+3. **Eyebrow word swap.** *"Inspired by CFP and CFA planning frameworks"* → *"Inspired by CFP and CFA planning principles"* — aligns with the footer Disclosure wording (which has always used "principles").
+
+4. **Sub-copy rewritten.** *"Twelve modules covering every part of your financial life — grounded in the same CFP and CFA frameworks the professionals use, in plain language, with you in charge."* The italic-green `<span class="you-decide">with you in charge</span>` emphasis preserved.
+
+5. **Trust line shortened.** From 4 parts to 3: *"Free to start · No credit card · About five minutes"*. Dropped *"to a first useful look"*.
+
+6. **New ProofStrip section (4 items).** Replaces the structure of the old EmpathyBand + ValueProps. Each item is an icon (green) + bold short title + one supporting line. Items: *Built for the 85%* / *CFP & CFA principles* / **AI by design** / *Understanding, not tracking*. 4-col desktop / 2×2 tablet / 1-col narrowest. (`8aa70d6`)
+
+7. **New PlatformPreview section.** Added between HowItWorks and UnderTheHood. Section head + a mock-browser-chrome wrapper around `public/product/quiet-index.png` (the Your Quiet Index dashboard capture) + serif italic caption. (`11c8e6f`)
+
+8. **New icons:** Users, ScrollText, Sparkles, Compass added to `src/components/Icons.tsx`. (`8aa70d6`)
+
+9. **Deleted:** `src/components/marketing/EmpathyBand.tsx`, `src/components/marketing/ValueProps.tsx`, the `.empathy` and `.values` style blocks in `globals.css`. (`8aa70d6`)
+
+10. **Added:** `.proof-strip` + `.proof-item` + `.platform-preview` + `.browser-chrome` style blocks in `globals.css`. (`8aa70d6`, `11c8e6f`)
+
+### Compliance notes — mid-session revisions
+
+These are recorded as **deliberate**, not silent drift. Each one was surfaced to the founder before code; the founder made an explicit decision.
+
+7. **New H1 ships without counsel re-review.** Founder explicitly chose this (Flag 1 in the mini-brief, founder discretion). The H1 the original Session 01 brief shipped (*"What a CFP would cover. Without the CFP."*) was counsel-approved per Session 01 decision #1; the new H1 has not been counsel-reviewed. Founder accepts this risk for the beta-period launch. **Watch item:** if counsel later flags the new H1, the revert to the counsel-approved version is a one-line edit in `Hero.tsx`.
+
+8. **Eyebrow word swap (frameworks → principles)** — same compliance posture as the original ("Inspired by CFP and CFA…"), just aligned to the footer Disclosure's already-counsel-approved language. Low risk.
+
+9. **"AI by design" proof point overrides strategy.md Part 7.** Founder-acknowledged override. Tracked as its own item in `docs/tech-debt-marketing.md` under "Strategy / compliance — deliberate overrides to revisit." Resolution paths documented there: amend strategy.md, revisit the proof point, or hold the override. The "you make every call" clause is load-bearing for the no-directive posture — flagged in code comments as not-to-be-removed.
+
+10. **Dashboard screenshot reintroduced on home.** Partial reversal of the original Session 01 decision to remove dashboard imagery. The new image is materially different from the OLD WS-1 mockup that triggered the original removal:
+
+    | Old WS-1 hero mockup | New screenshot |
+    |---|---|
+    | ❌ "$6,200/yr Tax savings found" pill | ✅ No dollar pills |
+    | ❌ "Action available" pill | ✅ No action pills |
+    | ❌ Dashboard as the lead | ✅ Mid-page, below How-it-works |
+    | ❌ Replaces the empathy story | ✅ Sits inside the explanatory arc |
+
+    Things in the screenshot worth noting for future review:
+    - *"Best score: 90 (Social Security Planner)"* — score, not dollars; the app's own UI showing user data, not a marketing claim about benefit.
+    - Bar chart red bars imply "lower scores need attention" — visual cue from the in-app UI; surrounding marketing copy stays observational.
+
+    Tracked in `docs/tech-debt-marketing.md` under "Home reintroduces a dashboard screenshot" as a watch item for future home-page sessions.
+
+11. **Dropped content from the consolidated rebuild** (founder-confirmed intentional in Flag 4):
+    - *"$250,000 in investable assets and a Certified Financial Planner on retainer"* specific framing → replaced thematically by the new H1's wealth-gap claim.
+    - *"working two jobs / raising kids / quietly avoiding the money conversation"* empathy texture → gone. This was the most emotionally specific copy on the home; future sessions may want to reintroduce this texture elsewhere (e.g., on `/about`).
+    - *"scope, observations, paths to consider, sensitivity drivers, what's not covered"* — the 5-section rigor explanation from the old ValueProp #2 — gone. The substance lives on `/platform`'s structured-analysis treatment; not promised on home.
+
+### Reviewer checklist — what changed for the re-QA
+
+When you re-QA `preview.finmagix.com` after the re-merge, the items below are the **new things to focus on** (the original checklist still applies for everything else):
+
+a. **New hero copy reads cleanly.** Read the new H1 + sub aloud at conversational pace. The wealth-gap framing should land without sounding combative.
+
+b. **ProofStrip layout at 4 viewports.** Desktop should be 4 columns; tablet ≈ 768px should be 2×2; mobile ≈ 380px should be 1 column. Icons green; titles bold; bodies muted.
+
+c. **"AI by design" copy.** Confirm the third proof point reads exactly *"AI by design"* + *"Modern technology does the heavy lifting; you make every call."* If the "you make every call" half is missing, the no-directive compliance guardrail is broken — flag immediately.
+
+d. **PlatformPreview section.** Should appear between HowItWorks and UnderTheHood. Browser chrome has three muted dots on the left, a centered URL pill showing *lite.finmagix.com*, and the screenshot below. Caption is serif italic and centered.
+
+e. **Screenshot quality.** The screenshot is 870×657 PNG; should be crisp on retina. If blurry or stretched, the wrapper sizing needs adjustment.
+
+f. **Eyebrow swap is visible.** New eyebrow reads *"Inspired by CFP and CFA planning principles"* (with "principles", not "frameworks"). Same green dash + uppercase tracking as before.
+
+---
+
 ## Reviewer checklist (for founder)
 
 Five-ish things to click, read, or sanity-check on `preview.finmagix.com` before approving the merge to `main`:
@@ -151,9 +225,13 @@ Out of scope: every page except `/` + the new stubs + shared chrome; `lite.finma
 
 ## Deployment trail
 
-Branch `session-01-finmagix-com-redesign-home` is **12 commits** ahead of `main`:
+Branch `session-01-finmagix-com-redesign-home` after mid-session revisions (2026-05-24):
 
 ```
+(docs commit landing this update)
+11c8e6f  feat: add PlatformPreview section — dashboard screenshot below HowItWorks
+8aa70d6  feat: replace top sections with consolidated hero + proof strip
+f588c87  docs: session 01 report
 e8bc22a  chore: delete /pricing route + update sitemap for Session 01 scope
 010413a  feat: wire home page + remove WS-1/WS-2 orphan components
 2c8ecc9  feat: home bottom — ModuleCard, ModulesPreview, PartnerStrip, ClosingCTA
@@ -168,6 +246,9 @@ e25de82  docs: lock in May 2026 handoff + Session 01 decisions
 (15a92fb empty trigger commit on `preview` for initial Vercel build)
 ```
 
-Currently merged into `preview` (commit `b3170b5`, no-ff merge). `preview.finmagix.com` is the QA URL.
+The original `b3170b5` merge into `preview` captured commits through `f588c87`. The mid-session revisions (`8aa70d6` + `11c8e6f` + this docs commit) need to be re-merged into `preview` for re-QA — that's the next step.
 
-Next step after founder approval on `preview.finmagix.com`: squash-merge `preview` → `main` to ship at `finmagix.com`.
+Next steps:
+1. Re-merge `session-01-finmagix-com-redesign-home` → `preview` (no-ff) to bring the mid-session revisions onto `preview.finmagix.com`.
+2. Founder re-QA on `preview.finmagix.com` using the mid-session reviewer checklist above + the original reviewer checklist below.
+3. After approval, squash-merge `preview` → `main` to ship at `finmagix.com`.
