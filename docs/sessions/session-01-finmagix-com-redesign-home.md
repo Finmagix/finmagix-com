@@ -233,6 +233,92 @@ m. **No disclaimer line under the table** — the in-component disclaimer is del
 
 ---
 
+## Sessions 02–05 consolidated execution (2026-05-24)
+
+After the home page work (Sessions 01 + mid-session revisions + Comparison) shipped to `preview`, founder requested the **all-pages-on-preview** approach: build out every remaining page in this same session, founder QAs the whole site cohesively, one batch of edits, then a single production deploy.
+
+Executed across 6 commit batches (commits `261b8f9` → `5ad5c4f`) + the docs commit landing this update.
+
+### What changed in Sessions 02–05
+
+**Batch 1 — Redirects + cleanup + auth redesign (`261b8f9`).**
+- `next.config.ts` 308 redirects: `/demo` → `/platform`, `/privacy` → `/privacy-and-security`, `/security` → `/privacy-and-security`
+- Deleted: `/blog` + `/blog/[slug]` routes, `src/lib/posts.ts`, `src/components/blog/`, `src/content/posts/` (3 MDX files). Per handoff "removed May 2026, data preserved" — preserved in git history (`e6f63ee`), restorable in a future session.
+- Deleted: `/demo` + `/privacy` WS source pages (now redirected)
+- Auth interstitials (`/sign-in`, `/sign-up`) — redirect behavior preserved; visuals redesigned. New period-mark wordmark, warm cream canvas, forest-green spinner. Removed inline "For educational purposes only" disclaimer (now provided by persistent footer Disclosure). `sign-up` imports `sign-in`'s CSS module (DRY).
+
+**Batch 2 — /platform full build (`3152de7`).**
+- Replaced Session 01 stub with full long-form narrative page from `Our_Platform.docx`.
+- 7 sections: Hero / empathy / "What Finmagix Lite is" / 5 numbered steps with product screenshots in mock-browser-chrome wrappers / "What's inside" tier cards / "What we won't do" dark band / "The promise" pull quote.
+- 3 new product screenshots: `fitness-overview.png`, `finmagicians-read.png`, `bigger-picture.png` (quiet-index already shipped in home PlatformPreview).
+- **B1** applied: tier cards strip dollar amounts ($19/$150, $29/$230) — show tier name + what's inside only.
+- **B2** applied: omit docx's "subscriptions only" footnote (handoff confirmed removed).
+- **B3** applied: step-04 title is "Read the Finmagician's (your AI friend's) analysis." (handoff revision; prototype JSX had earlier "Read the Finmagician's read.").
+
+**Batch 3 — /about full build (`a419ad5`).**
+- Replaced WS-2 /about (had Part 4 violations: "CFP-standard calculations," "personalized roadmap") with prototype AboutPage.
+- 4 numbered sections + mission close per handoff May 2026 revision.
+- **E1** applied: Section 03 line changed from prototype's "Pricing is static and transparent" → "Tiers are static and transparent" (no $ word).
+- **E2** preserved: hero lede keeps "AI-powered insight" per founder EXCEPTION to Part 4 (handoff Compliance note explicitly approved on About only; do not propagate elsewhere). Tracked in `docs/tech-debt-marketing.md`.
+
+**Batch 4 — /advisors full build (`7cf4f92`).**
+- Replaced WS-2 placeholder with prototype AdvisorsPage.
+- William Tincup feature card with photo, name, credentials (MBA, SHRM-SCP, SPHR), role lines, 4-paragraph bio.
+- **F1** applied: use prototype's 4-paragraph bio (concise, Finmagix-relevant) — not the longer discursive docx version.
+
+**Batch 5 — /partners full build (`7c82a5f`).**
+- Replaced WS-2 /partners with prototype PartnersPage.
+- 4 partner sections (credit unions, community banks, employers, CFP advisors) with anchors + "Talk to us" CTAs deep-linking to `/contact#<id>`.
+- **C** applied (override of original recommendation): REMOVED per-partner B2B pricing. The data still names price internally for future use, but the partner-card render skips the `.partner-price` element. Consistent with the Session 01 pricing-drop across all surfaces.
+
+**Batch 6 — 3 legal pages full build (`5ad5c4f`).**
+- Replaced 3 stubs (`/terms`, `/disclaimer`, `/privacy-and-security`) with full legal pages from `Finmagix_Lite_Beta_Legal_Documents.docx`.
+- New `src/lib/legal.ts` exports typed LegalDoc constants for all 3 docs.
+- New `src/components/marketing/LegalPage.tsx` renders any LegalDoc with sticky TOC + plain-language summary callout + intro callout + numbered sections (paragraphs, subheadings, bulleted lists, tables).
+- **G1** applied: NO "Version 0.9 · pre-counsel-review draft" stamp. Pages ship visually clean. Counsel-review gate before public launch is tracked in `docs/tech-debt-marketing.md` "Legal pages awaiting counsel review" — same control, just not surfaced to users.
+
+### Deferred (intentional, per founder direction)
+
+- **/contact page redesign + form backend** — entire page is the only design-mismatched page on the site. Email destination (`support@finmagix.com`) and success message (*"Thank you for your note. We will be in touch with you within two business days."*) are pre-specified; service choice + wiring is its own session. New tech-debt-marketing entry: "/contact page redesign + form backend — deferred to its own session."
+
+### New compliance flags recorded in this batch
+
+17. **AI-powered insight on About hero** — founder-approved EXCEPTION to Part 4. Hero lede contains *"We bring real planning frameworks and AI-powered insight to the people the advisory industry has overlooked."* — per handoff Compliance note, founder approved this specific language on About only. Code comment in `/about/page.tsx` flags it as About-only; do not propagate to other surfaces. Tech-debt entry tracks.
+
+18. **Three Part 4 violations cleared from production WS pages** — `/about` ("CFP-standard calculations," "personalized roadmap"), `/demo` ("Get your personalized roadmap"), `/privacy` ("personalized roadmap" + "AI-powered"). All three pages either redesigned (about) or redirected away (demo → platform, privacy → privacy-and-security). Production-live violations after merge: zero in Session-01-touched pages, one founder-approved exception on /about.
+
+19. **No "subscriptions only" callout on /platform** — the prototype's "What we won't do" section ends at the 5 × items per handoff May 2026 revision. Substance lives elsewhere (About §03 + this commit's deferred /contact restoration plan).
+
+20. **Legal pages ship without pre-counsel-review stamp** — founder G1 decision. Pages render visually clean; counsel-review control is internal-only (tech-debt entry). Means the live `finmagix.com` (after final merge) will display Terms / Disclaimer / Privacy & Security pages that look final, but content is still pre-counsel. Risk: an external reviewer (regulator, journalist) might assume the text is finalized. Mitigation: founder is aware and accepting; counsel review still gates broader marketing pushes.
+
+### Reviewer checklist — full preview QA pass
+
+When you re-QA `preview.finmagix.com` after the re-merge:
+
+n. **Click every nav + footer link** — every link should resolve to a redesigned page (except /contact which keeps WS-2 design intentionally).
+
+o. **Verify redirects** — visit `/demo` (should redirect to `/platform`), `/privacy` (should redirect to `/privacy-and-security`), `/security` (should redirect to `/privacy-and-security`).
+
+p. **/sign-in and /sign-up interstitials** — they should show new Finmagix wordmark + forest-green spinner for ~200ms before redirecting to `lite.finmagix.com`.
+
+q. **/platform** — long-form story page. Check the 5 numbered steps render correctly with product screenshots in mock browser-chrome wrappers. Tier cards show name + what's inside, no $ amounts.
+
+r. **/about** — read top-to-bottom. Confirm Section 03 says "Tiers are static and transparent" (not "Pricing"). Confirm hero lede mentions "AI-powered insight" (intentional exception).
+
+s. **/advisors** — William Tincup feature card. Photo loads, 4 paragraphs of bio.
+
+t. **/partners** — 4 partner sections. Each has icon tile, framing paragraph (NO $ price), benefits list, "Talk to us" CTA. Verify CTA hashes (`#credit-unions`, etc.) work.
+
+u. **/terms, /disclaimer, /privacy-and-security** — sticky TOC sidebar on desktop (stacks on mobile). Plain-language summary callout at top. Numbered sections with subheadings, lists, tables. No "Version 0.9" stamp anywhere.
+
+v. **/contact** — still shows WS-2 design (deferred). Note for own future session.
+
+w. **Run full Part 4 grep audit** on `src/` — see expected results in the final docs commit. Zero violations in Session-01-touched files; one founder-approved exception on /about.
+
+x. **Lighthouse on `/` (mobile)** — perf ≥ 90, a11y = 100, best-practices = 100, SEO ≥ 95.
+
+---
+
 ## Reviewer checklist (for founder)
 
 Five-ish things to click, read, or sanity-check on `preview.finmagix.com` before approving the merge to `main`:
