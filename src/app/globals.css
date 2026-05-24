@@ -2097,6 +2097,225 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   Legal pages — Terms / Disclaimer / Privacy & Security
+   Per founder Session 02 decision G1: NO v0.9 pre-counsel-review
+   stamp. Pages ship clean of the "Version 0.9" + "beta-stage document"
+   indicators. Counsel review still gates public launch (see
+   docs/tech-debt-marketing.md "Legal pages awaiting counsel review").
+   ============================================================ */
+.legal-header {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.legal-meta {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  letter-spacing: 0.02em;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.legal-meta .dot { color: var(--border-strong); }
+
+.legal-shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 56px;
+  align-items: start;
+  padding: 48px 0 96px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.legal-toc {
+  position: sticky;
+  top: 96px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 12px;
+  border-right: 1px solid var(--border-subtle);
+}
+.legal-toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.legal-toc li a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-secondary);
+  text-decoration: none;
+  display: block;
+  padding: 4px 0;
+  transition: color var(--motion-duration-quick) var(--motion-easing-standard);
+}
+.legal-toc li a:hover { color: var(--accent-primary); }
+
+.legal-article { max-width: 720px; }
+
+.legal-summary {
+  background: var(--surface-tier-recommended);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 36px;
+}
+.legal-summary__title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 500;
+  margin: 0 0 16px;
+  font-variation-settings: 'opsz' 36;
+  color: var(--ink-primary);
+}
+.legal-summary ul {
+  padding-left: 22px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.legal-summary li {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-primary);
+}
+
+.legal-callout {
+  padding: 24px 28px;
+  border-left: 3px solid var(--accent-primary);
+  background: var(--surface-sunken);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: 48px;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 36;
+}
+.legal-callout--strong { font-style: normal; }
+
+.legal-section {
+  padding-top: 48px;
+  padding-bottom: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+.legal-section:first-of-type { border-top: 0; padding-top: 0; }
+
+.legal-h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  font-variation-settings: 'opsz' 48;
+  color: var(--ink-primary);
+  text-wrap: balance;
+  scroll-margin-top: 96px;
+}
+
+.legal-sub {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 28px 0 12px;
+  color: var(--ink-primary);
+}
+
+.legal-p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-primary);
+  margin: 0 0 18px;
+  text-wrap: pretty;
+}
+.legal-p--strong {
+  background: var(--semantic-caution-bg);
+  border-left: 3px solid var(--semantic-caution);
+  padding: 16px 20px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-weight: 500;
+}
+
+.legal-ul {
+  padding-left: 22px;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.legal-ul li {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-primary);
+}
+
+.legal-table-wrap {
+  margin: 20px 0 28px;
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.legal-table th {
+  text-align: left;
+  font-weight: 600;
+  background: var(--surface-sunken);
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-default);
+  color: var(--ink-primary);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.legal-table td {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--ink-primary);
+  vertical-align: top;
+}
+
+.legal-footer-note {
+  margin-top: 56px;
+  padding: 20px 24px;
+  background: var(--surface-sunken);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--ink-tertiary);
+}
+.legal-footer-note p { margin: 0; line-height: 1.6; }
+.legal-footer-note strong { color: var(--ink-secondary); }
+
+@media (max-width: 920px) {
+  .legal-shell { grid-template-columns: 1fr; gap: 24px; padding: 24px 0 64px; }
+  .legal-toc {
+    position: static;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-right: 0;
+    padding-bottom: 16px;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+/* ============================================================
    LEGACY animation — preserved for WS-1/2/3 pages.
    See docs/tech-debt-marketing.md
    ============================================================ */
