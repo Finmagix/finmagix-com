@@ -72,6 +72,15 @@ export const metadata: Metadata = {
     description:
       "Twelve areas of structured financial thinking — in plain language, with you in charge. Inspired by CFP and CFA frameworks.",
   },
+  // Explicit icon declaration. Next.js auto-detects /src/app/icon.svg,
+  // but spelling it out here (a) locks the MIME type, (b) bumps cache
+  // by giving us a stable URL we control, and (c) prevents any fall-
+  // back to Vercel's default favicon if the auto-detection ever drifts.
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({
