@@ -1455,6 +1455,348 @@ h4, h5, h6 {
 }
 
 /* ============================================================
+   Platform page — long-form narrative product story
+   See docs/CLAUDE_CODE_HANDOFF.md /platform spec + prototype's
+   pages/other-pages.jsx PlatformPage component. Replaces WS-2
+   /demo (now redirected via next.config.ts).
+   ============================================================ */
+.platform-hero {
+  padding: 80px 0 48px;
+  text-align: center;
+}
+.platform-hero__inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+.platform-hero__h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 5.6vw, 64px);
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  margin: 16px 0 16px;
+  font-variation-settings: 'opsz' 144;
+  text-wrap: balance;
+}
+.platform-hero__h1 em {
+  font-style: italic;
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+.platform-hero__sub {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-style: italic;
+  color: var(--ink-secondary);
+  margin: 0 0 32px;
+}
+.platform-hero__lede {
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: var(--ink-primary);
+  margin: 0 auto 36px;
+  max-width: 680px;
+  text-wrap: pretty;
+}
+.platform-hero__lede strong { color: var(--accent-primary); font-weight: 600; }
+.platform-hero__cta { display: inline-flex; }
+
+.platform-empathy {
+  background: var(--surface-tier-recommended);
+  padding: 72px 0;
+}
+.platform-empathy__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.platform-empathy__body {
+  margin-top: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.platform-empathy__body p {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-primary);
+  margin: 0 0 20px;
+  text-wrap: pretty;
+}
+.platform-emphasis {
+  font-family: var(--font-serif) !important;
+  font-size: 24px !important;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent-primary) !important;
+  margin: 24px 0 !important;
+}
+
+.platform-what__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  max-width: 1040px;
+  margin: 0 auto;
+  align-items: start;
+}
+.platform-what__body p {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-primary);
+  margin: 0 0 16px;
+}
+@media (max-width: 920px) {
+  .platform-what__inner { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.platform-steps {
+  background: var(--surface-sunken);
+}
+.platform-step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.platform-step {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 48px;
+}
+.platform-step:first-child { border-top: 0; padding-top: 0; }
+.platform-step__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 32px;
+  align-items: start;
+  max-width: 880px;
+}
+.platform-step__num {
+  font-family: var(--font-serif);
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent-primary);
+  font-variation-settings: 'opsz' 96;
+  font-feature-settings: 'tnum' 1;
+}
+.platform-step__title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--ink-primary);
+  margin: 0 0 12px;
+  font-variation-settings: 'opsz' 60;
+  text-wrap: balance;
+}
+.platform-step__body {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.platform-step__visual {
+  margin-top: 32px;
+  margin-left: 88px;
+}
+.platform-step__caption {
+  margin-top: 18px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  max-width: 640px;
+  text-wrap: pretty;
+}
+
+.platform-screenshot {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--elevation-2);
+  max-width: 800px;
+}
+.platform-screenshot__chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-sunken);
+}
+.platform-screenshot__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  opacity: 0.4;
+}
+.platform-screenshot__path {
+  margin-left: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-tertiary);
+  letter-spacing: 0.02em;
+}
+.platform-screenshot__body {
+  background: var(--surface-canvas);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
+.platform-screenshot__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+@media (max-width: 720px) {
+  .platform-step__head { grid-template-columns: 1fr; gap: 12px; }
+  .platform-step__num { font-size: 36px; }
+  .platform-step__visual { margin-left: 0; }
+}
+
+.platform-inside { padding-top: 96px; }
+.platform-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.platform-tier {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  background: var(--surface-raised);
+}
+.platform-tier--recommended { background: var(--surface-tier-recommended); }
+.platform-tier--pro { background: var(--surface-tier-pro); }
+.platform-tier__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.platform-tier__name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  margin: 0;
+  font-variation-settings: 'opsz' 60;
+}
+.platform-tier__what {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-primary);
+  margin: 0;
+}
+@media (max-width: 900px) { .platform-tiers { grid-template-columns: 1fr; } }
+
+.platform-wont {
+  background: var(--surface-inverse);
+  color: var(--ink-inverse-primary);
+}
+.platform-wont__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  max-width: 1040px;
+  margin: 0 auto;
+  align-items: start;
+}
+.platform-wont__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(245, 240, 227, 0.14);
+}
+.platform-wont__list li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(245, 240, 227, 0.10);
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--ink-inverse-primary);
+  font-variation-settings: 'opsz' 36;
+}
+.platform-wont__x {
+  font-size: 24px;
+  color: #D8A693;
+  font-weight: 400;
+}
+@media (max-width: 920px) {
+  .platform-wont__inner { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.platform-promise {
+  background: var(--surface-tier-recommended);
+  padding: 96px 0;
+  text-align: center;
+}
+.platform-promise__quote {
+  margin: 24px auto 36px;
+  max-width: 800px;
+  position: relative;
+}
+.platform-promise__mark {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-serif);
+  font-size: 140px;
+  line-height: 1;
+  color: var(--accent-primary);
+  opacity: 0.18;
+  font-style: italic;
+  pointer-events: none;
+}
+.platform-promise__quote p {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3.2vw, 38px);
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--ink-primary);
+  margin: 0;
+  font-variation-settings: 'opsz' 96;
+  text-wrap: balance;
+  font-style: italic;
+}
+.platform-promise__quote em { color: var(--accent-primary); font-style: italic; }
+.platform-promise__disclosure {
+  margin: 40px auto 0;
+  max-width: 720px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-tertiary);
+}
+
+/* ============================================================
    LEGACY animation — preserved for WS-1/2/3 pages.
    See docs/tech-debt-marketing.md
    ============================================================ */
