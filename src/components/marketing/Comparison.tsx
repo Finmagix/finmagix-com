@@ -2,36 +2,37 @@
 //
 // Added 2026-05-24 per founder mini-brief. Sits between ProofStrip
 // and HowItWorks. Source reference: finmagix-comparison_1.html
-// (Claude Design mockup, 13:11) — adapted from inline HTML/CSS into
-// our component conventions and tokens.
+// (Claude Design mockup, 13:11).
+//
+// LAYOUT NOTE — the highlight on the middle (Finmagix) column is
+// applied PER-CELL (background + side borders + top/bottom borders
+// + radii on the first/last middle cells) rather than via a floating
+// `grid-row: 1 / -1` band overlay. The band approach broke CSS Grid
+// auto-placement: items with `grid-row: 1 / -1` claim cells the
+// auto-placer then skips, so the header row's column-2 cell would
+// flow into column 3 and column-3 cell would wrap to row 2. Per-cell
+// styling keeps every cell in its intended slot. (This is the
+// alignment bug the original Claude Design brief warned about.)
 //
 // COPY GATE (per Claude Design brief, locked):
 //   Row 1 "Built on CFP & CFA principles" is APPROVED wording.
 //     Do NOT change to "CFP-grade," "CFP-certified," "advisor-quality,"
-//     or anything implying Finmagix IS a CFP/CFA. This is a hard Part 4
-//     line per strategy.md.
+//     or anything implying Finmagix IS a CFP/CFA. Part 4 hard line.
 //   Row 2 "AI by design" is APPROVED but is the least-defensible row
 //     (most budget apps now market AI features). Flagged for counsel
-//     review in the session report.
+//     review — see docs/tech-debt-marketing.md.
 //   Row 5 "Free Financial Fitness Test" is a MARKETING label. The
 //     canonical in-app module name is "Financial Health Checkup."
-//     Founder confirmed dual naming is intentional (mini-brief 5a).
-//     Tracked in docs/tech-debt-marketing.md.
+//     Founder-confirmed dual naming. See tech-debt-marketing.md.
 //
-// COMPLIANCE — in-component disclaimer line is DELIBERATELY omitted
-// per founder decision in the brief. Page-level disclosure is provided
-// by the persistent <Disclosure variant="footer" /> mounted in
-// src/app/layout.tsx, satisfying CFP/CFA Principle 6 + strategy 5.8.
+// COMPLIANCE — in-component disclaimer line DELIBERATELY omitted per
+// founder decision. Page-level disclosure satisfied by the persistent
+// <Disclosure variant="footer" /> in shared layout.
 //
-// COLOR — uses the teal token set (--teal-mid, --teal-tint) introduced
-// for this component per founder mini-brief decision 1b. These deviate
-// from the design-system forest green. Tracked as a watch item in
-// docs/tech-debt-marketing.md.
-//
-// HIGHLIGHT — uses a grid-placed band (grid-column: 2; grid-row:
-// 1 / -1) rather than an absolutely positioned overlay. This avoids
-// the alignment bug the brief warned about, while still giving the
-// middle column the framed visual treatment the mockup specifies.
+// COLOR — teal token set (--teal-mid, --teal-tint) is a localized
+// design-system exception per founder mini-brief decision 1b.
+
+import { Fragment } from "react";
 
 // Yes icon — solid teal disc + white check
 function YesIcon() {
@@ -63,10 +64,9 @@ function NoIcon() {
   );
 }
 
-// Finmagix wordmark — inline SVG with the period-mark in
-// var(--accent-primary) (forest green, brand identity). Uses
-// var(--font-serif) which resolves to the next/font Fraunces variable
-// via the parent page's class chain.
+// Finmagix wordmark — inline SVG using design-system tokens. Renders
+// in Fraunces (via the next/font CSS variable) with the period in
+// forest green (brand identity).
 function FinmagixLogo() {
   return (
     <svg
@@ -125,9 +125,7 @@ export default function Comparison() {
             role="table"
             aria-label="Product feature comparison: Finmagix versus budgeting and spend apps"
           >
-            <div className="comparison__band" aria-hidden="true" />
-
-            {/* Header row */}
+            {/* HEADER ROW — exactly 3 cells, no wrappers between them. */}
             <div
               className="comparison__cell comparison__head comparison__head--feat"
               role="columnheader"
@@ -135,7 +133,7 @@ export default function Comparison() {
               Product features
             </div>
             <div
-              className="comparison__cell comparison__head comparison__head--fin"
+              className="comparison__cell comparison__head comparison__head--fin comparison__cell--middle comparison__cell--middle-top"
               role="columnheader"
             >
               <FinmagixLogo />
@@ -148,12 +146,17 @@ export default function Comparison() {
               Spend apps
             </div>
 
-            {/* Data rows */}
+            {/* DATA ROWS — each iteration emits 3 cells via Fragment
+                (not a div wrapper); auto-placement flows them into
+                the next 3 grid cells row by row. */}
             {rows.map((row, i) => {
               const isLast = i === rows.length - 1;
               const lineCls = isLast ? "" : " comparison__row-line";
+              const middleCls = isLast
+                ? " comparison__cell--middle comparison__cell--middle-bottom"
+                : " comparison__cell--middle";
               return (
-                <div key={row.text} style={{ display: "contents" }}>
+                <Fragment key={row.text}>
                   <div
                     className={`comparison__cell comparison__feat${
                       row.lead ? " comparison__feat--lead" : ""
@@ -163,7 +166,7 @@ export default function Comparison() {
                     {row.text}
                   </div>
                   <div
-                    className={`comparison__cell comparison__cell--icon${lineCls}`}
+                    className={`comparison__cell comparison__cell--icon${middleCls}`}
                     role="cell"
                   >
                     <YesIcon />
@@ -174,7 +177,7 @@ export default function Comparison() {
                   >
                     <NoIcon />
                   </div>
-                </div>
+                </Fragment>
               );
             })}
           </div>
