@@ -199,7 +199,7 @@ After the consolidated-hero + ProofStrip + PlatformPreview revisions, founder ad
 
 4. **No in-component disclaimer line** — founder removed it in the brief. Page-level disclosure via the persistent `<Disclosure variant="footer" />` in shared layout satisfies the Principle 6 obligation.
 
-5. **Highlight implementation** — uses a grid-placed `<div class="comparison__band">` with `grid-column: 2; grid-row: 1 / -1`, avoiding the absolute-positioning alignment bug the Claude Design brief warned about.
+5. **Highlight implementation — per-cell, not a band.** Initial implementation used a grid-placed band (`grid-column: 2; grid-row: 1 / -1`) per founder mini-brief decision 6a. **That broke alignment** in practice: items with `grid-row: 1 / -1` claim cells the CSS Grid auto-placer then skips, so the header row's column-2 cell would flow into column 3 and column-3 cell would wrap to row 2. The Claude Design brief specifically warned about this. Fixed by switching to founder decision 6b — apply the highlight directly to each middle-column cell (background fill + side borders, with top/bottom borders + radii only on the first and last middle cells). Same visual outcome; columns stay in their intended slots.
 
 ### New design-system + compliance flags
 

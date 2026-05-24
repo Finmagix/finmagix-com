@@ -743,7 +743,6 @@ h4, h5, h6 {
 }
 
 .comparison__table {
-  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(120px, 1fr) minmax(120px, 1fr);
   background: var(--surface-raised);
@@ -752,29 +751,33 @@ h4, h5, h6 {
   overflow: hidden;
 }
 
-/* The "band" — wraps the middle (Finmagix) column from top to bottom.
-   Grid-placed as a non-overlapping grid item (not an absolutely
-   positioned overlay), so column alignment stays clean at every
-   breakpoint including 380px. */
-.comparison__band {
-  grid-column: 2;
-  grid-row: 1 / -1;
-  background: var(--teal-tint);
-  border: 2px solid var(--teal-mid);
-  border-radius: 14px;
-  z-index: 0;
-  pointer-events: none;
-}
-
+/* Middle (Finmagix) column highlight — applied per-cell rather than via
+   a floating overlay. Earlier attempts used `grid-row: 1 / -1` on a band
+   div, which made CSS Grid auto-placement skip column 2 for the header
+   cells and broke alignment. Per-cell styling keeps every cell in its
+   intended grid slot. */
 .comparison__cell {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   min-height: 60px;
   padding: 0 18px;
   font-size: 15.5px;
   line-height: 1.4;
+}
+.comparison__cell--middle {
+  background: var(--teal-tint);
+  border-left: 2px solid var(--teal-mid);
+  border-right: 2px solid var(--teal-mid);
+}
+.comparison__cell--middle-top {
+  border-top: 2px solid var(--teal-mid);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+.comparison__cell--middle-bottom {
+  border-bottom: 2px solid var(--teal-mid);
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
 }
 .comparison__cell--icon {
   justify-content: center;
