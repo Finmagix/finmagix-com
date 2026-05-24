@@ -16,7 +16,7 @@ import { ArrowRightIcon } from "@/components/Icons";
 export const metadata: Metadata = {
   title: "Start free",
   description:
-    "Create your Finmagix Lite account. About three minutes. No card. Skip what you want.",
+    "Create your Finmagix account. About three minutes. No card. Skip what you want.",
 };
 
 const LITE_SIGNUP_URL = "https://lite.finmagix.com/signup";
@@ -66,7 +66,7 @@ export default function SignUpPage() {
       }
       footerDisclosure={
         <>
-          <strong>Finmagix Lite</strong> is an educational financial-wellness platform — not a financial advisor, fiduciary, broker, or insurance agent. Inspired by CFP Board and CFA Institute frameworks; not certified by either. Subscriptions only — no commissions, no referral fees, no data sales.
+          <strong>Finmagix</strong> is an educational financial-wellness platform — not a financial advisor, fiduciary, broker, or insurance agent. Inspired by CFP Board and CFA Institute frameworks; not certified by either. Subscriptions only — no commissions, no referral fees, no data sales.
         </>
       }
     >

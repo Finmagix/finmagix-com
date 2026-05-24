@@ -139,7 +139,7 @@ export default function PlatformPage() {
               — and won&apos;t make you feel dumb for asking.
             </p>
             <p className="platform-hero__lede">
-              Finmagix Lite is plain-language financial thinking, informed by CFP and CFA frameworks. Built for the{" "}
+              Finmagix is plain-language financial thinking, informed by CFP and CFA frameworks. Built for the{" "}
               <strong>85% of American adults</strong> who don&apos;t have a financial advisor on speed dial — and shouldn&apos;t need one to feel a little less lost.
             </p>
             <div className="platform-hero__cta">
@@ -181,12 +181,12 @@ export default function PlatformPage() {
         </div>
       </section>
 
-      {/* What Finmagix Lite is */}
+      {/* What Finmagix is */}
       <section className="section platform-what">
         <div className="wrap">
           <div className="platform-what__inner">
             <div>
-              <div className="section-label">What Finmagix Lite is</div>
+              <div className="section-label">What Finmagix is</div>
               <h2 className="t-section-title" style={{ marginTop: 12 }}>
                 A structured-thinking platform for personal financial decisions.
               </h2>
@@ -372,7 +372,7 @@ export default function PlatformPage() {
             <ArrowRightIcon size={16} />
           </a>
           <p className="platform-promise__disclosure">
-            Inspired by — and informed by — CFP Board and CFA Institute standards. Finmagix Lite is an educational decision-support platform; it is not a registered investment adviser and does not provide personalized investment, tax, or legal advice. For advice tailored to your situation, consult a licensed professional.
+            Inspired by — and informed by — CFP Board and CFA Institute standards. Finmagix is an educational decision-support platform; it is not a registered investment adviser and does not provide personalized investment, tax, or legal advice. For advice tailored to your situation, consult a licensed professional.
           </p>
         </div>
       </section>

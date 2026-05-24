@@ -45,8 +45,8 @@ export const terms: LegalDoc = {
   title: "Terms of Service",
   effectiveDate: "May 15, 2026",
   summary: [
-    "These Terms govern your use of Finmagix Lite — our educational financial-thinking platform. By using the Service, you agree to them.",
-    "Finmagix Lite is educational and structured-thinking only. It is not a financial advisor. It does not provide financial, investment, tax, legal, or insurance advice and does not create a fiduciary relationship with you.",
+    "These Terms govern your use of Finmagix — our educational financial-thinking platform. By using the Service, you agree to them.",
+    "Finmagix is educational and structured-thinking only. It is not a financial advisor. It does not provide financial, investment, tax, legal, or insurance advice and does not create a fiduciary relationship with you.",
     "Subscriptions: Free, Recommended ($19/mo or $150/yr), or Pro ($29/mo or $230/yr). You can cancel any time from settings; cancellation takes effect at the end of the billing period.",
     "We make money only from subscriptions. No commissions, referral fees, affiliate income, or data sales. Ever.",
     "Sections 13–16 (Disclaimer of Warranties, Limitation of Liability, Indemnification, Dispute Resolution) limit our exposure and require informal resolution and binding arbitration with a class-action waiver. Please read them carefully.",
@@ -57,16 +57,16 @@ export const terms: LegalDoc = {
   },
   sections: [
     {
-      heading: "1. Welcome to Finmagix Lite",
+      heading: "1. Welcome to Finmagix",
       body: [
-        { p: 'These Terms of Service (the "Terms") govern your access to and use of the Finmagix Lite website, application, and related services (together, the "Service"), operated by Finmagix, Inc., a Delaware corporation ("Finmagix," "we," "us," or "our"). By creating an account, accessing the Service, or using any feature of the Service, you agree to be bound by these Terms and by the documents incorporated here by reference, including our Privacy and Security Policy and our Educational and Financial Information Disclaimer.' },
+        { p: 'These Terms of Service (the "Terms") govern your access to and use of the Finmagix website, application, and related services (together, the "Service"), operated by Finmagix, Inc., a Delaware corporation ("Finmagix," "we," "us," or "our"). By creating an account, accessing the Service, or using any feature of the Service, you agree to be bound by these Terms and by the documents incorporated here by reference, including our Privacy and Security Policy and our Educational and Financial Information Disclaimer.' },
         { p: "If you do not agree to these Terms, do not use the Service." },
       ],
     },
     {
-      heading: "2. About Finmagix Lite",
+      heading: "2. About Finmagix",
       body: [
-        { p: "Finmagix Lite is an educational, structured-thinking platform for personal financial decisions. It is built for adults who want a calmer, clearer way to think through their financial situation — not a portfolio manager, not an advisor, and not a robo-adviser." },
+        { p: "Finmagix is an educational, structured-thinking platform for personal financial decisions. It is built for adults who want a calmer, clearer way to think through their financial situation — not a portfolio manager, not an advisor, and not a robo-adviser." },
         { p: "The Service helps you organize information about your situation, run educational modules that produce structured analyses, and see how different considerations relate. It is informed by widely recognized frameworks from the CFP Board and the CFA Institute, but Finmagix is not certified, accredited, or endorsed by either organization, and the Service is not a substitute for advice from a Certified Financial Planner, Chartered Financial Analyst, attorney, CPA, enrolled agent, licensed insurance professional, or any other licensed professional." },
       ],
     },
@@ -109,7 +109,7 @@ export const terms: LegalDoc = {
         { h3: "5.3 Cancellation, refunds, and trials" },
         { p: "You may cancel a paid subscription at any time from your account settings. Cancellation takes effect at the end of your then-current billing period; you retain access to paid features until that point. We do not provide refunds for partial periods except where required by law. If we offer a free trial, the trial converts to a paid subscription at the end of the trial period unless you cancel before the trial ends; we will tell you when your trial is ending before that happens." },
         { h3: "5.4 How we make money" },
-        { p: 'Finmagix Lite is funded entirely by user subscriptions. We do not receive referral fees, commissions, affiliate income, revenue-sharing payments, or any other form of compensation from the providers of any financial product, fund, security, insurance carrier, or service that may be discussed within the Service. We also do not sell user data. This commitment is part of our compliance posture, and it is described in plain language on our "How Finmagix makes money" page.' },
+        { p: 'Finmagix is funded entirely by user subscriptions. We do not receive referral fees, commissions, affiliate income, revenue-sharing payments, or any other form of compensation from the providers of any financial product, fund, security, insurance carrier, or service that may be discussed within the Service. We also do not sell user data. This commitment is part of our compliance posture, and it is described in plain language on our "How Finmagix makes money" page.' },
       ],
     },
     {
@@ -259,7 +259,7 @@ export const disclaimer: LegalDoc = {
   title: "Educational and Financial Information Disclaimer",
   effectiveDate: "May 15, 2026",
   summary: [
-    "Finmagix Lite is an educational, structured-thinking tool. It is not a financial advisor.",
+    "Finmagix is an educational, structured-thinking tool. It is not a financial advisor.",
     "Finmagix is not a fiduciary, registered investment adviser, broker-dealer, CFP, CFA, attorney, CPA, EA, or insurance producer.",
     "Nothing on the Service is financial, investment, tax, legal, insurance, retirement-planning, or accounting advice. Educational outputs are general — not personalized advice.",
     'Finmagix does not recommend specific securities, funds, ETFs, insurance carriers, or products by name. It does not produce a single "optimized" plan. It does not execute transactions on your behalf.',
@@ -268,13 +268,13 @@ export const disclaimer: LegalDoc = {
   ],
   intro: {
     strong: true,
-    text: "The short version: Finmagix Lite is an educational, structured-thinking tool. It is not a financial advisor. It does not tell you what to do with your money. It is here to help you think more clearly, not to make decisions for you.",
+    text: "The short version: Finmagix is an educational, structured-thinking tool. It is not a financial advisor. It does not tell you what to do with your money. It is here to help you think more clearly, not to make decisions for you.",
   },
   sections: [
     {
       heading: "1. What this disclaimer is for",
       body: [
-        { p: "This Disclaimer explains, in plain language, what Finmagix Lite is — and what it is not — when it comes to financial decisions. It is part of, and incorporated into, our Terms of Service. If you use the Service, you are agreeing to this Disclaimer." },
+        { p: "This Disclaimer explains, in plain language, what Finmagix is — and what it is not — when it comes to financial decisions. It is part of, and incorporated into, our Terms of Service. If you use the Service, you are agreeing to this Disclaimer." },
       ],
     },
     {
@@ -298,7 +298,7 @@ export const disclaimer: LegalDoc = {
     {
       heading: "5. No specific product or position recommendations",
       body: [
-        { p: "Finmagix Lite is designed not to do certain things, on purpose, because doing them would place us outside the scope of an educational tool. The Service does not provide:" },
+        { p: "Finmagix is designed not to do certain things, on purpose, because doing them would place us outside the scope of an educational tool. The Service does not provide:" },
         { ul: [
           'Personalized investment allocation percentages (for example, telling you that "your" mix should be X% in stocks and Y% in bonds);',
           "Recommendations of specific securities, funds, ETFs, mutual funds, or other investment products by ticker, name, or issuer;",
@@ -314,7 +314,7 @@ export const disclaimer: LegalDoc = {
     {
       heading: '6. "Inspired by," not certified',
       body: [
-        { p: "Finmagix Lite is informed by widely recognized frameworks from the CFP Board (the Code of Ethics and Standards of Conduct and the seven-step financial planning process) and the CFA Institute (the Code of Ethics and Standards of Professional Conduct). We have adopted these frameworks voluntarily as best-practice anchors for how the Service is built. Finmagix is not certified, accredited, sponsored, or endorsed by the CFP Board or the CFA Institute. The Service does not provide CFP- or CFA-equivalent services and is not a substitute for working with a CFP professional or a CFA charterholder." },
+        { p: "Finmagix is informed by widely recognized frameworks from the CFP Board (the Code of Ethics and Standards of Conduct and the seven-step financial planning process) and the CFA Institute (the Code of Ethics and Standards of Professional Conduct). We have adopted these frameworks voluntarily as best-practice anchors for how the Service is built. Finmagix is not certified, accredited, sponsored, or endorsed by the CFP Board or the CFA Institute. The Service does not provide CFP- or CFA-equivalent services and is not a substitute for working with a CFP professional or a CFA charterholder." },
       ],
     },
     {
@@ -326,7 +326,7 @@ export const disclaimer: LegalDoc = {
     {
       heading: "8. How we make money — and what that means for you",
       body: [
-        { p: "Finmagix Lite is funded entirely by user subscription fees. We do not receive referral fees, commissions, affiliate payments, revenue-sharing arrangements, or any other form of compensation from the providers of financial products discussed in the Service. We do not sell user data. This matters because it eliminates the conflicts of interest that often shape product recommendations elsewhere in the financial industry. It also means that any educational content you see in the Service is not steered by a financial relationship with a third party." },
+        { p: "Finmagix is funded entirely by user subscription fees. We do not receive referral fees, commissions, affiliate payments, revenue-sharing arrangements, or any other form of compensation from the providers of financial products discussed in the Service. We do not sell user data. This matters because it eliminates the conflicts of interest that often shape product recommendations elsewhere in the financial industry. It also means that any educational content you see in the Service is not steered by a financial relationship with a third party." },
       ],
     },
     {
@@ -413,13 +413,13 @@ export const privacyAndSecurity: LegalDoc = {
     {
       heading: "1. Our approach",
       body: [
-        { p: "You are trusting Finmagix Lite with information about your money and your life. We take that seriously. This Policy explains, in plain language, what we collect, why we collect it, how we use it, who we share it with, how we protect it, and the choices you have. If anything here is unclear, write to us at privacy@finmagix.com." },
+        { p: "You are trusting Finmagix with information about your money and your life. We take that seriously. This Policy explains, in plain language, what we collect, why we collect it, how we use it, who we share it with, how we protect it, and the choices you have. If anything here is unclear, write to us at privacy@finmagix.com." },
       ],
     },
     {
       heading: "2. Who this policy applies to",
       body: [
-        { p: "This Policy applies to information collected through the Finmagix Lite website at finmagix.com (and any subdomains), our applications, and our related services. It does not apply to third-party websites or services we link to. The Service is a U.S.-only beta and is offered only to U.S. residents who are 18 years or older." },
+        { p: "This Policy applies to information collected through the Finmagix website at finmagix.com (and any subdomains), our applications, and our related services. It does not apply to third-party websites or services we link to. The Service is a U.S.-only beta and is offered only to U.S. residents who are 18 years or older." },
       ],
     },
     {
