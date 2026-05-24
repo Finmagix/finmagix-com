@@ -577,86 +577,63 @@ h4, h5, h6 {
 }
 
 /* ============================================================
-   Home — Empathy band
-   "Who this is for" — narrow band with tier-recommended fill.
+   Home — Proof strip (4 short proof points below hero)
+   Sits directly under the hero in section--tight padding to read
+   as a continuation of the top band, not a fresh section.
+   4-col desktop · 2x2 tablet · 1-col narrowest.
    ============================================================ */
-.empathy {
-  background: var(--surface-tier-recommended);
+.proof-strip {
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-tier-recommended);
 }
-.empathy__inner {
+.proof-strip__grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 48px;
-  align-items: start;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px 28px;
 }
-.empathy__eyebrow { margin-bottom: 0; }
-.empathy__copy {
-  font-family: var(--font-sans);
-  font-size: clamp(17px, 1.5vw, 19px);
-  line-height: 1.55;
-  color: var(--ink-primary);
-  text-wrap: pretty;
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.empathy__copy p { margin: 0; }
-.empathy__copy p + p { margin-top: 16px; }
-.empathy__copy strong {
-  font-weight: 600;
-  color: var(--ink-primary);
-  background: linear-gradient(to top, var(--tier-recommended-bg) 38%, transparent 38%);
-  padding: 0 2px;
-}
-
-@media (max-width: 920px) {
-  .empathy__inner { grid-template-columns: 1fr; gap: 16px; }
-}
-
-/* ============================================================
-   Home — Value props (three columns)
-   ============================================================ */
-.values {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  background: var(--border-subtle);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-.value {
-  background: var(--surface-canvas);
-  padding: 36px 32px 40px;
-}
-.value__num {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  font-weight: 500;
+.proof-item__icon {
   color: var(--accent-primary);
-  letter-spacing: 0.02em;
-  font-feature-settings: 'tnum' 1;
-  margin-bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: rgba(44, 90, 62, 0.08);
 }
-.value__title {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  line-height: 1.2;
-  font-weight: 500;
-  color: var(--ink-primary);
-  margin: 0 0 14px;
-  font-variation-settings: 'opsz' 36;
-  text-wrap: balance;
-}
-.value__body {
+.proof-item__title {
   font-family: var(--font-sans);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+.proof-item__body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--ink-secondary);
   margin: 0;
   text-wrap: pretty;
 }
 
-@media (max-width: 900px) {
-  .values { grid-template-columns: 1fr; }
+@media (max-width: 920px) {
+  .proof-strip__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 24px;
+  }
+}
+@media (max-width: 540px) {
+  .proof-strip__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 /* ============================================================
@@ -724,6 +701,91 @@ h4, h5, h6 {
 @media (max-width: 900px) {
   .steps { grid-template-columns: 1fr; gap: 32px; }
   .step__num { font-size: 44px; margin-bottom: 12px; }
+}
+
+/* ============================================================
+   Home — Platform preview (dashboard screenshot below HowItWorks)
+   Browser-chrome wrapper around the product capture + serif caption.
+   Added 2026-05-24 per founder mini-brief. See PlatformPreview.tsx
+   header for compliance notes.
+   ============================================================ */
+.platform-preview__figure {
+  margin: 0;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.platform-preview__caption {
+  margin-top: 20px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink-secondary);
+  text-align: center;
+  font-variation-settings: 'opsz' 24;
+  text-wrap: balance;
+}
+
+/* Mock browser chrome — sits around product screenshots on
+   /platform and home. Subtle, flat, no skeuomorphic gradients. */
+.browser-chrome {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-raised);
+  box-shadow: var(--elevation-2);
+}
+.browser-chrome__bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.browser-chrome__dots {
+  display: inline-flex;
+  gap: 6px;
+}
+.browser-chrome__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  opacity: 0.5;
+}
+.browser-chrome__url {
+  justify-self: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  padding: 4px 14px;
+  background: var(--surface-canvas);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  max-width: 320px;
+}
+.browser-chrome__spacer {
+  /* Mirrors the dots width so the URL stays visually centered.
+     Hidden visually; aria-hidden on the element. */
+  display: inline-block;
+  width: 42px;
+}
+.browser-chrome__body {
+  display: block;
+  background: var(--surface-canvas);
+}
+.browser-chrome__body img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 540px) {
+  .browser-chrome__url { font-size: 11px; padding: 3px 10px; }
+  .browser-chrome__spacer { display: none; }
+  .browser-chrome__bar { grid-template-columns: auto 1fr; gap: 12px; }
 }
 
 /* ============================================================
