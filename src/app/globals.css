@@ -125,6 +125,20 @@
   --font-mono:  var(--font-geist-mono), 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 
   /* ============================================================
+     COMPARISON SECTION ACCENT — teal palette.
+     Introduced 2026-05-24 per founder mini-brief decision 1b.
+     These DEVIATE from the design-system forest green
+     (--accent-primary #2C5A3E). They are scoped to the home
+     comparison section only — do not use elsewhere without an
+     explicit decision. Tracked in docs/tech-debt-marketing.md as
+     a deliberate visual exception pending design-system
+     reconciliation.
+     ============================================================ */
+  --teal-deep:  #0F6E56;
+  --teal-mid:   #1D9E75;
+  --teal-tint:  #E8F4EE;
+
+  /* ============================================================
      LEGACY tokens — preserved for WS-1/2/3 pages not yet migrated.
      Each page retires its dependency on these as it gets its own
      redesign session. See docs/tech-debt-marketing.md under
@@ -701,6 +715,142 @@ h4, h5, h6 {
 @media (max-width: 900px) {
   .steps { grid-template-columns: 1fr; gap: 32px; }
   .step__num { font-size: 44px; margin-bottom: 12px; }
+}
+
+/* ============================================================
+   Home — Comparison section ("Not another budgeting app")
+   Three-column comparison table with the Finmagix column visually
+   highlighted via a grid-placed band (grid-column: 2; grid-row:
+   1 / -1). Uses the comparison-scoped teal tokens defined in :root
+   above — see comment on the token block for the design-system
+   exception.
+   ============================================================ */
+.comparison__intro {
+  max-width: 640px;
+  margin: 0 auto 32px;
+  text-align: left;
+}
+.comparison__intro .eyebrow { margin-bottom: 12px; }
+.comparison__title { margin-top: 0; }
+.comparison__sub {
+  margin-top: 14px;
+  max-width: 46ch;
+}
+
+.comparison__wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.comparison__table {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(120px, 1fr) minmax(120px, 1fr);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* The "band" — wraps the middle (Finmagix) column from top to bottom.
+   Grid-placed as a non-overlapping grid item (not an absolutely
+   positioned overlay), so column alignment stays clean at every
+   breakpoint including 380px. */
+.comparison__band {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  background: var(--teal-tint);
+  border: 2px solid var(--teal-mid);
+  border-radius: 14px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.comparison__cell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  padding: 0 18px;
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+.comparison__cell--icon {
+  justify-content: center;
+  padding: 0 8px;
+}
+.comparison__row-line { border-bottom: 1px solid var(--border-subtle); }
+
+.comparison__head {
+  min-height: 56px;
+  font-weight: 600;
+}
+.comparison__head--feat {
+  color: var(--ink-tertiary);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.comparison__head--fin { justify-content: center; }
+.comparison__head--app {
+  color: var(--ink-secondary);
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.comparison__feat { color: var(--ink-primary); }
+.comparison__feat--lead { font-weight: 500; }
+
+/* Logo inside the Finmagix column header. Inline SVG with the
+   wordmark text rendered using design-system tokens — keeps the
+   period-mark green even though the surrounding accent in this
+   section is teal (the period is brand identity, not theming). */
+.comparison__logo {
+  display: block;
+  height: 22px;
+  width: auto;
+}
+
+/* Yes / No icons — sharp SVG, no font glyphs. */
+.comparison__ic {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+.comparison__ic--yes circle { fill: var(--teal-mid); }
+.comparison__ic--yes path {
+  stroke: #fff;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+.comparison__ic--no circle {
+  fill: none;
+  stroke: var(--border-default);
+  stroke-width: 1.6;
+}
+.comparison__ic--no path {
+  stroke: var(--ink-tertiary);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  fill: none;
+}
+
+@media (max-width: 560px) {
+  .comparison__cell {
+    min-height: 56px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+  .comparison__cell--icon { padding: 0 4px; }
+  .comparison__logo { height: 18px; }
+  .comparison__table {
+    grid-template-columns: minmax(0, 1.5fr) minmax(72px, 1fr) minmax(72px, 1fr);
+  }
 }
 
 /* ============================================================

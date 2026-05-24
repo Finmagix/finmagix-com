@@ -8,6 +8,7 @@
 
 import Hero from "@/components/marketing/Hero";
 import ProofStrip from "@/components/marketing/ProofStrip";
+import Comparison from "@/components/marketing/Comparison";
 import HowItWorks from "@/components/marketing/HowItWorks";
 import PlatformPreview from "@/components/marketing/PlatformPreview";
 import UnderTheHood from "@/components/marketing/UnderTheHood";
@@ -21,6 +22,7 @@ export default function Home() {
     <>
       <Hero />
       <ProofStrip />
+      <Comparison />
       <HowItWorks />
       <PlatformPreview />
       <UnderTheHood />
