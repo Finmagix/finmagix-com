@@ -582,10 +582,14 @@ h4, h5, h6 {
   overflow: hidden;
   background: var(--surface-sunken);
   box-shadow: var(--elevation-1);
-  /* Small optical offset so the photo's top edge aligns with the
-     eyebrow's baseline rather than its cap-height — the columns feel
-     "in conversation" without the rigid feeling of perfect snap. */
-  margin-top: 8px;
+  /* Drop the photo so its top edge sits with the second H1 line
+     ("advice was built…") rather than the eyebrow. Offset =
+     eyebrow + 24px gap (~42px) + one H1 line. Scales with the same
+     vw factor as the H1's own clamp(40px, 5.8vw, 68px), then clamps
+     at the ends so very small / very large viewports stay balanced.
+     Reset to 0 in the stacked layout (≤920px) so the photo sits
+     directly below the text with just the standard grid gap. */
+  margin-top: clamp(80px, calc(7.5vw + 8px), 116px);
 }
 .hero__image-wrap img {
   width: 100%;
@@ -598,6 +602,9 @@ h4, h5, h6 {
 @media (max-width: 920px) {
   .hero { padding: 48px 0 32px; }
   .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+  /* No "align with H1 line 2" offset when the photo stacks below
+     the text — let the standard grid gap do the spacing. */
+  .hero__image-wrap { margin-top: 0; }
 }
 
 /* ============================================================
