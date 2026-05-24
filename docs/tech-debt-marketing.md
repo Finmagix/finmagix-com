@@ -51,6 +51,28 @@ This file tracks deferred work, design-system shortcuts, and cleanup items speci
 
 **Effort.** ~4 hours including copy review. **Cleanup session.** Future scope-brief session after beta + Stripe milestones.
 
+### /contact page redesign + form backend — deferred to its own session
+
+**What.** Sessions 02-05 (the all-pages-on-preview push) deferred the entire /contact page redesign per founder direction ("We will work on a separate session for the Contact Us form later"). The current WS-2 /contact page is still in place on `preview` and will ship to `main` on the consolidated merge — design-mismatched against the rest of the new site until its own session.
+
+**Where.** `src/app/contact/page.tsx` + `src/app/contact/page.module.css` (still WS-2).
+
+**Why it matters.** Three things:
+1. **Visual mismatch.** Users navigating from any redesigned page to /contact will see the old design jump. Per the founder's all-pages-on-preview workflow, this is the only such mismatch in the site (every other page redesigned).
+2. **Form backend.** The redesigned form per the prototype (`other-pages.jsx` ContactPage) is client-side only (sets a `sent` state). It does NOT actually email anyone. Founder direction: submissions should email `support@finmagix.com` (an active email) with the success message "Thank you for your note. We will be in touch with you within two business days."
+3. **Email service choice.** A Next.js page can't send email on its own. The contact session needs to pick + wire an email service (Resend recommended, or Web3Forms for quick path). DNS work on `finmagix.com` may be required if Resend.
+
+**Restoration steps (the future /contact session):**
+1. Founder picks email service (Resend / Web3Forms / other) and provides API key in Vercel env vars
+2. Replace `src/app/contact/page.tsx` with prototype's ContactPage component, translated to Next.js
+3. Form: partner-focused (Institution dropdown with 6 options + URL-hash deep-linking), single email destination `support@finmagix.com`
+4. Success-state copy: *"Thank you for your note. We will be in touch with you within two business days."* (founder-specified)
+5. Add `/api/contact` route (server-side handler that calls email service)
+6. Delete `src/app/contact/page.module.css` (WS-2 orphan)
+7. Update tech-debt-marketing to mark resolved
+
+**Restoration estimate.** ~2-3 hours including service setup. **Cleanup session.** Founder's call when ready.
+
 ### Three route stubs landed in Session 01 to avoid 404s on chrome links
 
 **What.** Session 01 added three minimal placeholder pages so the new NavBar / Footer don't 404 in preview. Each contains a "we're working on it" message + a link back to the relevant existing page. These are scope-honoring stubs, not real content.

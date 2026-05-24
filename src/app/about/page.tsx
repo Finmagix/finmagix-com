@@ -1,221 +1,245 @@
+// About us — long-form strategic story.
+//
+// Source: prototype/site/pages/other-pages.jsx AboutPage (founder copy
+// verbatim). 4 numbered sections + mission close per handoff May 2026
+// revision. Replaces WS-2 /about page which carried multiple Part 4
+// violations ("CFP-standard calculations," "personalized roadmap").
+//
+// Founder Session 02 decisions applied:
+//   E1: Section 03 line is "Tiers are static and transparent" (was
+//       "Pricing is static and transparent" in prototype — swapped per
+//       Session 01 pricing-drop decision; same idea, no $ word).
+//   E2: Hero lede contains "AI-powered insight" — explicit founder
+//       EXCEPTION to Part 4 (handoff Compliance note: "the founder's
+//       About copy uses 'AI-powered insight' as a value statement in
+//       the hero lede ... explicitly approved on About"). Do not
+//       propagate this phrasing to any other surface; About-only.
+//       Tracked in docs/tech-debt-marketing.md.
+
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
-import Button from "@/components/ui/Button";
-import SectionLabel from "@/components/ui/SectionLabel";
-import styles from "./page.module.css";
+import Link from "next/link";
+import { ArrowRightIcon } from "@/components/Icons";
 
 export const metadata: Metadata = {
-  title: "About | Finmagix",
+  title: "About us",
   description:
-    "Financial fitness should be measurable, understandable, and accessible to everyone. Our mission, approach, and principles.",
-  openGraph: {
-    title: "About | Finmagix",
-    description:
-      "Financial fitness should be measurable, understandable, and accessible to everyone.",
-    url: "https://finmagix.com/about",
-    siteName: "Finmagix",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About | Finmagix",
-    description:
-      "Financial fitness should be measurable, understandable, and accessible to everyone.",
-  },
+    "Built for the 85% of American adults the financial industry has overlooked. Working adults, parents, caregivers, late starters — anyone who has carried money stress for years.",
 };
 
-interface ValueCardData {
-  title: string;
-  body: string;
-  icon: ReactNode;
-}
-
-function ValueIconWrap({ children }: { children: ReactNode }) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="#b8e04a"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {children}
-    </svg>
-  );
-}
-
-const VALUES: ValueCardData[] = [
-  {
-    title: "Accessible to everyone",
-    body: "Financial planning tools that work for every American — not just those who can afford a private advisor. We believe financial clarity is a right, not a privilege.",
-    icon: (
-      <ValueIconWrap>
-        <path d="M3 14s-1-1-1-4a5 5 0 0110 0c0 3-1 4-1 4" />
-        <circle cx="8" cy="6" r="3" />
-      </ValueIconWrap>
-    ),
-  },
-  {
-    title: "Educational, not advisory",
-    body: "We provide planning tools, not financial advice. Every insight is educational, helping you understand your complete financial picture so you can make informed decisions.",
-    icon: (
-      <ValueIconWrap>
-        <path d="M8 4L2 7l6 3 6-3-6-3z" />
-        <path d="M5 8.5v3c0 1 1.5 2 3 2s3-1 3-2v-3" />
-      </ValueIconWrap>
-    ),
-  },
-  {
-    title: "Trustworthy by design",
-    body: "CFP-standard calculations, transparent methodology, bank-level encryption, and your data protected with row-level security. We never sell your data.",
-    icon: (
-      <ValueIconWrap>
-        <path d="M8 2L3 4v4c0 3.5 2.5 6 5 7 2.5-1 5-3.5 5-7V4L8 2z" />
-        <path d="M5.5 8l2 2 3-3" />
-      </ValueIconWrap>
-    ),
-  },
-];
-
-const STATS: { number: string; label: string }[] = [
-  { number: "12", label: "Planning modules" },
-  {
-    number: "$2,000+",
-    label: "Typical CFP plan cost — we do it for $19/month",
-  },
-  { number: "5 min", label: "Average per assessment" },
-  { number: "Free", label: "To get started" },
-];
+const LITE_SIGNUP_URL = "https://lite.finmagix.com/signup";
 
 export default function AboutPage() {
   return (
     <>
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <SectionLabel tone="dark">Our story</SectionLabel>
-          <h1 className={styles.heroH1}>
-            Financial fitness should be measurable, understandable, and
-            accessible to everyone
-          </h1>
-          <p className={styles.heroSub}>
-            We built Finmagix because quality financial planning was out of
-            reach for most people. A comprehensive financial plan from a CFP
-            costs $2,000–$5,000 and takes weeks. We deliver the same analytical
-            depth in minutes — for less than $19/month.
-          </p>
-        </div>
-      </section>
-
-      <section className={styles.mission}>
-        <div className={styles.missionInner}>
-          <div>
-            <h2 className={styles.missionH2}>Our mission</h2>
-            <hr className={styles.divider} />
-            <div className={styles.missionPBlock}>
-              <p className={styles.missionP}>
-                Our mission is simple — we want to help you improve your
-                financial fitness. Without understanding your financial
-                fitness, you cannot put yourself on the path to financial
-                freedom.
-              </p>
-            </div>
-            <div className={styles.missionPBlock}>
-              <p className={styles.missionP}>
-                Developed by experts with a passion for personal finance,
-                Finmagix brings our users a holistic view of their finances,
-                helps them understand their financial fitness, and creates a
-                personalized plan to improve it.
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <h2 className={styles.missionH2}>What makes us different</h2>
-            <hr className={styles.divider} />
-            <div className={styles.missionPBlock}>
-              <p className={styles.missionP}>
-                We have patent-pending technology that powers our platform,
-                and we use industry best practices so you can analyze your own
-                financial fitness and take steps to improve it.
-              </p>
-            </div>
-            <div className={styles.missionPBlock}>
-              <p className={styles.missionP}>
-                Unlike traditional financial tools that focus on one area,
-                Finmagix gives you a complete picture across 12 dimensions of
-                your financial life — all in one personalized roadmap.
-              </p>
-            </div>
+      {/* Hero */}
+      <section className="section section--tight about-hero">
+        <div className="wrap">
+          <div className="about-hero__inner">
+            <div className="eyebrow">About Finmagix</div>
+            <h1
+              className="t-page-title"
+              style={{ marginTop: 16, marginBottom: 24 }}
+            >
+              Built for the{" "}
+              <em
+                style={{ fontStyle: "italic", color: "var(--accent-primary)" }}
+              >
+                85%
+              </em>{" "}
+              the financial industry has overlooked.
+            </h1>
+            <p className="t-lede" style={{ maxWidth: 720 }}>
+              Most financial advice is built for people who already have it figured out. Finmagix is for everyone else — working adults, parents, caregivers, late starters, and the financially avoidant who have carried money stress for years.
+            </p>
+            <p className="t-lede" style={{ maxWidth: 720, marginTop: 20 }}>
+              Clarity shouldn&apos;t require a six-figure portfolio.{" "}
+              <strong style={{ color: "var(--ink-primary)", fontWeight: 600 }}>
+                We bring real planning frameworks and AI-powered insight to the people the advisory industry has overlooked.
+              </strong>
+            </p>
           </div>
         </div>
       </section>
 
-      <section className={styles.values}>
-        <div className={styles.valuesInner}>
-          <div className={styles.valuesHeader}>
-            <SectionLabel>What we stand for</SectionLabel>
-            <h2 className={styles.valuesH2}>
-              Built on three core principles
-            </h2>
-          </div>
-
-          <div className={styles.valuesGrid}>
-            {VALUES.map((v) => (
-              <article key={v.title} className={styles.valueCard}>
-                <div className={styles.valueIcon}>{v.icon}</div>
-                <h3 className={styles.valueH3}>{v.title}</h3>
-                <p className={styles.valueP}>{v.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.stats}>
-        <div className={styles.statsInner}>
-          <h2 className={styles.statsH2}>Finmagix by the numbers</h2>
-          <div className={styles.statsGrid}>
-            {STATS.map((s) => (
-              <div key={s.label} className={styles.statCell}>
-                <span className={styles.statNumber}>{s.number}</span>
-                <span className={styles.statLabel}>{s.label}</span>
+      {/* 01 — Why we built it */}
+      <section className="section about-section">
+        <div className="wrap">
+          <div className="about-block">
+            <div className="about-block__head">
+              <div className="section-label">01 — Why we built Finmagix</div>
+              <h2 className="t-section-title" style={{ marginTop: 12 }}>
+                Traditional advisory has a minimum.
+              </h2>
+            </div>
+            <div className="about-block__body">
+              <p>
+                Often six figures of investable assets. Don&apos;t clear it and you&apos;re left with budgeting apps that lecture, calculators that don&apos;t talk to each other, and &ldquo;advice&rdquo; from someone earning a commission to push it.
+              </p>
+              <p>
+                <strong>That&apos;s the gap Finmagix fills.</strong>
+              </p>
+              <div className="about-affirm">
+                <span>You are not bad with money.</span>
+                <span>You are not unsophisticated.</span>
+                <span>You are not behind.</span>
               </div>
-            ))}
+              <p>
+                You&apos;ve been busy living a real life. You deserve a tool that respects that.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className={styles.join}>
-        <div className={styles.joinInner}>
-          <h2 className={styles.joinH2}>Join our mission</h2>
-          <p className={styles.joinP}>
-            We are on a mission to improve the financial fitness of our users
-            and help them achieve financial freedom. If you want to join our
-            rapidly growing team, we&apos;d love to hear from you.
-          </p>
-          <div className={styles.joinBtnRow}>
-            <Button
-              variant="lime"
-              size="md"
-              href="https://lite.finmagix.com/signup"
-              target="_blank"
-            >
-              Get started free →
-            </Button>
-            <a
-              href="mailto:contactus@finmagix.com"
-              className={styles.workOutline}
-            >
-              Work with us
-            </a>
+      {/* 02 — What we believe */}
+      <section className="section about-section about-section--alt">
+        <div className="wrap">
+          <div className="about-block">
+            <div className="about-block__head">
+              <div className="section-label">02 — What we believe</div>
+              <h2 className="t-section-title" style={{ marginTop: 12 }}>
+                Avoidance is exhaustion, not irresponsibility.
+              </h2>
+            </div>
+            <div className="about-block__body">
+              <p>
+                Most people who avoid money have tried to engage and been made to feel small.{" "}
+                <em>So they stopped trying.</em> That isn&apos;t a character flaw — it&apos;s a rational response to an industry that hasn&apos;t made room for them.
+              </p>
+              <ul className="about-list">
+                <li>
+                  <strong>Capable adults deserve tools that treat them as capable.</strong> Plain language. Education, not lectures. Trade-offs, not directives.
+                </li>
+                <li>
+                  <strong>Structured thinking beats one more calculator.</strong> Clarity comes from seeing how income, debt, savings, risk, and goals fit together — not from tracking spending alone.
+                </li>
+                <li>
+                  <strong>You decide. Always.</strong> We lay out the picture. You choose.
+                </li>
+              </ul>
+            </div>
           </div>
-          <p className={styles.joinDisclaimer}>
-            For educational purposes only. Not financial advice.
+        </div>
+      </section>
+
+      {/* 03 — How Finmagix is different */}
+      <section className="section about-section">
+        <div className="wrap">
+          <div className="about-block">
+            <div className="about-block__head">
+              <div className="section-label">
+                03 — How Finmagix is different
+              </div>
+              <h2 className="t-section-title" style={{ marginTop: 12 }}>
+                Not another budgeting app.
+              </h2>
+            </div>
+            <div className="about-block__body">
+              <p>
+                <strong>Finmagix Lite covers what actually drives outcomes</strong> — financial health, taxes, debt, retirement, longevity, insurance, college, Social Security, FIRE, estate, and wealth building. Each is a structured module that produces a real analysis.
+              </p>
+              <p>
+                <strong>Every analysis shows the work.</strong> What we looked at. What we assumed. What the options are. What each one trades off. You get a structured way to think — not a verdict.
+              </p>
+              <p>
+                {/* E1: "Pricing is static" → "Tiers are static" per founder Session 02 decision */}
+                <strong>Tiers are static and transparent.</strong> Free, Recommended, and Pro contain the same modules for every user. No hidden gates. The whole menu is visible before you subscribe.
+              </p>
+              <p>
+                <strong>Inspired by CFP Board and CFA Institute standards.</strong> The planning logic underneath is grounded in the same principles that guide regulated professionals. We are not a CFP or CFA — and we don&apos;t claim to be.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 04 — Who's behind it */}
+      <section className="section about-section">
+        <div className="wrap">
+          <div className="about-block">
+            <div className="about-block__head">
+              <div className="section-label">
+                04 — Who&apos;s behind Finmagix
+              </div>
+              <h2 className="t-section-title" style={{ marginTop: 12 }}>
+                A small team. Real experience.
+              </h2>
+            </div>
+            <div className="about-block__body">
+              <p>
+                Finmagix is built by a small team with deep experience in financial services, software, and financial education.
+              </p>
+              <p>
+                Our founder spent years inside the industry and watched the same pattern repeat:{" "}
+                <strong>
+                  capable adults turned away — not because their questions were hard, but because their balances were small.
+                </strong>
+              </p>
+              <p>
+                We work with experienced financial advisory professionals who keep our planning principles grounded and our boundaries honest.
+              </p>
+              <div className="about-advisor-cta">
+                <div>
+                  <div className="about-advisor-cta__label">
+                    Meet our advisors
+                  </div>
+                  <p className="about-advisor-cta__body">
+                    The professionals who shape our principles, review our framework, and challenge our thinking.
+                  </p>
+                </div>
+                <Link href="/advisors" className="btn btn--secondary">
+                  See the advisors
+                  <ArrowRightIcon size={16} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission close */}
+      <section className="section about-mission">
+        <div className="wrap wrap--medium" style={{ textAlign: "center" }}>
+          <div
+            className="eyebrow eyebrow--centered"
+            style={{ justifyContent: "center", display: "inline-flex" }}
+          >
+            Our mission
+          </div>
+          <h2
+            className="t-section-title"
+            style={{ marginTop: 16, marginBottom: 24, textAlign: "center" }}
+          >
+            Make financial clarity available to the people who&apos;ve been told they{" "}
+            <em
+              style={{ fontStyle: "italic", color: "var(--accent-primary)" }}
+            >
+              don&apos;t deserve it.
+            </em>
+          </h2>
+          <div className="about-not">
+            <span>Not lectures.</span>
+            <span>Not sales pitches.</span>
+            <span>Not one-size-fits-all answers.</span>
+          </div>
+          <p
+            className="t-lede"
+            style={{ maxWidth: 680, margin: "32px auto 40px" }}
+          >
+            A clearer view of your money — and{" "}
+            <strong style={{ color: "var(--ink-primary)", fontWeight: 600 }}>
+              the dignity of making your own decisions about it.
+            </strong>
           </p>
+          <a
+            href={LITE_SIGNUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--primary btn--lg"
+          >
+            Try the free checkup
+            <ArrowRightIcon size={16} />
+          </a>
         </div>
       </section>
     </>

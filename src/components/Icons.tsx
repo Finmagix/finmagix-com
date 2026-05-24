@@ -138,6 +138,51 @@ export function CompassIcon(props: IconProps) {
   );
 }
 
+// Partners icons + Check — added 2026-05-24 for /partners batch.
+export function CheckIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <polyline points="20 6 9 17 4 12" />
+    </Icon>
+  );
+}
+
+export function Building2Icon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+      <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+      <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
+      <path d="M10 6h4" />
+      <path d="M10 10h4" />
+      <path d="M10 14h4" />
+      <path d="M10 18h4" />
+    </Icon>
+  );
+}
+
+export function LandmarkIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <line x1="3" x2="21" y1="22" y2="22" />
+      <line x1="6" x2="6" y1="18" y2="11" />
+      <line x1="10" x2="10" y1="18" y2="11" />
+      <line x1="14" x2="14" y1="18" y2="11" />
+      <line x1="18" x2="18" y1="18" y2="11" />
+      <polygon points="12 2 20 7 4 7" />
+    </Icon>
+  );
+}
+
+export function BriefcaseIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <rect width="20" height="14" x="2" y="7" rx="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </Icon>
+  );
+}
+
 // Icon resolver — used by ModuleCard when iterating over module data.
 // Returns null for unknown names; consumer can fall back to a placeholder.
 const iconMap = {
