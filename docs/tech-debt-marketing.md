@@ -90,6 +90,50 @@ This file tracks deferred work, design-system shortcuts, and cleanup items speci
 
 **Effort.** (a) ~30 min strategy edit + counsel review; (b) ~15 min code edit + new proof copy; (c) ~0 (already current state). **Cleanup session.** Open — flag for the next quarterly Part 4/7 review.
 
+### Comparison section introduces teal tokens outside the design system
+
+**What.** The 2026-05-24 founder mini-brief on the "Not another budgeting app" comparison section approved use of teal (`--teal-deep #0F6E56`, `--teal-mid #1D9E75`, `--teal-tint #E8F4EE`) for the Finmagix column highlight, instead of translating to the design-system forest green (`--accent-primary #2C5A3E`). Founder decision 1b in the mini-brief.
+
+**Where.** `src/app/globals.css` `:root` block has a new sub-section labeled `COMPARISON SECTION ACCENT — teal palette`. Used in `src/components/marketing/Comparison.tsx` for the band border, fill, and the "yes" icon disc.
+
+**Why it matters.** The home page now has two accent colors visible: forest green everywhere else (Hero CTAs, eyebrow lines, ProofStrip icons, NavBar wordmark dot, PartnerStrip CTA, ClosingCTA CTA) and teal in the Comparison section. The Finmagix wordmark inside the Comparison's middle column header keeps its forest-green period (brand identity, not theming), creating a small green-period-inside-teal-frame visual moment. Not necessarily wrong, but inconsistent.
+
+**Watch items for future review:**
+- If the comparison section's teal "succeeds" visually, consider promoting teal as a secondary accent across the design system (would require strategy / design review).
+- If teal is later abandoned, this token block and the Comparison's `.comparison__band` + `.comparison__ic--yes circle` rules need to migrate to `--accent-primary`.
+- Do not introduce teal in additional components without revisiting this trade-off.
+
+**Effort.** Watch-item only; no immediate action. **Cleanup session.** Folded into the next design-system reconciliation pass (or the eventual `@finmagix/design-system` package extraction).
+
+### Comparison row 2 "AI by design" — flagged as least-defensible row
+
+**What.** The comparison table's second row claims "AI by design" as a Finmagix differentiator from budgeting / spend apps. Most modern budgeting apps now market AI features (Cleo, Mint's redesign, Monarch, YNAB's recent additions). This row is approved per the Claude Design brief, but flagged as the row most likely to be challenged.
+
+**Where.** `src/components/marketing/Comparison.tsx` `rows` array, second item.
+
+**Why it matters.** Compliance + truth-in-marketing exposure. If counsel or a competitive-research review finds the claim weak (e.g., budgeting apps demonstrably ship AI features), the row should be replaced or qualified rather than ship as a clean comparison.
+
+**Resolution paths (founder decision when reviewed):**
+- (a) Keep as written. Defend on the grounds that Finmagix's AI is bounded by CFP/CFA frameworks while budget apps' AI is unbounded categorization / forecasting.
+- (b) Qualify: "AI grounded in CFP & CFA frameworks" — adds the framing that differentiates.
+- (c) Replace with a different proof point.
+
+**Effort.** ~5 minutes when decided. **Cleanup session.** Open — counsel review or competitive-marketing pass.
+
+### Dual naming: "Free Financial Fitness Test" vs "Financial Health Checkup"
+
+**What.** The comparison section's row 5 uses the marketing label **"Free Financial Fitness Test."** The canonical in-app module name (in `prototype/data.js`, in strategy.md Part 5.3 tier composition, and in the home ModulesPreview) is **"Financial Health Checkup."** Founder confirmed the dual naming is intentional (mini-brief decision 5a).
+
+**Where.** Comparison row 5 vs everywhere else on the marketing site + the in-app surface.
+
+**Why it matters.** Users moving from the comparison section ("Free Financial Fitness Test") to the actual product (`lite.finmagix.com` shows "Financial Health Checkup" as the free module) may not immediately recognize the same thing. The marketing-to-product naming bridge is implicit. If discovery friction shows up in analytics, the dual naming is a candidate to align.
+
+**Watch items:**
+- If marketing copy diverges further (e.g., other surfaces start saying "Fitness Test" too), evaluate whether to migrate the in-app name to match marketing OR migrate marketing to match in-app.
+- Quarterly: re-read the Comparison section + ModulesPreview + Health Checkup module copy as a set; confirm the dual-naming is still intentional.
+
+**Effort.** Either ~5 minutes (align marketing → in-app, single-string edit in Comparison) or ~30 minutes (align in-app → marketing, requires rename across multiple in-app surfaces + URLs). **Cleanup session.** Open; revisit at the next quarterly Part 7 voice review.
+
 ### Home reintroduces a dashboard screenshot (partial reversal of Session 01 decision)
 
 **What.** The 2026-05-24 mini-brief added a `PlatformPreview` section below `HowItWorks`, displaying `public/product/quiet-index.png` inside a mock browser chrome.
