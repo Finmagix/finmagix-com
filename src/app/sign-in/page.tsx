@@ -1,29 +1,34 @@
-// Sign in — full landing page with branded shell + email-only form.
+// Sign in — full landing page mirroring lite.finmagix.com/login.
 //
-// Replaces the brief redirect-interstitial. Per founder direction:
-// "redesign" — full prototype-style auth experience on marketing
-// site, while keeping the real auth (password / magic-link) on
-// lite.finmagix.com where the auth backend actually lives.
+// REBUILD (2026-05-24, post-founder-review): the previous version
+// shipped a marketing-style email-only handoff form. Founder
+// direction: mirror lite's exact field set (Google OAuth button +
+// email + password + Forgot password + Sign in), styled in the
+// Finmagix Quiet Index design system. AuthShell now uses a dark-
+// left / cream-right polarity matching lite.
 //
-// Architecture:
-//   - Server Component (native HTML form, no client state)
-//   - Email-only form (no password capture on marketing — that's
-//     lite's job; cross-domain password POST would be a security
-//     anti-pattern)
-//   - Form submits via GET to lite.finmagix.com/login?email=<email>
-//   - Lite's login page receives the email as a query param and
-//     pre-fills its own email field, then prompts for password
-//   - If lite doesn't support ?email= pre-fill, the user just sees
-//     an empty email field on lite — graceful degradation
+// Form submission target: native HTML POST to lite.finmagix.com/login.
+// If lite's backend handles cross-origin POSTs from finmagix.com it
+// authenticates directly; if lite is purely a client-side SPA without
+// a POST handler, the browser navigates to lite's login page and the
+// SPA re-renders cleanly (graceful fallback). Either way, marketing
+// never stores credentials — they live in the POST body for the
+// duration of one request.
 //
-// Marketing chrome (NavBar/Footer) is hidden via CSS :has() rule in
-// globals.css — the auth-shell is full-viewport with its own header
-// + footer per the prototype design.
+// Google OAuth: links to lite's /login page where the OAuth flow
+// lives. Deep-linking to a specific Google OAuth initiation URL
+// would require knowing lite's auth provider setup; safer to just
+// hand off and let lite's own button drive the flow.
+//
+// Side-panel copy mirrors lite's marketing intent but uses Part 4
+// compliant language: "CFP-standard" → "inspired by CFP and CFA
+// frameworks", "personalized financial roadmap" → "Financial
+// Health Checkup", "AI-powered analysis" → "structured reads".
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import AuthShell from "@/components/auth/AuthShell";
-import { ArrowRightIcon } from "@/components/Icons";
+import { ArrowRightIcon, GoogleIcon } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -38,42 +43,50 @@ export default function SignInPage() {
     <AuthShell
       sidePanel={
         <>
-          <div className="auth-side__eyebrow">What&apos;s waiting</div>
           <h2 className="auth-side__h2">
-            Your timeline is right where you left it.
+            Your complete financial picture — in one place.
           </h2>
+          <p className="auth-side__sub">
+            Twelve modules covering retirement, tax, debt, protection, and more — in plain language, inspired by CFP and CFA frameworks.
+          </p>
           <ul className="auth-side__list">
             <li className="auth-side__item">
               <div className="auth-side__bullet" />
-              <div className="auth-side__item-text">
-                <strong className="auth-side__item-title">
-                  Your Quiet Index
-                </strong>
-                Where you&apos;ve explored and where the next interesting thread might be.
-              </div>
+              <span className="auth-side__item-text">
+                Your Financial Health Checkup in about five minutes
+              </span>
             </li>
             <li className="auth-side__item">
               <div className="auth-side__bullet" />
-              <div className="auth-side__item-text">
-                <strong className="auth-side__item-title">
-                  The modules you&apos;ve run
-                </strong>
-                Scores, notes, and the structured reads you generated.
-              </div>
+              <span className="auth-side__item-text">
+                Modules across retirement, tax, debt, protection, and more
+              </span>
             </li>
             <li className="auth-side__item">
               <div className="auth-side__bullet" />
-              <div className="auth-side__item-text">
-                <strong className="auth-side__item-title">
-                  Anything you saved
-                </strong>
-                Quietly stored. No streaks, no shame, no nudges.
-              </div>
+              <span className="auth-side__item-text">
+                Structured reads that explain what your scores mean
+              </span>
+            </li>
+            <li className="auth-side__item">
+              <div className="auth-side__bullet" />
+              <span className="auth-side__item-text">
+                Save your work and pick up where you left off
+              </span>
+            </li>
+            <li className="auth-side__item">
+              <div className="auth-side__bullet" />
+              <span className="auth-side__item-text">
+                Download a structured read of your full picture as a PDF
+              </span>
             </li>
           </ul>
-          <p className="auth-side__close">
-            Finmagix is educational — a thinking tool, not a financial advisor.
-          </p>
+          <div className="auth-side__badge">
+            <div className="auth-side__badge-eyebrow">Educational tool</div>
+            <p className="auth-side__badge-text">
+              Finmagix is a thinking tool for your money — not a financial advisor. Inspired by CFP and CFA principles.
+            </p>
+          </div>
         </>
       }
       footerDisclosure={
@@ -82,13 +95,24 @@ export default function SignInPage() {
         </>
       }
     >
-      <div className="auth-eyebrow">Sign in</div>
-      <h1 className="auth-h1">
-        Welcome <span className="accent">back.</span>
-      </h1>
-      <p className="auth-sub">Pick up where you left off.</p>
+      <h1 className="auth-h1">Welcome back</h1>
+      <p className="auth-sub auth-sub--tight">
+        Sign in to your Finmagix account
+      </p>
 
-      <form className="auth-form" action={LITE_LOGIN_URL} method="GET">
+      {/* Google OAuth — hands off to lite where the OAuth flow lives. */}
+      <a href={LITE_LOGIN_URL} className="auth-oauth">
+        <GoogleIcon size={18} />
+        Continue with Google
+      </a>
+
+      <div className="auth-divider">
+        <span>or sign in with email</span>
+      </div>
+
+      {/* Email + password form. Native HTML POST to lite's /login.
+          See header comment for cross-domain submission notes. */}
+      <form className="auth-form" action={LITE_LOGIN_URL} method="POST">
         <div className="auth-field">
           <label className="auth-label" htmlFor="email">
             Email
@@ -106,22 +130,37 @@ export default function SignInPage() {
           />
         </div>
 
+        <div className="auth-field">
+          <div className="auth-label-row">
+            <label className="auth-label" htmlFor="password">
+              Password
+            </label>
+            <a
+              href={`${LITE_LOGIN_URL}?reset=1`}
+              className="auth-forgot"
+            >
+              Forgot password?
+            </a>
+          </div>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            className="auth-input"
+            required
+          />
+        </div>
+
         <button type="submit" className="auth-button auth-button--primary">
-          Continue
+          Sign in
           <ArrowRightIcon size={16} />
         </button>
 
-        <p
-          className="auth-help"
-          style={{ textAlign: "center", marginTop: 4 }}
-        >
-          You&apos;ll enter your password on the next screen.
-        </p>
-
         <p className="auth-alt-link">
-          New here?
+          Don&apos;t have an account?
           <Link href="/sign-up">
-            Start free
+            Create one free
             <ArrowRightIcon size={14} />
           </Link>
         </p>

@@ -1,18 +1,28 @@
 // AuthShell — shared full-viewport layout for /sign-in and /sign-up.
 //
-// Replaces the brief redirect-interstitial style with the prototype's
-// substantial auth-page design (custom header + brand wordmark +
-// "back to finmagix.com" link, two-column main with form left + side
-// reassurance panel right, custom footer with compliance disclosure).
+// REBUILD (2026-05-24, post-founder-review): polarity flipped to
+// mirror lite.finmagix.com — dark forest-green LEFT column with the
+// marketing copy / bullets / "educational tool" badge, cream RIGHT
+// column with the actual form. Previous version (2026-05-22) had
+// both columns cream with form-LEFT / side-RIGHT, which the founder
+// flagged as not matching the lite reference. This is a one-for-one
+// redo of the polarity / structure — design language stays the same
+// (Finmagix Quiet Index design system).
+//
+// DOM ORDER is now <aside> first, <section> (form) second so screen
+// readers and source order match the visual order (dark column
+// first, form second). On mobile (≤920px) the stack is REVERSED
+// via grid row ordering so the form is on top — users who came here
+// to sign in shouldn't have to scroll past a marketing panel first.
 //
 // Marketing chrome (NavBar + Footer + skip link) is hidden via the
-// `body:has(.auth-shell) > {nav,footer,a.skip} { display: none; }`
-// rules in globals.css, so the auth shell occupies the full viewport
-// cleanly without route-group restructuring.
+// `body:has(.auth-shell) > {nav,footer,a.skip}` rules in globals.css
+// so the auth shell occupies the full viewport with its own outer
+// header (brand + "back to finmagix.com") and footer (disclosure +
+// legal links).
 //
-// Server Component. Each page passes the form column as `children` and
-// the side panel + footer disclosure as props for the parts that
-// differ between sign-in and sign-up.
+// Server Component. Each page passes the form column as `children`
+// and the side panel + footer disclosure as props.
 
 import Link from "next/link";
 import { ArrowLeftIcon } from "@/components/Icons";
@@ -43,12 +53,17 @@ export default function AuthShell({
       </header>
 
       <main className="auth-main">
-        <section className="auth-form-col">
-          <div className="auth-form-card">{children}</div>
-        </section>
+        {/* Dark column — marketing copy + bullets + educational tool
+            badge. Visually FIRST on desktop, SECOND on mobile (the
+            form is the primary intent on small screens). */}
         <aside className="auth-side">
           <div className="auth-side__inner">{sidePanel}</div>
         </aside>
+
+        {/* Cream column — the actual form. */}
+        <section className="auth-form-col">
+          <div className="auth-form-card">{children}</div>
+        </section>
       </main>
 
       <footer className="auth-footer">
