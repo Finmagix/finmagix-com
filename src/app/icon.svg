@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Cream tile mirrors the site canvas (#FAF7F2) -->
+  <rect width="32" height="32" fill="#FAF7F2" rx="6"/>
+  <!-- Bold sans "F" drawn as a path so it renders identically in every
+       browser without depending on Fraunces (or any font) being loaded
+       in favicon context. -->
+  <path d="M8 6h14v4h-10v5h8v4h-8v7h-4z" fill="#1F1A14"/>
+  <!-- Forest-green accent dot — echo of the period-mark wordmark -->
+  <circle cx="24" cy="23" r="2.8" fill="#2C5A3E"/>
+</svg>

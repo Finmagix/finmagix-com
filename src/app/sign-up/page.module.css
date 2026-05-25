@@ -1,5 +1,9 @@
+/* Sign-in/sign-up interstitial — Quiet Index design system.
+   Cream surface, forest-green accent, Fraunces serif wordmark with
+   the brand period-mark. Same structural design as the production
+   interstitial, just restyled. */
+
 .wrap {
-  background: var(--deep);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -7,54 +11,87 @@
   justify-content: center;
   padding: 24px;
   text-align: center;
+  background: var(--surface-canvas);
+  /* Hide the marketing NavBar + Footer on this page — the
+     interstitial owns the full viewport so the redirect feels
+     instant and uncluttered. Targets the chrome rendered by
+     RootLayout. */
 }
 
-.brand {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 18px;
-  color: #fff;
-  font-weight: 500;
-  margin-bottom: 20px;
-  display: inline-flex;
-  align-items: center;
+/* Hide nav + footer + skip link when this wrap is mounted. Uses
+   :has() on body — same mechanism as the auth-shell pages. Scoped
+   here in the module so it auto-detaches when the page is unmounted. */
+:global(body:has(.wrap)) :global(a.skip),
+:global(body:has(.wrap)) :global(header.nav),
+:global(body:has(.wrap)) :global(footer.footer) {
+  display: none;
 }
-
-.brandLite {
-  color: var(--lime);
-  margin-left: 4px;
-}
-
-.brandSlash {
-  color: rgba(255, 255, 255, 0.4);
-  margin: 0 4px;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(255, 255, 255, 0.1);
-  border-top-color: var(--lime);
-  border-radius: 50%;
-  animation: fm-auth-spin 0.8s linear infinite;
-  margin-bottom: 16px;
-}
-
-@keyframes fm-auth-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.label {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.6);
+:global(body:has(.wrap)) :global(main) {
+  padding: 0;
   margin: 0;
 }
 
+.brand {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 48;
+  letter-spacing: -0.01em;
+  color: var(--ink-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  margin-bottom: 32px;
+}
+.mark {
+  color: var(--accent-primary);
+  margin-left: 1px;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--border-subtle);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: fm-auth-spin 800ms linear infinite;
+  margin-bottom: 18px;
+}
+
+@keyframes fm-auth-spin {
+  to { transform: rotate(360deg); }
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink-secondary);
+  margin: 0 0 10px;
+}
+
+.fallback {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink-tertiary);
+  margin: 0;
+}
+.fallback a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+.fallback a:hover { text-decoration-thickness: 2px; }
+
 .disclaimer {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.3);
-  margin-top: 40px;
+  max-width: 460px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-tertiary);
+  margin: 44px 0 0;
+}
+.disclaimer strong {
+  color: var(--ink-secondary);
+  font-weight: 600;
 }

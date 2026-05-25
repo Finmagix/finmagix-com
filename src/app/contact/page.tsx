@@ -27,8 +27,13 @@ interface InfoCard {
   email: string;
 }
 
+// "General inquiries" card removed 2026-05-25 per founder direction —
+// hello@finmagix.com is no longer publicly published on the contact
+// page. Partnerships + Support remain as the two surfaced channels.
+// (The contact form's hidden error-fallback in ContactForm.tsx still
+// references hello@ — flagged for the deferred contact-page session
+// that wires up the real form backend.)
 const INFO_CARDS: InfoCard[] = [
-  { label: "General inquiries", email: "hello@finmagix.com" },
   { label: "Partnerships", email: "partners@finmagix.com" },
   { label: "Support", email: "support@finmagix.com" },
 ];
