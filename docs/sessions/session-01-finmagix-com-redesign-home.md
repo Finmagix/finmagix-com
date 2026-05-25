@@ -291,6 +291,24 @@ Executed across 6 commit batches (commits `261b8f9` → `5ad5c4f`) + the docs co
 
 20. **Legal pages ship without pre-counsel-review stamp** — founder G1 decision. Pages render visually clean; counsel-review control is internal-only (tech-debt entry). Means the live `finmagix.com` (after final merge) will display Terms / Disclaimer / Privacy & Security pages that look final, but content is still pre-counsel. Risk: an external reviewer (regulator, journalist) might assume the text is finalized. Mitigation: founder is aware and accepting; counsel review still gates broader marketing pushes.
 
+### Post-batch addendum (2026-05-25) — /platform top-section copy update
+
+**What changed.** Top of `/platform` page (the `.platform-hero` section). Copy-only update; layout / type treatment / colors / button / spacing all preserved except for one CSS margin tweak to compensate for the removed italic sub-line.
+
+**Before → After.**
+- **Headline.** Was: *"Like having a friend who actually understands money."* + standalone italic sub-line *"— and won't make you feel dumb for asking."* Now: single headline *"The thinking of a financial planner, finally priced for the rest of us."* The second clause takes the green-italic `<em>` treatment (same mechanism as the prior "understands money." — no new class).
+- **Supporting paragraph.** Was: *"Finmagix is plain-language financial thinking, informed by CFP and CFA frameworks. Built for the **85% of American adults** who don't have a financial advisor on speed dial — and shouldn't need one to feel a little less lost."* Now: *"Twelve AI-driven modules informed by CFP and CFA principles, covering every part of your financial life. For **the 85%** who plan without an advisor on speed dial — or want to crunch the numbers on their own."* Green-and-bold emphasis on `the 85%` via the existing `.platform-hero__lede strong` rule.
+- **Removed:** the standalone `<p class="platform-hero__sub">` italic line. Its CSS rule (lines 1565-1571 of `globals.css`) was also removed since nothing else referenced it.
+- **CSS adjustment:** `.platform-hero__h1` `margin-bottom` 16px → 32px so the headline-to-lede gap stays at a comfortable ~32px after the intermediate italic line was removed (was ~48px before, would have collapsed to ~16px otherwise).
+
+**Compliance notes.**
+
+21. **New headline references "the thinking of a financial planner" and a pricing angle.** Founder-approved. The phrasing references the *style* of thinking, not a claim that Finmagix IS a CFP, CFA, or licensed financial planner — staying on the right side of `strategy.md` Part 4. **Flagged as a counsel-review surface pre-launch alongside the home hero** (both use a directional framing that benefits from a second legal read before public push).
+
+22. **Sub-copy names AI ("AI-driven modules").** Consistent with the founder's "AI by design" decision on the home hero. This falls under the same pending `strategy.md` Part 7 reconciliation already tracked in `docs/tech-debt-marketing.md` under *"Strategy / compliance — deliberate overrides to revisit" → "AI by design proof point on home — overrides strategy.md Part 7."* No new tech-debt item created — referencing the existing one.
+
+23. **"Informed by CFP and CFA principles"** (not "built on"). Founder revised the scope brief's "built on" wording to "informed by" in real time. Matches the framing used in the comparison-section row 1 and the prior /platform lede — established compliant phrasing.
+
 ### Reviewer checklist — full preview QA pass
 
 When you re-QA `preview.finmagix.com` after the re-merge:

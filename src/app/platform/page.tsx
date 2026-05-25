@@ -133,14 +133,12 @@ export default function PlatformPage() {
               Our platform
             </div>
             <h1 className="platform-hero__h1">
-              Like having a friend who actually <em>understands money.</em>
+              The thinking of a financial planner,{" "}
+              <em>finally priced for the rest of us.</em>
             </h1>
-            <p className="platform-hero__sub">
-              — and won&apos;t make you feel dumb for asking.
-            </p>
             <p className="platform-hero__lede">
-              Finmagix is plain-language financial thinking, informed by CFP and CFA frameworks. Built for the{" "}
-              <strong>85% of American adults</strong> who don&apos;t have a financial advisor on speed dial — and shouldn&apos;t need one to feel a little less lost.
+              Twelve AI-driven modules informed by CFP and CFA principles, covering every part of your financial life. For{" "}
+              <strong>the 85%</strong> who plan without an advisor on speed dial — or want to crunch the numbers on their own.
             </p>
             <div className="platform-hero__cta">
               <a
