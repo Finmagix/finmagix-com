@@ -2378,6 +2378,21 @@ h4, h5, h6 {
   color: var(--ink-tertiary);
 }
 .legal-footer-note p { margin: 0; line-height: 1.6; }
+
+/* In-flow footnote — small italic clarification under a paragraph or
+   table (e.g. defining an abbreviation used in a table cell). Sits
+   tighter than .legal-p (smaller top margin) so it reads as a
+   continuation of the block above it. */
+.legal-note {
+  margin: -8px 0 22px;
+  line-height: 1.55;
+  color: var(--ink-tertiary);
+}
+.legal-note small {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-style: italic;
+}
 .legal-footer-note strong { color: var(--ink-secondary); }
 
 @media (max-width: 920px) {

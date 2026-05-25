@@ -23,7 +23,12 @@ export type LegalBlock =
   | { p: string; strong?: boolean }
   | { h3: string }
   | { ul: string[] }
-  | { table: { head: string[]; rows: string[][] } };
+  | { table: { head: string[]; rows: string[][] } }
+  // Footnote-style note. Smaller, muted, italic-ish — for short
+  // clarifications under a table or paragraph (e.g. defining an
+  // abbreviation used in a table cell). Not a Markdown footnote
+  // anchor — just visually distinguished body copy.
+  | { note: string };
 
 export type LegalSection = {
   heading: string;
@@ -47,7 +52,7 @@ export const terms: LegalDoc = {
   summary: [
     "These Terms govern your use of Finmagix — our educational financial-thinking platform. By using the Service, you agree to them.",
     "Finmagix is educational and structured-thinking only. It is not a financial advisor. It does not provide financial, investment, tax, legal, or insurance advice and does not create a fiduciary relationship with you.",
-    "Subscriptions: Free, Recommended ($19/mo or $150/yr), or Pro ($29/mo or $230/yr). You can cancel any time from settings; cancellation takes effect at the end of the billing period.",
+    "Subscriptions: Free, Recommended, or Pro (pricing TBA — To Be Announced). You can cancel any time from settings; cancellation takes effect at the end of the billing period.",
     "We make money only from subscriptions. No commissions, referral fees, affiliate income, or data sales. Ever.",
     "Sections 13–16 (Disclaimer of Warranties, Limitation of Liability, Indemnification, Dispute Resolution) limit our exposure and require informal resolution and binding arbitration with a class-action waiver. Please read them carefully.",
   ],
@@ -94,16 +99,17 @@ export const terms: LegalDoc = {
       heading: "5. Subscription tiers, billing, and cancellation",
       body: [
         { h3: "5.1 Tiers and pricing" },
-        { p: "The Service is offered in three tiers. The same modules are included in each tier for every user — tier composition is not personalized. Current pricing during the beta is:" },
+        { p: "The Service is offered in three tiers. The same modules are included in each tier for every user — tier composition is not personalized. Tier pricing during the beta is:" },
         { table: {
           head: ["Tier", "Price", "Modules included"],
           rows: [
-            ["Free", "$0", "Financial Health Checkup, Stress Test"],
-            ["Recommended", "$19 / month or $150 / year", "Tax Efficiency, Protection & Insurance, Debt Strategy, Social Security, College Planning, FIRE"],
-            ["Pro", "$29 / month or $230 / year", "Retirement Planner, Wealth Builder, Longevity Calculator, Estate & Legacy Planner"],
+            ["Free", "TBA", "Financial Health Checkup, Stress Test"],
+            ["Recommended", "TBA", "Tax Efficiency, Protection & Insurance, Debt Strategy, Social Security, College Planning, FIRE"],
+            ["Pro", "TBA", "Retirement Planner, Wealth Builder, Longevity Calculator, Estate & Legacy Planner"],
           ],
         }},
         { p: "Every module in every tier is visible to every user with a description, sample output, and clear pricing. Running a paid module against your own data requires a paid subscription. Pricing may change for new subscribers; if we change pricing for existing subscribers, we will provide at least thirty (30) days advance notice and give you an opportunity to cancel before the new price takes effect." },
+        { note: "TBA = To Be Announced. We will publish tier pricing in this section before any paid tier becomes available." },
         { h3: "5.2 How we charge" },
         { p: "Paid subscriptions are billed in advance through our payment processor, Stripe. By providing payment information, you authorize us (acting through Stripe) to charge the applicable fees plus any applicable taxes to your selected payment method on a recurring basis (monthly or annually, as you choose) until you cancel. You are responsible for keeping payment information current; if a charge fails, we may suspend paid features until the issue is resolved." },
         { h3: "5.3 Cancellation, refunds, and trials" },

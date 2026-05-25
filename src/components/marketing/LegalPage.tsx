@@ -55,6 +55,16 @@ function Block({ block }: { block: LegalBlock }) {
       </p>
     );
   }
+  if ("note" in block) {
+    // Footnote-style clarification — semantic <small> wrapped in <p>
+    // so it carries the same line-height + margin semantics as the
+    // surrounding body copy but is visually distinguished.
+    return (
+      <p className="legal-note">
+        <small>{block.note}</small>
+      </p>
+    );
+  }
   return null;
 }
 
