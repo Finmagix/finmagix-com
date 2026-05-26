@@ -4,13 +4,11 @@
 // src/ on 2026-05-25 alongside the home closing-band redesign.
 //
 // Consumers:
-//   - src/components/marketing/ClosingCTA.tsx (12-tile grid)
+//   - src/components/marketing/ModulesShowcase.tsx (12-tile grid on
+//     the home page, formerly ClosingCTA.tsx — renamed + moved up
+//     the page on 2026-05-25).
 //
 // Future consumers (when those sessions land):
-//   - src/components/marketing/ModulesPreview.tsx — already uses 3 of
-//     these (health / stress / tax) but with the entries duplicated
-//     inline. Switch to importing from here once we're confident the
-//     shape is stable.
 //   - src/app/platform/page.tsx — full 12-module list (currently
 //     comma-separated strings in the "What's inside" tier cards).
 //   - src/app/pricing/page.tsx — when /pricing returns post-beta +
@@ -49,9 +47,8 @@ export type Module = {
  *  This order isn't tier-grouped — it reflects the team's narrative
  *  ordering (health and stress first as the always-free anchors,
  *  then tax / debt / protection / social, then the longer-horizon
- *  modules). The closing-band tile grid renders them in this order
- *  to stay consistent with what ModulesPreview already uses for its
- *  three featured entries (health, stress, tax — positions 1-3). */
+ *  modules). The ModulesShowcase tile grid renders them in this
+ *  order; future surfaces (/platform, /pricing) should follow suit. */
 export const MODULES: ReadonlyArray<Module> = [
   {
     id: "health",

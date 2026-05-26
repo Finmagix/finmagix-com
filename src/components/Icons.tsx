@@ -66,7 +66,7 @@ export function ArrowUpRightIcon(props: IconProps) {
   );
 }
 
-// Module icons — used by ModuleCard for the 3 featured modules on home
+// Module icons — used by ModulesShowcase (12-tile module grid on home)
 // (health/stress/tax) and for the full set on /platform and /pricing
 // when those pages get built. Add more as needed; keep tree-shakable.
 export function ActivityIcon(props: IconProps) {
@@ -262,8 +262,9 @@ export function HeartPulseIcon(props: IconProps) {
   );
 }
 
-// Icon resolver — used by ModuleCard when iterating over module data.
-// Returns null for unknown names; consumer can fall back to a placeholder.
+// Icon resolver — used by ModulesShowcase when iterating over MODULES
+// from src/lib/modules.ts. Returns null for unknown names; consumer
+// can fall back to a placeholder.
 const iconMap = {
   Activity: ActivityIcon,
   Shield: ShieldIcon,
