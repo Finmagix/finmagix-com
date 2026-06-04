@@ -1,29 +1,25 @@
-// Home hero — Concept F mockup (Monarch-style centered hero).
+// Home hero — Concept F mockup v2 (Monarch-style, tighter sizing).
 //
-// 2026-06-04 (v3): founder iteration — pivoted from the rotating-
-// questions Concept A v2 to a Monarch-Money-style centered hero:
-//   - Banner ("Financial Fitness Transformed!") full-width green
-//     strip at the very top (carried over from v2).
-//   - Centered large serif headline.
-//   - Centered subtitle.
-//   - Single centered green CTA.
-//   - Large dashboard screenshot below the CTA (placeholder uses
-//     /product/quiet-index.png; will be swapped to the lite
-//     dashboard screenshot once that file is saved to public/).
+// 2026-06-04 (v3 of Concept F): founder iteration —
+//   - Headline split: eyebrow "Inspired by CFP and CFA planning
+//     principles" (small uppercase) now sits ABOVE the H1; the H1
+//     itself is the cleaner "Financial Planning | Your Way."
+//   - H1 + subtitle font sizes reduced for a more measured top
+//     section.
+//   - Subtitle copy updated to the 12-modules wording.
+//   - Dashboard screenshot moved OUTSIDE the .wrap so it can extend
+//     wider (Monarch-style near-full-width), and the gap between
+//     CTA and screenshot tightened.
 //
-// Compliance flags (founder-approved per direction, flagged for
-// future tone-consistency review):
-//   - "Financial Planning Your way" elevates Finmagix from
-//     "thinking tool" toward "planning provider" — shift in
-//     brand positioning.
-//   - "AI powered tool" in the H1 is the fourth on-page AI mention;
-//     ProofStrip + Comparison + About + /platform are already
-//     tracked as Part 7 overrides in docs/tech-debt-marketing.md.
-//     Adding the hero moves AI from "documented exception" toward
-//     "central pitch."
-//   - "take control of your financial planning" is directive
-//     language; brand voice has been non-directive ("we help"
-//     not "we tell you to do X").
+// Banner ("Financial Fitness Transformed!") unchanged.
+//
+// Compliance flags (founder-approved per direction; flagged for
+// future tone-consistency review): "AI powered financial fitness
+// platform" in the subtitle continues the AI-prominent positioning
+// (4th on-page AI mention, see tech-debt-marketing.md Part 7
+// override entry). "assess and plan every aspect of your financial
+// life" is more directive than the brand's typical voice. Both
+// shipped verbatim per founder direction.
 
 import Image from "next/image";
 import { ArrowRightIcon } from "../Icons";
@@ -37,20 +33,20 @@ export default function Hero() {
       <div className="hero__banner">Financial Fitness Transformed!</div>
 
       <div className="wrap hero__inner">
-        {/* Centered headline. Pipe character preserved per founder
-            copy; CSS adds spacing around it as a soft separator. */}
+        <div className="eyebrow hero__eyebrow">
+          Inspired by CFP and CFA planning principles
+        </div>
+
         <h1 className="hero__h1">
-          Financial Planning Your way{" "}
+          Financial Planning{" "}
           <span className="hero__h1-divider" aria-hidden="true">
             |
           </span>{" "}
-          <span className="hero__h1-secondary">
-            Inspired by CFP, CFA Principles
-          </span>
+          Your Way
         </h1>
 
         <p className="hero__sub">
-          Finmagix is AI powered tool to help you take control of your financial planning.
+          Finmagix is an AI powered financial fitness platform with 12 modules to help you assess and plan every aspect of your financial life.
         </p>
 
         <div className="hero__cta">
@@ -64,12 +60,13 @@ export default function Hero() {
             <ArrowRightIcon size={16} />
           </a>
         </div>
+      </div>
 
-        {/* Lite dashboard screenshot — 2026-06-04 cropped from a live
-            lite.finmagix.com/dashboard capture. Shows the "Create a
-            summary" generate panel + "Get the lay of the land" and
-            "Cover the bases" module category groups with module rows
-            and per-module scores. */}
+      {/* Dashboard screenshot — sits OUTSIDE the .wrap so it can
+          extend beyond the 1180px wrap max-width (Monarch-style
+          near-full-width). Tight margin-top pulls it up close to
+          the CTA. */}
+      <div className="hero__screenshot-wrap">
         <div className="hero__screenshot">
           <div className="hero__screenshot-chrome" aria-hidden="true">
             <span className="hero__screenshot-dot"></span>
@@ -83,7 +80,7 @@ export default function Hero() {
             width={1440}
             height={707}
             priority
-            sizes="(max-width: 920px) 100vw, 1080px"
+            sizes="(max-width: 920px) 100vw, 1400px"
             className="hero__screenshot-img"
           />
         </div>
