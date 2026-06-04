@@ -22,9 +22,7 @@
 // shipped verbatim per founder direction.
 
 import Image from "next/image";
-import { ArrowRightIcon } from "../Icons";
-
-const LITE_SIGNUP_URL = "https://lite.finmagix.com/signup";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -49,16 +47,17 @@ export default function Hero() {
           Finmagix is an AI powered financial fitness platform with 12 modules to help you assess and plan every aspect of your financial life.
         </p>
 
+        {/* Two smaller buttons (Sign Up + Sign In) right-aligned with
+            the text block's right edge. /sign-up and /sign-in route
+            through the marketing-side redirect interstitials, which
+            hand off to lite.finmagix.com. */}
         <div className="hero__cta">
-          <a
-            href={LITE_SIGNUP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn--primary btn--lg"
-          >
-            Try the free checkup
-            <ArrowRightIcon size={16} />
-          </a>
+          <Link href="/sign-up" className="btn btn--primary">
+            Sign Up
+          </Link>
+          <Link href="/sign-in" className="btn btn--secondary">
+            Sign In
+          </Link>
         </div>
       </div>
 

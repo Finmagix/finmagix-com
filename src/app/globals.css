@@ -559,23 +559,22 @@ h4, h5, h6 {
 /* ----- Centered hero block (text content) ----- */
 .hero__inner {
   text-align: center;
-  padding-top: 64px;
+  /* Tightened (was 64) to pull the eyebrow up close to the banner
+     per founder direction 2026-06-04. */
+  padding-top: 24px;
 }
 
 /* ----- Eyebrow "Inspired by CFP and CFA planning principles" -----
-   Sits above the H1. Centered (inline-flex inside a text-align:center
-   parent centers it). Reuses the .eyebrow visual styling. */
+   Sits above the H1. */
 .hero__eyebrow {
   display: inline-flex;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 /* ----- Centered serif headline ----- */
 .hero__h1 {
   font-family: var(--font-serif);
-  /* Reduced from clamp(38px, 5.4vw, 68px) per founder direction
-     (2026-06-04) for a more measured top section. */
   font-size: clamp(28px, 3.6vw, 48px);
   line-height: 1.08;
   font-weight: 500;
@@ -583,12 +582,9 @@ h4, h5, h6 {
   color: var(--ink-primary);
   font-variation-settings: 'opsz' 96;
   text-wrap: balance;
-  margin: 0 auto 16px;
+  margin: 0 auto 12px;
   max-width: 820px;
 }
-/* The pipe divider sits visually between the two clauses. Green
-   accent + slight horizontal padding so it reads as a separator,
-   not a stray character. */
 .hero__h1-divider {
   color: var(--accent-primary);
   font-weight: 300;
@@ -596,49 +592,58 @@ h4, h5, h6 {
   display: inline-block;
 }
 .hero__h1-secondary {
-  /* No visual differentiation; the pipe alone separates the two
-     clauses. (Span kept on the H1 for future responsive tweaks.) */
+  /* Wrapper span kept for future responsive tweaks. */
 }
 
 /* ----- Centered subtitle ----- */
 .hero__sub {
   font-family: var(--font-sans);
-  /* Reduced from clamp(17px, 1.5vw, 21px) per founder direction. */
   font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.55;
   color: var(--ink-secondary);
-  margin: 0 auto 28px;
-  max-width: 720px;
+  margin: 0 auto 18px;
+  /* Bumped from 720 → 820 to match the H1 width so the right-edge
+     alignment of the CTA below feels consistent with the text block
+     above. */
+  max-width: 820px;
   text-wrap: pretty;
 }
 
-/* ----- Centered CTA ----- */
+/* ----- CTA cluster — two smaller buttons (Sign Up + Sign In)
+        right-aligned with the text block's right edge per founder
+        direction 2026-06-04. Container max-width matches the H1's
+        820px so the right edge of the buttons aligns with the right
+        edge of the text above. */
 .hero__cta {
-  display: inline-flex;
-  justify-content: center;
-  /* Tightened from 64px to pull the screenshot up close to the CTA
-     per founder direction (2026-06-04). */
-  margin: 0 0 28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  max-width: 820px;
+  /* Tightened (was 28) so the dashboard screenshot sits close
+     beneath. */
+  margin: 0 auto 16px;
 }
 
-/* ----- Dashboard screenshot wrapper -----
-   Lives OUTSIDE the .wrap so it can extend past the wrap's 1180px
-   max-width (Monarch-style near-full-width). Small horizontal
-   padding preserves breathing room against the viewport edges. */
+/* ----- Full-bleed dashboard screenshot -----
+   Edge-to-edge of the viewport per founder direction 2026-06-04.
+   No max-width, no padding on the wrap, no border-radius, no border,
+   no shadow — the screenshot fills the available width and reads as
+   part of the page rather than a framed image. The browser-chrome
+   bar (dots + URL) at the top stays for character — signals "this
+   is a screenshot of the lite dashboard." */
 .hero__screenshot-wrap {
-  padding: 0 24px;
+  padding: 0;
 }
 .hero__screenshot {
   position: relative;
-  /* Bumped from 1080px to 1400px for a wider Monarch-like feel on
-     standard desktop. */
-  max-width: 1400px;
-  margin: 0 auto;
-  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
   overflow: hidden;
   background: var(--surface-raised);
-  box-shadow: var(--elevation-2, 0 24px 64px rgba(31, 26, 20, 0.18));
-  border: 1px solid var(--border-subtle);
 }
 .hero__screenshot-chrome {
   display: flex;
@@ -672,25 +677,25 @@ h4, h5, h6 {
 
 /* ----- Responsive ----- */
 @media (max-width: 920px) {
-  .hero { padding-bottom: 56px; }
+  .hero { padding-bottom: 40px; }
   .hero__banner { font-size: 14px; padding: 12px 20px; }
-  .hero__inner { padding-top: 48px; }
-  .hero__eyebrow { margin-bottom: 14px; }
-  .hero__h1 { margin-bottom: 14px; }
-  .hero__sub { margin-bottom: 22px; }
-  .hero__cta { margin-bottom: 24px; }
-  .hero__screenshot-wrap { padding: 0 16px; }
+  .hero__inner { padding-top: 20px; }
+  .hero__eyebrow { margin-bottom: 10px; }
+  .hero__h1 { margin-bottom: 10px; }
+  .hero__sub { margin-bottom: 14px; }
+  /* On narrow viewports, center the CTA so the right-aligned
+     desktop placement doesn't fight a single-column phone read. */
+  .hero__cta { justify-content: center; margin-bottom: 14px; }
   .hero__screenshot-chrome { padding: 10px 12px; }
   .hero__screenshot-dot { width: 9px; height: 9px; }
   .hero__screenshot-path { font-size: 11px; margin-left: 12px; }
 }
 @media (max-width: 560px) {
-  .hero { padding-bottom: 44px; }
+  .hero { padding-bottom: 32px; }
   .hero__banner { font-size: 13px; padding: 10px 16px; }
-  .hero__inner { padding-top: 32px; }
-  .hero__sub { margin-bottom: 18px; }
-  .hero__cta { margin-bottom: 20px; }
-  .hero__screenshot-wrap { padding: 0 12px; }
+  .hero__inner { padding-top: 16px; }
+  .hero__sub { margin-bottom: 12px; }
+  .hero__cta { margin-bottom: 12px; }
   /* On narrow phones, hide the URL path so the chrome stays clean. */
   .hero__screenshot-path { display: none; }
 }
