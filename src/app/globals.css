@@ -251,12 +251,15 @@ h4, h5, h6 {
 .wrap--narrow { max-width: 760px; }
 .wrap--medium { max-width: 920px; }
 
-.section { padding: 72px 0; }
-.section--tight { padding: 48px 0; }
+/* Section padding tightened 2026-06-04 per founder direction —
+   72→48 (desktop) and 56→32 (mobile) for a denser vertical rhythm
+   across the home page. */
+.section { padding: 48px 0; }
+.section--tight { padding: 32px 0; }
 
 @media (max-width: 720px) {
-  .section { padding: 56px 0; }
-  .section--tight { padding: 36px 0; }
+  .section { padding: 32px 0; }
+  .section--tight { padding: 24px 0; }
   .wrap { padding: 0 20px; }
 }
 
@@ -573,16 +576,20 @@ h4, h5, h6 {
 }
 
 /* ----- Title row: H1 + CTA on the same horizontal line -----
-   Per founder direction 2026-06-04: Sign Up + Sign In buttons sit
-   on the SAME line as the H1, not below it. Both are centered as
-   a single horizontal cluster. Below 920px the row wraps to a
-   column (H1 above, buttons below, both centered). */
+   Per founder direction 2026-06-04 (v5): row width matches the
+   1080px screenshot below. justify-content: space-between pushes
+   the H1 to the LEFT edge (aligned with the screenshot's left
+   border) and the buttons to the RIGHT edge (Sign In button's
+   right border aligns with the screenshot's right border).
+   Below 920px the row wraps to a column (H1 above, buttons below,
+   both centered). */
 .hero__title-row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
+  max-width: 1080px;
   margin: 0 auto 16px;
 }
 
