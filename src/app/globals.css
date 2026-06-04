@@ -523,100 +523,141 @@ h4, h5, h6 {
 }
 
 /* ============================================================
-   Home — Hero (Concept A mockup, 2026-06-03)
-   Single-column centered layout with a CSS-animated rotating
-   questions stack as the visual hook. The H1 below the rotator
-   is the static brand reframe. Family photograph removed.
+   Home — Hero (Concept A mockup v2, 2026-06-03)
 
-   The orphaned styles for .hero__grid / .hero__text / .hero__sub /
-   .t-hero / .hero__image-wrap / .you-decide are kept below for
-   trivial revert if this mockup is rejected. They'll be removed
-   in a cleanup pass once Concept A is approved or replaced.
+   Promotional banner at the very top of the hero, then a two-column
+   layout below: family photograph LEFT, rotating questions + static
+   reframe + CTAs RIGHT. Questions cycle every 4s via CSS-only
+   animation (no JS). Reduced-motion and pause-on-hover supported.
+
+   The orphaned .hero__sub / .t-hero rules from the prior 4-line H1
+   layout are kept at the very bottom so a revert to that layout is
+   trivial if the mockup is rejected.
    ============================================================ */
 .hero {
-  padding: 96px 0 80px;
-  text-align: center;
-}
-.hero__inner {
-  max-width: 880px;
-  margin: 0 auto;
-}
-/* Eyebrow on Concept A is centered. Reuses .eyebrow visual styling
-   but adjusts layout (justify-content) to center within the column. */
-.hero__eyebrow {
-  display: inline-flex;
-  justify-content: center;
-  margin-bottom: 32px;
+  /* No top padding — the banner sits flush at the top of the hero.
+     The grid below restores breathing room with its own padding-top. */
+  padding: 0 0 80px;
 }
 
-/* Rotating questions stack. Each .hero__question is absolutely
-   positioned within the container so they overlap; only one is
-   visible at a time via opacity-keyframe animation with staggered
-   delays. The container reserves vertical space so the layout
-   doesn't reflow as questions cycle. */
+/* ----- Banner (full-width green strip across the top) ----- */
+.hero__banner {
+  background: var(--accent-primary);
+  color: var(--ink-inverse-primary);
+  text-align: center;
+  padding: 14px 24px;
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 1.4vw, 19px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* ----- Two-column grid (image left, text right) ----- */
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 56px;
+  align-items: center;
+  padding-top: 80px;
+}
+
+/* ----- Left column: family photograph ----- */
+.hero__image-wrap {
+  position: relative;
+  /* Square crop fills the column height naturally alongside the
+     text column. The landscape source photo (family on porch) keeps
+     all four family members in view with object-position: center 28%. */
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--surface-sunken);
+  box-shadow: var(--elevation-1);
+}
+.hero__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  display: block;
+}
+
+/* ----- Right column: text content ----- */
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.hero__eyebrow {
+  display: inline-flex;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+}
+
+/* Rotating questions — each .hero__question is absolutely positioned
+   within the container so they overlap; only one is visible at a time
+   via opacity-keyframe animation with staggered delays. */
 .hero__questions {
   position: relative;
+  width: 100%;
   font-family: var(--font-serif);
-  font-size: clamp(36px, 5.4vw, 64px);
+  /* Smaller than the centered v1 (clamp 36-64px) because the
+     two-column right cell is narrower (~50% of viewport vs full). */
+  font-size: clamp(28px, 4vw, 48px);
   line-height: 1.1;
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--ink-primary);
   font-variation-settings: 'opsz' 144;
   text-wrap: balance;
-  /* Reserve ~2 lines worth of height to handle wrap variability.
-     Tuned for the longest expected question wrap. */
-  min-height: 2.2em;
-  margin: 0 auto 28px;
+  /* Reserve enough height for the longest expected question wrap.
+     ~3 lines at clamp font size keeps questions like "Should I claim
+     Social Security at 62 or 67?" from causing layout shift. */
+  min-height: 3.3em;
+  margin: 0 0 24px;
 }
 .hero__question {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   opacity: 0;
-  /* 20s loop total (5 questions × 4s each). Keyframes below define
-     the visible window for one question; --q-delay (set inline per
+  /* 20s loop total (5 questions × 4s each). --q-delay (set inline per
      question) staggers them so they cycle one at a time. */
   animation: hero-question-cycle 20s linear infinite;
   animation-delay: var(--q-delay, 0s);
 }
 @keyframes hero-question-cycle {
-  /* Out → fade in → hold → fade out → out.
-     Visible window: 0.6s fade in + 3.2s hold + 0.6s fade out = 4.4s.
+  /* Visible window: 0.6s fade in + 3.2s hold + 0.6s fade out = 4.4s.
      Q1 fade-out (3.8-4.4s) overlaps Q2 fade-in (4-4.6s) for crossfade. */
   0%   { opacity: 0; }
-  3%   { opacity: 1; }   /* 0.6s — faded in */
-  19%  { opacity: 1; }   /* 3.8s — still holding */
-  22%  { opacity: 0; }   /* 4.4s — faded out */
+  3%   { opacity: 1; }
+  19%  { opacity: 1; }
+  22%  { opacity: 0; }
   100% { opacity: 0; }
 }
-/* Pause-on-hover gives users time to read if a question catches
-   their eye. Same for keyboard focus (focus-within). */
+/* Pause-on-hover and pause-on-focus give users time to read. */
 .hero__questions:hover .hero__question,
 .hero__questions:focus-within .hero__question {
   animation-play-state: paused;
 }
-/* Reduced-motion: no rotation. Show only the first question
-   statically. Other questions are still in the DOM and read by
-   screen readers, but invisible to all users in this mode. */
+/* Reduced-motion: no rotation. Show only the first question. */
 @media (prefers-reduced-motion: reduce) {
   .hero__question { animation: none; opacity: 0; }
   .hero__question:first-child { opacity: 1; }
 }
 
-/* The H1 — static brand reframe sits below the rotator. Smaller
-   than the rotating questions on purpose: the questions are the
-   hook, the reframe is the calm answer. */
+/* Static H1 — brand reframe below the rotator. Smaller than the
+   questions: questions are the hook, this is the calm answer. */
 .hero__reframe {
   font-family: var(--font-serif);
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: clamp(18px, 1.8vw, 24px);
   line-height: 1.4;
   font-weight: 500;
   color: var(--ink-primary);
-  margin: 0 auto 36px;
-  max-width: 580px;
+  margin: 0 0 32px;
   text-wrap: balance;
 }
 .hero__reframe em {
@@ -626,19 +667,19 @@ h4, h5, h6 {
 }
 
 .hero__ctas {
-  display: inline-flex;
+  display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .hero__trust {
   margin-top: 18px;
   font-size: 13px;
   color: var(--ink-tertiary);
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: baseline;
+  justify-content: flex-start;
   gap: 6px 14px;
 }
 .hero__trust .dot {
@@ -649,64 +690,44 @@ h4, h5, h6 {
   opacity: 0.5;
   display: inline-block;
 }
+
+/* ----- Responsive: stack to single column ----- */
 @media (max-width: 920px) {
-  .hero { padding: 64px 0 56px; }
-  .hero__eyebrow { margin-bottom: 24px; }
+  .hero { padding-bottom: 56px; }
+  .hero__banner { font-size: 14px; padding: 12px 20px; }
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-top: 48px;
+  }
+  .hero__image-wrap {
+    /* Landscape crop reads better when stacked above text on mobile. */
+    aspect-ratio: 16 / 10;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .hero__text { align-items: stretch; }
+  .hero__eyebrow { margin-bottom: 20px; }
+  .hero__questions {
+    min-height: 3.8em;
+    font-size: clamp(26px, 6.5vw, 40px);
+  }
 }
 @media (max-width: 560px) {
-  .hero { padding: 48px 0 40px; }
-  /* Questions wrap to 2-3 lines on phones — give a bit more room. */
-  .hero__questions { min-height: 3.4em; margin-bottom: 22px; }
+  .hero { padding-bottom: 40px; }
+  .hero__banner { font-size: 13px; padding: 10px 16px; }
+  .hero__grid { padding-top: 32px; gap: 28px; }
+  .hero__questions { min-height: 4.2em; }
 }
 
-/* ---- ORPHANED styles preserved for revert (see header note) ---- */
-.hero__grid {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 64px;
-  align-items: start;
-}
-.hero__text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
+/* ---- ORPHANED styles preserved for revert to the prior 4-line
+        H1 layout. Will be removed once Concept A is approved or
+        replaced. ---- */
+.hero__sub { max-width: 540px; }
+.t-hero { padding-bottom: 8px; }
 .hero__text > * { margin: 0; }
 .hero__text > * + * { margin-top: 24px; }
 .hero__text > .t-hero + .t-lede { margin-top: 40px; }
-.hero__sub { max-width: 540px; }
-.t-hero { padding-bottom: 8px; }
-.hero__image-wrap {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: var(--surface-sunken);
-  box-shadow: var(--elevation-1);
-  /* Drop the photo so its top edge sits with the second H1 line
-     ("advice was built…") rather than the eyebrow. Offset =
-     eyebrow + 24px gap (~42px) + one H1 line. Scales with the same
-     vw factor as the H1's own clamp(40px, 5.8vw, 68px), then clamps
-     at the ends so very small / very large viewports stay balanced.
-     Reset to 0 in the stacked layout (≤920px) so the photo sits
-     directly below the text with just the standard grid gap. */
-  margin-top: clamp(80px, calc(7.5vw + 8px), 116px);
-}
-.hero__image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 28%;
-  display: block;
-}
-
-@media (max-width: 920px) {
-  .hero { padding: 48px 0 32px; }
-  .hero__grid { grid-template-columns: 1fr; gap: 40px; }
-  /* No "align with H1 line 2" offset when the photo stacks below
-     the text — let the standard grid gap do the spacing. */
-  .hero__image-wrap { margin-top: 0; }
-}
 
 /* ============================================================
    Home — Proof strip (4 short proof points below hero)
