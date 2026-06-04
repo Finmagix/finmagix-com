@@ -251,12 +251,15 @@ h4, h5, h6 {
 .wrap--narrow { max-width: 760px; }
 .wrap--medium { max-width: 920px; }
 
-.section { padding: 72px 0; }
-.section--tight { padding: 48px 0; }
+/* Section padding tightened 2026-06-04 per founder direction —
+   72→48 (desktop) and 56→32 (mobile) for a denser vertical rhythm
+   across the home page. */
+.section { padding: 48px 0; }
+.section--tight { padding: 32px 0; }
 
 @media (max-width: 720px) {
-  .section { padding: 56px 0; }
-  .section--tight { padding: 36px 0; }
+  .section { padding: 32px 0; }
+  .section--tight { padding: 24px 0; }
   .wrap { padding: 0 20px; }
 }
 
@@ -523,89 +526,242 @@ h4, h5, h6 {
 }
 
 /* ============================================================
-   Home — Hero
-   Two-column grid: text + photograph. Photograph eager-loaded
-   for LCP (above the fold).
+   Home — Hero (v7, 2026-06-04 — founder handoff spec)
+
+   Single-column centered stack:
+     announcement bar (full-width green strip)
+     ─────────────────
+     eyebrow (uppercase, --accent-primary, letter-spaced)
+     H1 ("Financial Planning done [Your Way]" — em italic 400 wt)
+     lede (centered, max-width 760px)
+     CTAs (Sign Up filled + Sign In outlined, centered)
+     ─────────────────
+     dashboard preview (1120px max, fade-to-canvas bottom 140px)
+
+   All vertical spacing uses the --space-* 8px scale. Hero buttons
+   override the site-wide .btn shape (52px tall, --radius-md, 600 wt)
+   scoped to .hero__cta so other pages' button styling isn't touched.
+
+   The orphaned hero-related rules from earlier mockup versions
+   (.hero__title-row / .hero__inspired / .hero__tagline / etc.) are
+   preserved at the bottom of this block in case a revert is needed.
    ============================================================ */
 .hero {
-  padding: 72px 0 56px;
+  /* No top padding — the banner sits flush at the top of the hero. */
+  padding: 0 0 var(--space-9);
 }
+
+/* ----- Announcement bar (full-width green strip) ----- */
+.hero__banner {
+  background: var(--accent-primary);
+  color: var(--ink-inverse-primary);
+  text-align: center;
+  /* Spec: padding --space-3 --space-4, font 14px weight 600. */
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* ----- Centered hero block ----- */
+.hero__inner {
+  text-align: center;
+  /* Spec: announcement bar → hero top is --space-9 (96px) desktop. */
+  padding-top: var(--space-9);
+}
+
+/* ----- Eyebrow ----- */
+.hero__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  text-align: center;
+  margin: 0 0 var(--space-5);
+}
+
+/* ----- H1 ----- */
+.hero__h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 5.2vw, 66px);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 144;
+  text-wrap: balance;
+  text-align: center;
+  margin: 0 0 var(--space-5);
+}
+/* "Your Way" — italic, lighter weight per spec. */
+.hero__h1 em {
+  font-style: italic;
+  font-weight: 400;
+  /* No color override — stays --ink-primary so the italic + weight
+     drop are the only differentiators. */
+}
+
+/* ----- Lede paragraph ----- */
+.hero__sub {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto var(--space-6);
+  text-wrap: pretty;
+}
+
+/* ----- CTA row ----- */
+.hero__cta {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin: var(--space-6) 0 0;
+  flex-wrap: wrap;
+}
+/* Hero-scoped button overrides per spec — 52px tall, --radius-md,
+   weight 600. Scoped under .hero__cta so other pages' buttons stay
+   on the existing global .btn shape. */
+.hero__cta .btn {
+  height: 52px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 15px;
+}
+.hero__cta .btn--primary {
+  background: var(--accent-primary);
+  color: var(--ink-inverse-primary);
+  border: 1px solid var(--accent-primary);
+}
+.hero__cta .btn--secondary {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--border-strong);
+}
+
+/* ----- Dashboard preview wrap ----- */
+.hero__screenshot-wrap {
+  /* Spec: CTA row → dashboard preview = --space-7 (48px). */
+  margin-top: var(--space-7);
+  padding: 0 var(--space-5);
+}
+.hero__screenshot {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  /* Soft warm shadow per spec. */
+  box-shadow: 0 24px 60px -20px rgba(31, 26, 20, 0.28);
+}
+/* Fade-to-canvas overlay at the bottom of the screenshot — makes
+   the cut-off product peek blend into the page background instead
+   of ending on a hard edge. */
+.hero__screenshot::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--surface-canvas) 100%
+  );
+  pointer-events: none;
+}
+.hero__screenshot-chrome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.hero__screenshot-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--border-default);
+}
+.hero__screenshot-dot:nth-child(1) { background: #E26B5A; opacity: 0.6; }
+.hero__screenshot-dot:nth-child(2) { background: #E0A14B; opacity: 0.6; }
+.hero__screenshot-dot:nth-child(3) { background: #6BA572; opacity: 0.6; }
+.hero__screenshot-path {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  margin-left: 16px;
+  letter-spacing: 0.02em;
+}
+.hero__screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 920px) {
+  .hero { padding-bottom: var(--space-8); }
+  .hero__banner { font-size: 13px; padding: var(--space-3) var(--space-4); }
+  /* Spec: announcement → hero top is --space-8 (64px) on mobile. */
+  .hero__inner { padding-top: var(--space-8); }
+  .hero__eyebrow { font-size: 14px; margin-bottom: var(--space-4); }
+  .hero__h1 { margin-bottom: var(--space-4); }
+  .hero__sub { font-size: 16px; margin-bottom: var(--space-5); }
+  .hero__cta { margin-top: var(--space-5); }
+  .hero__screenshot-wrap { padding: 0 var(--space-4); margin-top: var(--space-6); }
+  .hero__screenshot-chrome { padding: 10px 12px; }
+  .hero__screenshot-dot { width: 9px; height: 9px; }
+  .hero__screenshot-path { font-size: 11px; margin-left: 12px; }
+  /* Soft fade is also a touch shorter on mobile to match the
+     reduced screenshot height. */
+  .hero__screenshot::after { height: 100px; }
+}
+@media (max-width: 560px) {
+  .hero { padding-bottom: var(--space-7); }
+  .hero__inner { padding-top: var(--space-7); }
+  .hero__sub { font-size: 15px; }
+  .hero__screenshot-wrap { padding: 0 var(--space-3); }
+  /* On narrow phones, hide the URL path so the chrome stays clean. */
+  .hero__screenshot-path { display: none; }
+}
+
+/* ---- ORPHANED styles preserved for revert to the Concept A v2
+        (or earlier) layouts. Will be removed once Concept F is
+        approved or replaced. ---- */
 .hero__grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 64px;
-  /* Top-align rather than center: the text column (eyebrow + 4-line
-     H1 + lede + CTAs + trust) is much taller than the 16:10 photo,
-     so centering pushed the photo's visual mass down to the sub-
-     paragraph. Top-aligned, the photo sits alongside the H1 — which
-     is what "centered with the text" reads as visually, because the
-     H1 is the visual anchor of the column. */
-  align-items: start;
-}
-.hero__text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.hero__text > * { margin: 0; }
-.hero__text > * + * { margin-top: 24px; }
-.hero__text > .t-hero + .t-lede { margin-top: 40px; }
-.hero__sub { max-width: 540px; }
-.t-hero { padding-bottom: 8px; }
-.hero__ctas {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 32px;
-}
-.hero__trust {
-  margin-top: 18px;
-  font-size: 13px;
-  color: var(--ink-tertiary);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 6px 14px;
-}
-.hero__trust .dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--ink-tertiary);
-  opacity: 0.5;
-  display: inline-block;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 56px;
+  align-items: center;
 }
 .hero__image-wrap {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--surface-sunken);
   box-shadow: var(--elevation-1);
-  /* Drop the photo so its top edge sits with the second H1 line
-     ("advice was built…") rather than the eyebrow. Offset =
-     eyebrow + 24px gap (~42px) + one H1 line. Scales with the same
-     vw factor as the H1's own clamp(40px, 5.8vw, 68px), then clamps
-     at the ends so very small / very large viewports stay balanced.
-     Reset to 0 in the stacked layout (≤920px) so the photo sits
-     directly below the text with just the standard grid gap. */
-  margin-top: clamp(80px, calc(7.5vw + 8px), 116px);
 }
-.hero__image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 28%;
-  display: block;
-}
-
-@media (max-width: 920px) {
-  .hero { padding: 48px 0 32px; }
-  .hero__grid { grid-template-columns: 1fr; gap: 40px; }
-  /* No "align with H1 line 2" offset when the photo stacks below
-     the text — let the standard grid gap do the spacing. */
-  .hero__image-wrap { margin-top: 0; }
-}
+.hero__text { display: flex; flex-direction: column; align-items: flex-start; }
+.hero__eyebrow { display: inline-flex; }
+.hero__questions { position: relative; }
+.hero__question { position: absolute; opacity: 0; }
+.hero__reframe { font-family: var(--font-serif); }
+.hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero__trust { font-size: 13px; color: var(--ink-tertiary); display: flex; }
+.hero__trust .dot { width: 3px; height: 3px; border-radius: 50%; }
 
 /* ============================================================
    Home — Proof strip (4 short proof points below hero)
