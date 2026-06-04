@@ -523,21 +523,24 @@ h4, h5, h6 {
 }
 
 /* ============================================================
-   Home — Hero (Concept A mockup v2, 2026-06-03)
+   Home — Hero (Concept F mockup, 2026-06-04)
 
-   Promotional banner at the very top of the hero, then a two-column
-   layout below: family photograph LEFT, rotating questions + static
-   reframe + CTAs RIGHT. Questions cycle every 4s via CSS-only
-   animation (no JS). Reduced-motion and pause-on-hover supported.
+   Monarch-Money-style centered hero. Promotional banner across
+   the very top, then centered serif headline → subtitle → CTA →
+   large dashboard screenshot below. No two-column split, no
+   rotating questions, no left-column photograph.
 
-   The orphaned .hero__sub / .t-hero rules from the prior 4-line H1
-   layout are kept at the very bottom so a revert to that layout is
-   trivial if the mockup is rejected.
+   The orphaned .hero__grid / .hero__image-wrap / .hero__text /
+   .hero__eyebrow / .hero__questions / .hero__reframe / .hero__ctas
+   / .hero__trust rules from the prior Concept A v2 layout are
+   preserved at the bottom for trivial revert if this mockup is
+   rejected.
    ============================================================ */
 .hero {
   /* No top padding — the banner sits flush at the top of the hero.
-     The grid below restores breathing room with its own padding-top. */
-  padding: 0 0 80px;
+     The inner block below restores breathing room with its own
+     padding-top. */
+  padding: 0 0 96px;
 }
 
 /* ----- Banner (full-width green strip across the top) ----- */
@@ -553,181 +556,154 @@ h4, h5, h6 {
   line-height: 1.3;
 }
 
-/* ----- Two-column grid (image left, text right) ----- */
+/* ----- Centered hero block ----- */
+.hero__inner {
+  text-align: center;
+  padding-top: 80px;
+  /* Don't fight the .wrap max-width on the centered text; the
+     screenshot below can blow past via its own max-width. */
+}
+
+/* ----- Centered serif headline ----- */
+.hero__h1 {
+  font-family: var(--font-serif);
+  /* Closer to Monarch's heft — display-size serif. */
+  font-size: clamp(38px, 5.4vw, 68px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  font-variation-settings: 'opsz' 144;
+  text-wrap: balance;
+  margin: 0 auto 24px;
+  max-width: 920px;
+}
+/* The pipe divider sits visually between the two clauses. Green
+   accent + slight horizontal padding so it reads as a separator,
+   not a stray character. */
+.hero__h1-divider {
+  color: var(--accent-primary);
+  /* Slightly lighter weight than surrounding type to read as a
+     punctuation mark rather than a competing word. */
+  font-weight: 300;
+  padding: 0 0.15em;
+  display: inline-block;
+}
+/* The second clause shares the H1 style but is rendered as a span
+   so it can break to its own line cleanly when needed. No visual
+   change vs the first clause — same size + color. */
+.hero__h1-secondary {
+  /* No visual differentiation; the pipe alone separates the two
+     clauses. Wrapping the second half in a span just lets future
+     responsive tweaks (e.g. line break before it) be one-liners. */
+}
+
+/* ----- Centered subtitle ----- */
+.hero__sub {
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.5;
+  color: var(--ink-secondary);
+  margin: 0 auto 36px;
+  max-width: 720px;
+  text-wrap: pretty;
+}
+
+/* ----- Centered CTA ----- */
+.hero__cta {
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 0 64px;
+}
+
+/* ----- Dashboard screenshot wrapper ----- */
+.hero__screenshot {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--surface-raised);
+  box-shadow: var(--elevation-2, 0 24px 64px rgba(31, 26, 20, 0.18));
+  border: 1px solid var(--border-subtle);
+}
+.hero__screenshot-chrome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--surface-sunken);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.hero__screenshot-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--border-default);
+}
+.hero__screenshot-dot:nth-child(1) { background: #E26B5A; opacity: 0.6; }
+.hero__screenshot-dot:nth-child(2) { background: #E0A14B; opacity: 0.6; }
+.hero__screenshot-dot:nth-child(3) { background: #6BA572; opacity: 0.6; }
+.hero__screenshot-path {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  color: var(--ink-tertiary);
+  margin-left: 16px;
+  letter-spacing: 0.02em;
+}
+.hero__screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 920px) {
+  .hero { padding-bottom: 64px; }
+  .hero__banner { font-size: 14px; padding: 12px 20px; }
+  .hero__inner { padding-top: 56px; }
+  .hero__h1 { margin-bottom: 20px; }
+  .hero__sub { margin-bottom: 28px; }
+  .hero__cta { margin-bottom: 44px; }
+  .hero__screenshot-chrome { padding: 10px 12px; }
+  .hero__screenshot-dot { width: 9px; height: 9px; }
+  .hero__screenshot-path { font-size: 11px; margin-left: 12px; }
+}
+@media (max-width: 560px) {
+  .hero { padding-bottom: 48px; }
+  .hero__banner { font-size: 13px; padding: 10px 16px; }
+  .hero__inner { padding-top: 40px; }
+  .hero__sub { margin-bottom: 24px; }
+  .hero__cta { margin-bottom: 32px; }
+  /* On narrow phones, hide the URL path so the chrome stays clean. */
+  .hero__screenshot-path { display: none; }
+}
+
+/* ---- ORPHANED styles preserved for revert to the Concept A v2
+        (or earlier) layouts. Will be removed once Concept F is
+        approved or replaced. ---- */
 .hero__grid {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 56px;
   align-items: center;
-  padding-top: 80px;
 }
-
-/* ----- Left column: family photograph ----- */
 .hero__image-wrap {
   position: relative;
-  /* Square crop fills the column height naturally alongside the
-     text column. The landscape source photo (family on porch) keeps
-     all four family members in view with object-position: center 28%. */
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--surface-sunken);
   box-shadow: var(--elevation-1);
 }
-.hero__image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 28%;
-  display: block;
-}
-
-/* ----- Right column: text content ----- */
-.hero__text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-.hero__eyebrow {
-  display: inline-flex;
-  justify-content: flex-start;
-  margin-bottom: 24px;
-}
-
-/* Rotating questions — each .hero__question is absolutely positioned
-   within the container so they overlap; only one is visible at a time
-   via opacity-keyframe animation with staggered delays. */
-.hero__questions {
-  position: relative;
-  width: 100%;
-  font-family: var(--font-serif);
-  /* Smaller than the centered v1 (clamp 36-64px) because the
-     two-column right cell is narrower (~50% of viewport vs full). */
-  font-size: clamp(28px, 4vw, 48px);
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--ink-primary);
-  font-variation-settings: 'opsz' 144;
-  text-wrap: balance;
-  /* Reserve enough height for the longest expected question wrap.
-     ~3 lines at clamp font size keeps questions like "Should I claim
-     Social Security at 62 or 67?" from causing layout shift. */
-  min-height: 3.3em;
-  margin: 0 0 24px;
-}
-.hero__question {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  opacity: 0;
-  /* 20s loop total (5 questions × 4s each). --q-delay (set inline per
-     question) staggers them so they cycle one at a time. */
-  animation: hero-question-cycle 20s linear infinite;
-  animation-delay: var(--q-delay, 0s);
-}
-@keyframes hero-question-cycle {
-  /* Visible window: 0.6s fade in + 3.2s hold + 0.6s fade out = 4.4s.
-     Q1 fade-out (3.8-4.4s) overlaps Q2 fade-in (4-4.6s) for crossfade. */
-  0%   { opacity: 0; }
-  3%   { opacity: 1; }
-  19%  { opacity: 1; }
-  22%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-/* Pause-on-hover and pause-on-focus give users time to read. */
-.hero__questions:hover .hero__question,
-.hero__questions:focus-within .hero__question {
-  animation-play-state: paused;
-}
-/* Reduced-motion: no rotation. Show only the first question. */
-@media (prefers-reduced-motion: reduce) {
-  .hero__question { animation: none; opacity: 0; }
-  .hero__question:first-child { opacity: 1; }
-}
-
-/* Static H1 — brand reframe below the rotator. Smaller than the
-   questions: questions are the hook, this is the calm answer. */
-.hero__reframe {
-  font-family: var(--font-serif);
-  font-size: clamp(18px, 1.8vw, 24px);
-  line-height: 1.4;
-  font-weight: 500;
-  color: var(--ink-primary);
-  margin: 0 0 32px;
-  text-wrap: balance;
-}
-.hero__reframe em {
-  font-style: italic;
-  color: var(--accent-primary);
-  font-weight: 500;
-}
-
-.hero__ctas {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-.hero__trust {
-  margin-top: 18px;
-  font-size: 13px;
-  color: var(--ink-tertiary);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: flex-start;
-  gap: 6px 14px;
-}
-.hero__trust .dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--ink-tertiary);
-  opacity: 0.5;
-  display: inline-block;
-}
-
-/* ----- Responsive: stack to single column ----- */
-@media (max-width: 920px) {
-  .hero { padding-bottom: 56px; }
-  .hero__banner { font-size: 14px; padding: 12px 20px; }
-  .hero__grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
-    padding-top: 48px;
-  }
-  .hero__image-wrap {
-    /* Landscape crop reads better when stacked above text on mobile. */
-    aspect-ratio: 16 / 10;
-    max-width: 540px;
-    margin: 0 auto;
-  }
-  .hero__text { align-items: stretch; }
-  .hero__eyebrow { margin-bottom: 20px; }
-  .hero__questions {
-    min-height: 3.8em;
-    font-size: clamp(26px, 6.5vw, 40px);
-  }
-}
-@media (max-width: 560px) {
-  .hero { padding-bottom: 40px; }
-  .hero__banner { font-size: 13px; padding: 10px 16px; }
-  .hero__grid { padding-top: 32px; gap: 28px; }
-  .hero__questions { min-height: 4.2em; }
-}
-
-/* ---- ORPHANED styles preserved for revert to the prior 4-line
-        H1 layout. Will be removed once Concept A is approved or
-        replaced. ---- */
-.hero__sub { max-width: 540px; }
-.t-hero { padding-bottom: 8px; }
-.hero__text > * { margin: 0; }
-.hero__text > * + * { margin-top: 24px; }
-.hero__text > .t-hero + .t-lede { margin-top: 40px; }
+.hero__text { display: flex; flex-direction: column; align-items: flex-start; }
+.hero__eyebrow { display: inline-flex; }
+.hero__questions { position: relative; }
+.hero__question { position: absolute; opacity: 0; }
+.hero__reframe { font-family: var(--font-serif); }
+.hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero__trust { font-size: 13px; color: var(--ink-tertiary); display: flex; }
+.hero__trust .dot { width: 3px; height: 3px; border-radius: 50%; }
 
 /* ============================================================
    Home — Proof strip (4 short proof points below hero)
