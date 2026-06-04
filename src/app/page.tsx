@@ -32,8 +32,8 @@ export default function Home() {
     <>
       <Hero />
       <ProofStrip />
-      <Comparison />
       <ModulesShowcase />
+      <Comparison />
       <HowItWorks />
       <PlatformPreview />
       <UnderTheHood />

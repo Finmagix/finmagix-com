@@ -60,12 +60,11 @@ export default function Hero() {
       </div>
 
       {/* Subtitle — outside the .wrap so it can extend wider than
-          the 1180px wrap max-width and stay on a single line at
-          standard desktop sizes. Falls back to wrapping on smaller
-          viewports. */}
+          the 1180px wrap max-width. With the longer copy added
+          2026-06-04 it now wraps to 2-3 lines on standard viewports. */}
       <div className="hero__sub-wrap">
         <p className="hero__sub">
-          Finmagix is an AI powered financial fitness platform with 12 modules to help you assess and plan every aspect of your financial life.
+          Finmagix is the FIRST AI powered FINANCIAL FITNESS PLATFORM with 12 comprehensive modules to help you plan and assess every part of your financial life. Your financial life done your way!
         </p>
       </div>
 
