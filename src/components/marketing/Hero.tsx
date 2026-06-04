@@ -31,15 +31,13 @@ export default function Hero() {
       <div className="hero__banner">Financial Fitness Transformed!</div>
 
       <div className="wrap hero__inner">
-        <div className="eyebrow hero__eyebrow">
-          Inspired by CFP and CFA planning principles
-        </div>
-
-        {/* H1 + CTA in the same horizontal row (founder direction
-            2026-06-04). Centered as a pair, with the H1 on the left
-            and the Sign Up / Sign In buttons immediately to its
-            right. On <=920px the row wraps to a column, both
-            centered. */}
+        {/* Title row — H1 centered + Sign Up/Sign In buttons right-
+            aligned. Uses a CSS grid (1fr auto 1fr) so the H1 sits
+            in the centered middle column while the buttons live in
+            the right column with justify-self: end (their right
+            edge aligns with the 1080px screenshot border below).
+            On <=920px the grid collapses to a single column with
+            H1 above buttons, both centered. */}
         <div className="hero__title-row">
           <h1 className="hero__h1">
             Financial Planning{" "}
@@ -57,14 +55,24 @@ export default function Hero() {
             </Link>
           </div>
         </div>
+
+        {/* "Inspired by..." moved below the title row 2026-06-04.
+            Sentence case + no dash prefix per founder direction. */}
+        <div className="hero__inspired">
+          Inspired by CFP and CFA Planning Principles
+        </div>
       </div>
 
-      {/* Subtitle — outside the .wrap so it can extend wider than
-          the 1180px wrap max-width. With the longer copy added
-          2026-06-04 it now wraps to 2-3 lines on standard viewports. */}
+      {/* Subtitle block — outside the .wrap so it can match the
+          screenshot's 1080px container width. Main paragraph is
+          LEFT-aligned (so its left edge meets the screenshot border).
+          Closing tagline is centered on its own line below. */}
       <div className="hero__sub-wrap">
         <p className="hero__sub">
-          Finmagix is the FIRST AI powered FINANCIAL FITNESS PLATFORM with 12 comprehensive modules to help you plan and assess every part of your financial life. Your financial life done your way!
+          Finmagix is the FIRST AI powered FINANCIAL FITNESS PLATFORM with 12 comprehensive modules to help you plan and assess every part of your financial life.
+        </p>
+        <p className="hero__tagline">
+          Your financial life done your way!
         </p>
       </div>
 
