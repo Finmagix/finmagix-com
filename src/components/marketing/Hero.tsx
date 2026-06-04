@@ -1,25 +1,29 @@
-// Home hero — Concept F mockup v2 (Monarch-style, tighter sizing).
+// Home hero — single-column centered stack (2026-06-04 v7).
 //
-// 2026-06-04 (v3 of Concept F): founder iteration —
-//   - Headline split: eyebrow "Inspired by CFP and CFA planning
-//     principles" (small uppercase) now sits ABOVE the H1; the H1
-//     itself is the cleaner "Financial Planning | Your Way."
-//   - H1 + subtitle font sizes reduced for a more measured top
-//     section.
-//   - Subtitle copy updated to the 12-modules wording.
-//   - Dashboard screenshot moved OUTSIDE the .wrap so it can extend
-//     wider (Monarch-style near-full-width), and the gap between
-//     CTA and screenshot tightened.
+// Founder-supplied detailed handoff spec. Replaces the prior
+// Concept F variants with a clean, single-column centered hero:
 //
-// Banner ("Financial Fitness Transformed!") unchanged.
+//   announcement bar
+//   ─────────────────────
+//   eyebrow (uppercase, 16px, green, letter-spaced)
+//   H1 ("Financial Planning done [Your Way]" — "Your Way" italic, weight 400)
+//   lede (centered, max-width 760px)
+//   CTAs (Sign Up + Sign In, centered, gap --space-4)
+//   ─────────────────────
+//   dashboard screenshot (1120px max, --radius-xl, fade-to-canvas
+//   gradient at the bottom 140px so the cut-off peek blends into
+//   the surface)
 //
-// Compliance flags (founder-approved per direction; flagged for
-// future tone-consistency review): "AI powered financial fitness
-// platform" in the subtitle continues the AI-prominent positioning
-// (4th on-page AI mention, see tech-debt-marketing.md Part 7
-// override entry). "assess and plan every aspect of your financial
-// life" is more directive than the brand's typical voice. Both
-// shipped verbatim per founder direction.
+// Standalone tagline "Your financial life done your way!" REMOVED.
+//
+// All spacing uses the --space-* 8px scale. No new tokens introduced.
+//
+// Compliance flags carried over (founder-approved verbatim; logged in
+// docs/tech-debt-marketing.md Part 7 override):
+//   - Banner "Financial Fitness Transformed!" is more promotional
+//     than the rest of the site's voice.
+//   - Lede includes "FIRST AI powered" (superlative claim) and
+//     fourth on-page AI mention.
 
 import Image from "next/image";
 import Link from "next/link";
@@ -27,59 +31,38 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <section className="hero">
-      {/* Promotional banner — full-width green strip at the top. */}
+      {/* Announcement bar — full-width forest-green strip directly
+          under the nav. Smaller padding + font than prior versions
+          per spec. */}
       <div className="hero__banner">Financial Fitness Transformed!</div>
 
       <div className="wrap hero__inner">
-        {/* Title row — H1 centered + Sign Up/Sign In buttons right-
-            aligned. Uses a CSS grid (1fr auto 1fr) so the H1 sits
-            in the centered middle column while the buttons live in
-            the right column with justify-self: end (their right
-            edge aligns with the 1080px screenshot border below).
-            On <=920px the grid collapses to a single column with
-            H1 above buttons, both centered. */}
-        <div className="hero__title-row">
-          <h1 className="hero__h1">
-            Financial Planning{" "}
-            <span className="hero__h1-divider" aria-hidden="true">
-              |
-            </span>{" "}
-            Your Way
-          </h1>
-          <div className="hero__cta">
-            <Link href="/sign-up" className="btn btn--primary">
-              Sign Up
-            </Link>
-            <Link href="/sign-in" className="btn btn--secondary">
-              Sign In
-            </Link>
-          </div>
-        </div>
-
-        {/* "Inspired by..." moved below the title row 2026-06-04.
-            Sentence case + no dash prefix per founder direction. */}
-        <div className="hero__inspired">
+        <div className="hero__eyebrow">
           Inspired by CFP and CFA Planning Principles
         </div>
-      </div>
 
-      {/* Subtitle block — outside the .wrap so it can match the
-          screenshot's 1080px container width. Main paragraph is
-          LEFT-aligned (so its left edge meets the screenshot border).
-          Closing tagline is centered on its own line below. */}
-      <div className="hero__sub-wrap">
+        <h1 className="hero__h1">
+          Financial Planning done <em>Your Way</em>
+        </h1>
+
         <p className="hero__sub">
           Finmagix is the FIRST AI powered FINANCIAL FITNESS PLATFORM with 12 comprehensive modules to help you plan and assess every part of your financial life.
         </p>
-        <p className="hero__tagline">
-          Your financial life done your way!
-        </p>
+
+        <div className="hero__cta">
+          <Link href="/sign-up" className="btn btn--primary">
+            Sign Up
+          </Link>
+          <Link href="/sign-in" className="btn btn--secondary">
+            Sign In
+          </Link>
+        </div>
       </div>
 
-      {/* Dashboard screenshot — sits OUTSIDE the .wrap so it can
-          extend beyond the 1180px wrap max-width (Monarch-style
-          near-full-width). Tight margin-top pulls it up close to
-          the CTA. */}
+      {/* Dashboard preview — centered, 1120px max, with a bottom
+          fade-to-canvas gradient overlay (~140px) so the cut-off
+          peek blends into the page surface rather than ending in a
+          hard edge. */}
       <div className="hero__screenshot-wrap">
         <div className="hero__screenshot">
           <div className="hero__screenshot-chrome" aria-hidden="true">
@@ -94,7 +77,7 @@ export default function Hero() {
             width={1440}
             height={707}
             priority
-            sizes="(max-width: 920px) 100vw, 1400px"
+            sizes="(max-width: 920px) 100vw, 1120px"
             className="hero__screenshot-img"
           />
         </div>
