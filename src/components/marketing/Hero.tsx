@@ -35,30 +35,38 @@ export default function Hero() {
           Inspired by CFP and CFA planning principles
         </div>
 
-        <h1 className="hero__h1">
-          Financial Planning{" "}
-          <span className="hero__h1-divider" aria-hidden="true">
-            |
-          </span>{" "}
-          Your Way
-        </h1>
+        {/* H1 + CTA in the same horizontal row (founder direction
+            2026-06-04). Centered as a pair, with the H1 on the left
+            and the Sign Up / Sign In buttons immediately to its
+            right. On <=920px the row wraps to a column, both
+            centered. */}
+        <div className="hero__title-row">
+          <h1 className="hero__h1">
+            Financial Planning{" "}
+            <span className="hero__h1-divider" aria-hidden="true">
+              |
+            </span>{" "}
+            Your Way
+          </h1>
+          <div className="hero__cta">
+            <Link href="/sign-up" className="btn btn--primary">
+              Sign Up
+            </Link>
+            <Link href="/sign-in" className="btn btn--secondary">
+              Sign In
+            </Link>
+          </div>
+        </div>
+      </div>
 
+      {/* Subtitle — outside the .wrap so it can extend wider than
+          the 1180px wrap max-width and stay on a single line at
+          standard desktop sizes. Falls back to wrapping on smaller
+          viewports. */}
+      <div className="hero__sub-wrap">
         <p className="hero__sub">
           Finmagix is an AI powered financial fitness platform with 12 modules to help you assess and plan every aspect of your financial life.
         </p>
-
-        {/* Two smaller buttons (Sign Up + Sign In) right-aligned with
-            the text block's right edge. /sign-up and /sign-in route
-            through the marketing-side redirect interstitials, which
-            hand off to lite.finmagix.com. */}
-        <div className="hero__cta">
-          <Link href="/sign-up" className="btn btn--primary">
-            Sign Up
-          </Link>
-          <Link href="/sign-in" className="btn btn--secondary">
-            Sign In
-          </Link>
-        </div>
       </div>
 
       {/* Dashboard screenshot — sits OUTSIDE the .wrap so it can
