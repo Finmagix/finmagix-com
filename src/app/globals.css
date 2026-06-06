@@ -3486,26 +3486,33 @@ h4, h5, h6 {
   padding: 13px 15px;
   box-shadow: 0 12px 30px rgba(27, 31, 27, 0.3);
 }
+/* Stack the caption lines vertically so the 85% stat and the
+   uppercase tagline each get their own row (cleaner read than
+   the mockup's inline pairing, which can overflow on narrow
+   photo widths). */
 .home-who__stat .big {
+  display: block;
   font-family: var(--font-serif);
-  font-size: 1.85rem;
+  font-size: 2rem;
   font-weight: 600;
   color: #F4F0E7;
   line-height: 1;
 }
 .home-who__stat .cap {
+  display: block;
+  margin-top: 4px;
   color: var(--home-clay-soft);
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  font-size: 0.6rem;
-  margin-left: 8px;
+  font-size: 0.66rem;
+  line-height: 1.3;
 }
 .home-who__stat p {
   color: #C9D6CC;
-  font-size: 0.76rem;
-  margin-top: 7px;
-  line-height: 1.4;
+  font-size: 0.78rem;
+  margin-top: 9px;
+  line-height: 1.45;
 }
 .home-who__list { list-style: none; margin-top: 26px; padding: 0; }
 .home-who__list li {
