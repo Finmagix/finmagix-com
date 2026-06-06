@@ -1,44 +1,56 @@
-// Home page. Composes the marketing sections.
+// Home page — production composition (2026-06-06 rebuild).
 //
-// 2026-05-25 reorder:
-//   - ModulesShowcase (the 12-tile module flip grid, formerly named
-//     ClosingCTA) moved up to sit between Comparison and HowItWorks.
-//   - ModulesPreview (the standalone "Twelve sides of your financial
-//     life" 3-card section) removed entirely — its role is subsumed
-//     by ModulesShowcase, which surfaces all twelve modules.
-//   - PartnerStrip is now the last section before the footer; the
-//     page no longer has a dedicated closing CTA. The persistent
-//     <Disclosure> in the footer handles the end-of-page closure.
+// Rebuilt per the founder handoff brief (Redesign of Home Page_060626).
+// All visible copy is verbatim from the approved finmagix-home.html
+// mockup; layout, tokens, and motion mirror the brief's spec.
 //
-// See docs/CLAUDE_CODE_HANDOFF.md § 5 for the original section list.
+// Section components live in src/components/home/ and are wrapped
+// in a `.home-rebuild` div so the --home-* color tokens, Hanken
+// Grotesk body font, paper-grain noise overlay, and all other
+// scoped styles in globals.css apply only on this surface (other
+// pages keep their existing tokens untouched).
 //
-// The page is a Server Component — all interactive bits (NavBar's
-// hamburger menu) are isolated in their own Client Component
-// boundaries. <main id="main"> is provided by src/app/layout.tsx
-// for the skip-to-content target.
+// The previous /home-rebuild test route was the staging surface
+// for QA — it's removed in this commit since / now renders the
+// same composition.
+//
+// The legacy src/components/marketing/* components used by the
+// prior v7 hero are no longer imported but are left in place so
+// the diff stays scoped to home composition. They can be removed
+// in a follow-up cleanup once the rebuild is stable.
 
-import Hero from "@/components/marketing/Hero";
-import ProofStrip from "@/components/marketing/ProofStrip";
-import Comparison from "@/components/marketing/Comparison";
-import ModulesShowcase from "@/components/marketing/ModulesShowcase";
-import HowItWorks from "@/components/marketing/HowItWorks";
-import PlatformPreview from "@/components/marketing/PlatformPreview";
-import UnderTheHood from "@/components/marketing/UnderTheHood";
-import Testimonial from "@/components/marketing/Testimonial";
-import PartnerStrip from "@/components/marketing/PartnerStrip";
+import HomeHero from "@/components/home/Hero";
+import HomeSampleOutput from "@/components/home/SampleOutput";
+import HomeWhatYouGet from "@/components/home/WhatYouGet";
+import HomeSocialProof from "@/components/home/SocialProof";
+import HomeTrustBand from "@/components/home/TrustBand";
+import HomeWhoThisIsFor from "@/components/home/WhoThisIsFor";
+import HomeHowItWorks from "@/components/home/HowItWorks";
+import HomeComparisonTable from "@/components/home/ComparisonTable";
+import HomeJourneyStages from "@/components/home/JourneyStages";
+import HomeTwelveModules from "@/components/home/TwelveModules";
+import HomeUnderTheHood from "@/components/home/UnderTheHood";
+import HomeForPartners from "@/components/home/ForPartners";
+import HomeFinalCTA from "@/components/home/FinalCTA";
+import HomeStickyCTA from "@/components/home/StickyCTA";
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <ProofStrip />
-      <ModulesShowcase />
-      <Comparison />
-      <HowItWorks />
-      <PlatformPreview />
-      <UnderTheHood />
-      <Testimonial />
-      <PartnerStrip />
-    </>
+    <div className="home-rebuild">
+      <HomeHero />
+      <HomeSampleOutput />
+      <HomeWhatYouGet />
+      <HomeSocialProof />
+      <HomeTrustBand />
+      <HomeWhoThisIsFor />
+      <HomeHowItWorks />
+      <HomeComparisonTable />
+      <HomeJourneyStages />
+      <HomeTwelveModules />
+      <HomeUnderTheHood />
+      <HomeForPartners />
+      <HomeFinalCTA />
+      <HomeStickyCTA />
+    </div>
   );
 }
