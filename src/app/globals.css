@@ -2907,20 +2907,66 @@ h4, h5, h6 {
 }
 
 /* ════════════════════════════════════════════════════════════
-   HERO — verbatim styling from finmagix-home.html mockup.
+   HERO — single-column centered stack with the dashboard
+   stretched as a faded full-bleed background behind the text
+   (founder direction 2026-06-06).
    ════════════════════════════════════════════════════════════ */
-.home-hero { padding: 74px 0 56px; position: relative; }
-.home-hero__wrap {
+.home-hero {
+  position: relative;
+  padding: 96px 0 120px;
+  overflow: hidden;
+  isolation: isolate; /* contain z-index stack */
+}
+
+/* Full-width dashboard background. The image sits behind everything
+   and is softened by a paper-tinted veil so the hero text stays
+   legible at any viewport. */
+.home-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.home-hero__bg-img {
   width: 100%;
-  max-width: 1180px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  opacity: 0.45;
+  /* Slight desaturation softens the dashboard against the warm
+     paper surface so the text/badge contrast lands cleanly. */
+  filter: saturate(0.85);
+}
+/* Paper-tinted veil — radial gradient, denser at the edges so the
+   center stays open and the text remains the visual focus. */
+.home-hero__bg-veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(244, 240, 231, 0.45) 0%,
+    rgba(244, 240, 231, 0.78) 60%,
+    rgba(244, 240, 231, 0.96) 100%
+  );
+}
+
+.home-hero__wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 980px;
   margin: 0 auto;
   padding: 0 28px;
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 56px;
-  align-items: center;
+  text-align: center;
 }
-.home-hero__copy { display: flex; flex-direction: column; align-items: flex-start; }
+.home-hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
 
 /* AI badge — green pill, cream text, gold lightning bolt. */
 .home-hero__ai-badge {
@@ -2966,25 +3012,26 @@ h4, h5, h6 {
   margin: 18px 0 0;
 }
 
-/* Subhead with inline bold span. */
+/* Subhead with inline bold span. Centered. */
 .home-hero__sub {
   font-size: 1.22rem;
   line-height: 1.5;
   color: var(--home-ink-soft);
-  margin: 24px 0 0;
-  max-width: 30em;
+  margin: 24px auto 0;
+  max-width: 36em;
 }
 .home-hero__sub b { color: var(--home-ink); font-weight: 600; }
 
-/* CTA row */
+/* CTA row — centered. */
 .home-hero__ctas {
   display: flex;
   gap: 14px;
   margin-top: 30px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* Friction line with dot separators */
+/* Friction line with dot separators — centered. */
 .home-hero__friction {
   margin-top: 18px;
   font-size: 0.9rem;
@@ -2993,6 +3040,7 @@ h4, h5, h6 {
   gap: 14px;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
 .home-hero__friction span { display: inline-flex; align-items: center; gap: 6px; }
 .home-hero__dot {
@@ -3002,17 +3050,6 @@ h4, h5, h6 {
   background: var(--home-sage);
   display: inline-block;
 }
-
-/* Visual column. */
-.home-hero__visual {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--home-card);
-  border: 1px solid var(--home-line);
-  box-shadow: var(--home-shadow-lg);
-}
-.home-hero__image { width: 100%; height: auto; display: block; }
 
 /* Stagger fade-up on first paint. */
 .home-hero__d1, .home-hero__d2, .home-hero__d3,
@@ -3029,15 +3066,28 @@ h4, h5, h6 {
 @keyframes home-hero-up { to { opacity: 1; transform: none; } }
 
 @media (max-width: 900px) {
-  .home-hero { padding: 48px 0 40px; }
-  .home-hero__wrap { grid-template-columns: 1fr; gap: 40px; }
+  .home-hero { padding: 64px 0 80px; }
   .home-hero__sub { max-width: 100%; }
+  /* Pull the background image down a touch so the dashboard's top
+     section frames the text on tablets. */
+  .home-hero__bg-img { object-position: center 30%; }
 }
 @media (max-width: 560px) {
-  .home-hero { padding: 28px 0 32px; }
+  .home-hero { padding: 48px 0 64px; }
   .home-hero__h1 { font-size: clamp(2rem, 9vw, 2.5rem); }
   .home-hero__sub { font-size: 1.05rem; margin-top: 18px; }
   .home-hero__ctas .home-btn { flex: 1; min-width: 0; justify-content: center; }
+  /* Stronger veil on phones — narrower hero means the dashboard
+     visual can compete more aggressively with the text. */
+  .home-hero__bg-img { opacity: 0.32; }
+  .home-hero__bg-veil {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(244, 240, 231, 0.55) 0%,
+      rgba(244, 240, 231, 0.86) 60%,
+      rgba(244, 240, 231, 0.98) 100%
+    );
+  }
 }
 
 /* Ghost button variant per mockup --btn-ghost. */
