@@ -2,17 +2,15 @@
 //
 // Verbatim copy from finmagix-home.html per the prompt directive.
 //
-// 2026-06-06 layout change: dashboard screenshot is now a full-width
-// faded background BEHIND the centered text (single-column hero)
-// instead of a side-by-side card. The image still uses next/image
-// for responsive sizing; a paper-tinted gradient overlay keeps the
-// hero text legible at every viewport.
+// Layout: two-column on desktop (text left, dashboard preview right),
+// stacks on mobile (text above image). 2026-06-06 founder direction:
+// reverted from the full-bleed background variant back to the
+// side-by-side card layout, with the new (narrower, focused)
+// dashboard screenshot at /product/lite-dashboard-v2.png.
 //
-// CTA destinations (per the brief's "CTA destinations" section):
+// CTA destinations:
 //   Primary "Start my free checkup" → https://lite.finmagix.com/signup
 //   Secondary "Check out our Platform" → /platform
-//
-// Patent claim status: filed (founder-confirmed in this session).
 
 import Image from "next/image";
 import Link from "next/link";
@@ -22,25 +20,8 @@ const LITE_SIGNUP_URL = "https://lite.finmagix.com/signup";
 export default function HomeHero() {
   return (
     <section className="home-hero">
-      {/* Full-width dashboard preview behind the text. The image is
-          decorative in this layout (the same dashboard appears in
-          the sample-output section below with a richer caption), so
-          alt is empty to avoid double-announcement to assistive
-          tech. The descriptive alt lives on the sample-output card. */}
-      <div className="home-hero__bg" aria-hidden="true">
-        <Image
-          src="/product/lite-dashboard.png"
-          alt=""
-          width={1440}
-          height={707}
-          priority
-          sizes="100vw"
-          className="home-hero__bg-img"
-        />
-        <div className="home-hero__bg-veil" />
-      </div>
-
       <div className="home-hero__wrap">
+        {/* ── Text column ── */}
         <div className="home-hero__copy">
           {/* AI badge — green pill with gold lightning bolt + cream text */}
           <span className="home-hero__ai-badge home-hero__d1">
@@ -99,6 +80,19 @@ export default function HomeHero() {
             <i className="home-hero__dot" aria-hidden="true" />
             <span>No bank connection</span>
           </div>
+        </div>
+
+        {/* ── Visual column — dashboard preview ── */}
+        <div className="home-hero__visual home-hero__d4">
+          <Image
+            src="/product/lite-dashboard-v2.png"
+            alt="Finmagix Lite dashboard — a green 'Create a summary across your modules' card at the top with a Generate button, then 'Get the lay of the land' showing Financial Fitness Score (71) and Financial Stress Test, followed by 'Cover the bases' with Protection & Insurance flagged Recommended."
+            width={856}
+            height={976}
+            priority
+            sizes="(max-width: 900px) 90vw, (max-width: 1280px) 45vw, 480px"
+            className="home-hero__image"
+          />
         </div>
       </div>
     </section>
