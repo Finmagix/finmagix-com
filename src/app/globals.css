@@ -139,6 +139,48 @@
   --teal-tint:  #E8F4EE;
 
   /* ============================================================
+     HOME PAGE REBUILD TOKENS — 2026-06-06.
+     Paper + green + clay + gold palette per the rebuild brief.
+     Prefixed with --home-* so they coexist with the existing
+     design-system tokens (other pages keep their cream/forest
+     palette). Shared across the new home-page section components
+     in src/components/home/*.
+     ============================================================ */
+  /* Surfaces */
+  --home-paper:      #F4F0E7;  /* page background */
+  --home-paper-2:    #EEE8DB;  /* alternate band background */
+  --home-card:       #FCFAF4;  /* card background */
+  /* Ink */
+  --home-ink:        #1B1F1B;  /* primary text */
+  --home-ink-soft:   #43483F;  /* secondary text */
+  --home-ink-mute:   #6F756A;  /* tertiary text */
+  --home-ink-inv:    #F4F0E7;  /* inverse text on dark green sections */
+  /* Greens (darker + cooler than --accent-primary site default) */
+  --home-green:      #1E3A30;  /* primary brand green for this design */
+  --home-green-2:    #2C5446;  /* lighter green for accents/hover */
+  /* Sage */
+  --home-sage:       #5B7A6B;
+  --home-sage-soft:  #A9BCAE;
+  /* Clay (accent + secondary CTA on dark sections) */
+  --home-clay:       #BC5836;
+  --home-clay-soft:  #E5A883;
+  /* Gold (subtle accent only) */
+  --home-gold:       #C99A3F;
+  /* Lines / borders */
+  --home-line:       #D9D2C2;
+  /* Soft layered shadows */
+  --home-shadow:     0 1px 2px rgba(31, 26, 20, 0.06),
+                     0 4px 12px rgba(31, 26, 20, 0.08);
+  --home-shadow-lg:  0 4px 12px rgba(31, 26, 20, 0.10),
+                     0 24px 60px -20px rgba(31, 26, 20, 0.22);
+  /* Card radius */
+  --home-radius:     18px;
+  /* Hanken Grotesk body font for the new home page (variable font,
+     loaded via next/font in layout.tsx). Existing pages keep DM Sans. */
+  --font-hanken-grotesk: var(--font-hanken), system-ui, -apple-system,
+                         'Segoe UI', sans-serif;
+
+  /* ============================================================
      LEGACY tokens — preserved for WS-1/2/3 pages not yet migrated.
      Each page retires its dependency on these as it gets its own
      redesign session. See docs/tech-debt-marketing.md under
@@ -2737,4 +2779,320 @@ h4, h5, h6 {
 
 .fm-pulse {
   animation: finmagix-pulse 1.8s ease-in-out infinite;
+}
+
+/* ============================================================
+   ╔════════════════════════════════════════════════════════════╗
+   ║  HOME PAGE REBUILD — 2026-06-06                            ║
+   ║  Founder handoff brief. All styles below are scoped to     ║
+   ║  components under src/components/home/ and the rebuild     ║
+   ║  test route at /home-rebuild. Existing /home (page.tsx     ║
+   ║  using src/components/marketing/*) is untouched until the  ║
+   ║  rebuild is approved.                                      ║
+   ║                                                            ║
+   ║  Uses --home-* tokens defined in :root above.              ║
+   ║  Body font: var(--font-hanken-grotesk).                    ║
+   ╚════════════════════════════════════════════════════════════╝
+   ============================================================ */
+
+/* Page-level resets for the home-rebuild surface. Scoped via the
+   .home-rebuild ancestor on the test route + the real / route once
+   swapped, so other pages keep their existing surface tokens. */
+.home-rebuild,
+.home-rebuild body {
+  background: var(--home-paper);
+  color: var(--home-ink);
+  font-family: var(--font-hanken-grotesk);
+}
+
+/* Subtle paper-grain noise overlay — kept optional/very light per
+   brief. Applied as a body-level pseudo-element so it doesn't
+   interfere with layout. */
+.home-rebuild::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+.home-rebuild > * { position: relative; z-index: 1; }
+
+/* ────────────────────────────────────────────────────────────
+   Shared HOME button — primary green pill + secondary outline
+   ──────────────────────────────────────────────────────────── */
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-hanken-grotesk);
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1;
+  /* Minimum 44x44 touch target per brief acceptance criteria. */
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 180ms ease,
+    color 180ms ease;
+  white-space: nowrap;
+}
+.home-btn--primary {
+  background: var(--home-green);
+  color: var(--home-paper);
+  border: 1px solid var(--home-green);
+  box-shadow: var(--home-shadow);
+}
+.home-btn--primary:hover {
+  background: var(--home-green-2);
+  border-color: var(--home-green-2);
+  transform: translateY(-1px);
+  box-shadow: var(--home-shadow-lg);
+}
+.home-btn--primary:active { transform: translateY(0); }
+.home-btn--secondary {
+  background: transparent;
+  color: var(--home-green);
+  border: 1px solid var(--home-line);
+}
+.home-btn--secondary:hover {
+  background: var(--home-card);
+  border-color: var(--home-sage-soft);
+  transform: translateY(-1px);
+}
+.home-btn--secondary:active { transform: translateY(0); }
+.home-btn--clay {
+  background: var(--home-clay);
+  color: var(--home-paper);
+  border: 1px solid var(--home-clay);
+  box-shadow: var(--home-shadow);
+}
+.home-btn--clay:hover {
+  background: #A84B2E;
+  border-color: #A84B2E;
+  transform: translateY(-1px);
+}
+.home-btn:focus-visible {
+  outline: 2px solid var(--home-green);
+  outline-offset: 3px;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Section utilities — wrap, padding, eyebrow
+   ──────────────────────────────────────────────────────────── */
+.home-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@media (max-width: 720px) {
+  .home-wrap { padding: 0 18px; }
+}
+
+.home-section {
+  padding: 96px 0;
+}
+@media (max-width: 900px) {
+  .home-section { padding: 64px 0; }
+}
+@media (max-width: 560px) {
+  .home-section { padding: 48px 0; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   HERO
+   ════════════════════════════════════════════════════════════ */
+.home-hero {
+  padding: 56px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+.home-hero__wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+}
+
+/* ── Text column ── */
+.home-hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0; /* per-element margins below */
+}
+
+/* Patent-pending badge */
+.home-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-hanken-grotesk);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--home-ink-soft);
+  background: var(--home-paper-2);
+  border: 1px solid var(--home-line);
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+.home-hero__badge-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--home-clay);
+  /* Subtle pulse to draw the eye to the patent claim. */
+  animation: home-badge-pulse 2.4s ease-in-out infinite;
+}
+@keyframes home-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(188, 88, 54, 0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(188, 88, 54, 0); }
+}
+
+/* Eyebrow */
+.home-hero__eyebrow {
+  font-family: var(--font-hanken-grotesk);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--home-sage);
+  margin-bottom: 18px;
+}
+
+/* H1 */
+.home-hero__h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--home-ink);
+  font-variation-settings: 'opsz' 144;
+  text-wrap: balance;
+  margin: 0 0 22px;
+}
+.home-hero__h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--home-green);
+}
+
+/* Subhead */
+.home-hero__sub {
+  font-family: var(--font-hanken-grotesk);
+  font-size: 17.5px;
+  line-height: 1.6;
+  color: var(--home-ink-soft);
+  margin: 0 0 32px;
+  max-width: 540px;
+  text-wrap: pretty;
+}
+
+/* CTAs */
+.home-hero__ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+/* Friction */
+.home-hero__friction {
+  font-family: var(--font-hanken-grotesk);
+  font-size: 13px;
+  color: var(--home-ink-mute);
+  margin: 0;
+}
+
+/* ── Visual column ── */
+.home-hero__visual {
+  position: relative;
+  border-radius: var(--home-radius);
+  overflow: hidden;
+  background: var(--home-card);
+  border: 1px solid var(--home-line);
+  box-shadow: var(--home-shadow-lg);
+}
+.home-hero__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Stagger fade-up on first paint ── */
+.home-hero__badge,
+.home-hero__eyebrow,
+.home-hero__h1,
+.home-hero__sub,
+.home-hero__ctas,
+.home-hero__friction {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: home-fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.home-hero__badge    { animation-delay: 80ms; }
+.home-hero__eyebrow  { animation-delay: 160ms; }
+.home-hero__h1       { animation-delay: 240ms; }
+.home-hero__sub      { animation-delay: 340ms; }
+.home-hero__ctas     { animation-delay: 440ms; }
+.home-hero__friction { animation-delay: 540ms; }
+.home-hero__visual {
+  opacity: 0;
+  animation: home-fade-in 900ms cubic-bezier(0.22, 1, 0.36, 1) 320ms forwards;
+}
+@keyframes home-fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes home-fade-in {
+  to { opacity: 1; }
+}
+
+/* ── Responsive: stack to single column ── */
+@media (max-width: 900px) {
+  .home-hero { padding: 32px 0 56px; }
+  .home-hero__wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .home-hero__sub { max-width: 100%; }
+}
+@media (max-width: 560px) {
+  .home-hero { padding: 20px 0 40px; }
+  .home-hero__badge { margin-bottom: 18px; }
+  .home-hero__eyebrow { margin-bottom: 14px; font-size: 12px; }
+  .home-hero__h1 { margin-bottom: 18px; }
+  .home-hero__sub { margin-bottom: 24px; font-size: 16px; }
+  .home-hero__ctas .home-btn { flex: 1; min-width: 0; }
+}
+
+/* ── Reduced motion: disable transforms/animations ── */
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__badge,
+  .home-hero__eyebrow,
+  .home-hero__h1,
+  .home-hero__sub,
+  .home-hero__ctas,
+  .home-hero__friction,
+  .home-hero__visual {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .home-hero__badge-dot { animation: none; }
+  .home-btn:hover { transform: none; }
 }
