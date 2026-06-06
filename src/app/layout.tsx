@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   Fraunces,
+  Hanken_Grotesk,
   DM_Sans,
   DM_Serif_Display,
   Geist_Mono,
@@ -19,7 +20,16 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-// Primary sans — body, UI, navigation
+// Body/UI for the rebuilt home page (2026-06-06). Variable font,
+// weights 300-800. Used by the new home page components via
+// var(--font-hanken). Existing pages still use DM Sans (below).
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+  display: "swap",
+});
+
+// Primary sans — body, UI, navigation (existing pages).
 const dmSans = DM_Sans({
   subsets: ["latin"],
   axes: ["opsz"],
@@ -91,7 +101,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${dmSans.variable} ${dmSerif.variable} ${geistMono.variable}`}
+      className={`${fraunces.variable} ${hankenGrotesk.variable} ${dmSans.variable} ${dmSerif.variable} ${geistMono.variable}`}
     >
       <body>
         <a className="skip" href="#main">
