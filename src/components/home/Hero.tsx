@@ -1,25 +1,22 @@
-// Home rebuild — Hero section.
+// Home rebuild — Hero (section 2 of the brief).
 //
-// Two-column on desktop (text left, dashboard preview right);
-// stacks on mobile with text above image.
+// Verbatim copy from finmagix-home.html per the prompt directive:
+// "All visible copy must come word-for-word from finmagix-home.html."
 //
-// Staggered fade-up animation on first paint:
-//   badge → eyebrow → H1 → subhead → CTAs → friction line.
-// The dashboard image fades in slightly later. All animations
-// respect prefers-reduced-motion (handled in globals.css).
+// Layout:
+//   - Two-column on desktop: text left, dashboard preview right.
+//   - Stacks on mobile (text above image).
+//   - Staggered fade-up animation on first paint.
+//   - prefers-reduced-motion respected (handled in globals.css).
 //
-// Copy mapping (per founder direction 2026-06-06):
-//   - Eyebrow + H1 + subhead retained from v7 production hero.
-//   - Patent-pending badge added per brief (application filed,
-//     confirmed).
-//   - CTAs swapped to "Start my free checkup" (primary, →
-//     lite.finmagix.com/signup) + "Check out our Platform"
-//     (secondary, → /platform) per brief.
-//   - Friction line is the existing trust-line phrasing.
+// The mockup faked the dashboard preview in CSS; per the brief,
+// we swap in the real /product/lite-dashboard.png via next/image.
 //
-// Analytics: each CTA carries a data-analytics attribute for
-// downstream click-tracking wiring (cta_hero_signup,
-// cta_hero_platform) per brief acceptance criteria.
+// CTA destinations (per the brief's "CTA destinations" section):
+//   Primary "Start my free checkup" → https://lite.finmagix.com/signup
+//   Secondary "Check out our Platform" → /platform
+//
+// Patent claim status: filed (founder-confirmed in this session).
 
 import Image from "next/image";
 import Link from "next/link";
@@ -32,24 +29,38 @@ export default function HomeHero() {
       <div className="home-hero__wrap">
         {/* ── Text column ── */}
         <div className="home-hero__copy">
-          <div className="home-hero__badge">
-            <span className="home-hero__badge-dot" aria-hidden="true" />
-            Patent-pending technology
-          </div>
+          {/* AI badge — green pill with gold lightning bolt + cream text */}
+          <span className="home-hero__ai-badge home-hero__d1">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              aria-hidden="true"
+            >
+              <path d="M13 2L4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5z" />
+            </svg>
+            AI-powered · Patent-pending technology
+          </span>
 
-          <div className="home-hero__eyebrow">
-            Inspired by CFP and CFA Planning Principles
-          </div>
+          <span className="home-hero__eyebrow home-hero__d1">
+            Inspired by CFP &amp; CFA planning principles
+          </span>
 
-          <h1 className="home-hero__h1">
-            Financial Planning done <em>Your Way</em>
+          <h1 className="home-hero__h1 home-hero__d2">
+            A financial planner&apos;s whole playbook.{" "}
+            <br />
+            Without the $250,000 minimum.
           </h1>
 
-          <p className="home-hero__sub">
-            Finmagix is the FIRST AI powered FINANCIAL FITNESS PLATFORM with 12 comprehensive modules to help you plan and assess every part of your financial life.
+          <p className="home-hero__sub home-hero__d3">
+            Budgets look back.{" "}
+            <b>Finmagix helps you decide what&apos;s next</b> — across all
+            twelve areas of your financial life, in plain language, with you in
+            charge.
           </p>
 
-          <div className="home-hero__ctas">
+          <div className="home-hero__ctas home-hero__d4">
             <a
               href={LITE_SIGNUP_URL}
               target="_blank"
@@ -61,27 +72,31 @@ export default function HomeHero() {
             </a>
             <Link
               href="/platform"
-              className="home-btn home-btn--secondary"
+              className="home-btn home-btn--ghost"
               data-analytics="cta_hero_platform"
             >
               Check out our Platform
             </Link>
           </div>
 
-          <p className="home-hero__friction">
-            Free to start · No credit card · About five minutes
-          </p>
+          <div className="home-hero__friction home-hero__d5">
+            <span>Free to start</span>
+            <i className="home-hero__dot" aria-hidden="true" />
+            <span>No credit card</span>
+            <i className="home-hero__dot" aria-hidden="true" />
+            <span>No bank connection</span>
+          </div>
         </div>
 
-        {/* ── Visual column ── */}
-        <div className="home-hero__visual">
+        {/* ── Visual column — real lite dashboard screenshot ── */}
+        <div className="home-hero__visual home-hero__d4">
           <Image
             src="/product/lite-dashboard.png"
-            alt="Finmagix Lite dashboard — a 'Create a summary across your modules' panel at the top with a Generate button and '11 modules completed' status, followed by category groups ('Get the lay of the land' with Financial Fitness Score and Financial Stress Test, and 'Cover the bases' with Protection & Insurance Optimizer and Debt Strategy), each module showing its name, tier badge, one-line description, and current score."
+            alt="Finmagix Lite dashboard — a 'Create a summary across your modules' panel at the top followed by category groups ('Get the lay of the land' and 'Cover the bases') with module rows showing names, tier badges, descriptions, and scores."
             width={1440}
             height={707}
             priority
-            sizes="(max-width: 900px) 100vw, (max-width: 1280px) 50vw, 720px"
+            sizes="(max-width: 900px) 100vw, (max-width: 1280px) 50vw, 600px"
             className="home-hero__image"
           />
         </div>
