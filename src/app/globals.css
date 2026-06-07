@@ -4131,37 +4131,31 @@ h4, h5, h6 {
 }
 
 /* Step 1 — text-only strip */
+/* Step 1 — text-only block. No card wrapper. Uses the same inline
+   .pf-flabel pattern as steps 2-6 (clay number circle + "How it works"
+   eyebrow). Aligned to the left within a constrained max-width so it
+   visually sits in the same column as the text-side of the feature
+   blocks below. */
 .pf-step-one {
-  display: flex;
-  gap: 22px;
-  align-items: center;
-  background: var(--home-card);
-  border: 1px solid var(--home-line);
-  border-radius: var(--home-radius);
-  padding: 26px 28px;
   margin: 44px auto 0;
-  max-width: 900px;
-}
-.pf-step-one__n {
-  flex: none;
-  font-family: var(--font-serif);
-  font-weight: 600;
-  color: #F4F0E7;
-  background: var(--home-green);
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 1000px;
+  padding: 12px 0 28px;
 }
 .pf-step-one__h3 {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
   color: var(--home-ink);
+  margin: 14px 0 12px;
 }
-.pf-step-one__p { font-size: 0.98rem; margin-top: 2px; color: var(--home-ink-soft); }
+.pf-step-one__p {
+  font-size: 1.04rem;
+  color: var(--home-ink-soft);
+  line-height: 1.55;
+  max-width: 36em;
+}
 
 /* Steps 2/3/5/6 — text + image feature blocks */
 .pf-feature {
@@ -4249,13 +4243,23 @@ h4, h5, h6 {
   background: transparent;
   border: none;
   box-shadow: none;
-  overflow: hidden;
+  overflow: visible;
   max-width: 300px;
   width: 100%;
 }
-.pf-phone img { display: block; width: 100%; height: auto; }
+.pf-phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* mix-blend-mode: multiply softens any residual near-white pixels
+     around the phone bezel that the corner flood-fill didn't catch,
+     so the phone reads as sitting directly on the paper surface
+     instead of inside a white card. */
+  mix-blend-mode: multiply;
+}
 @media (max-width: 720px) {
-  .pf-phones { gap: 20px; }
+  /* On phones, stack the two device shots vertically + center them. */
+  .pf-phones { flex-direction: column; align-items: center; gap: 28px; }
   .pf-phone { max-width: 260px; }
 }
 
@@ -4273,13 +4277,72 @@ h4, h5, h6 {
   margin-top: 32px;
 }
 @media (max-width: 820px) { .pf-tier-grid { grid-template-columns: 1fr; } }
-.pf-tier {
+/* The outer .pf-tier no longer carries the card visual — that lives
+   on the inner flip faces (or the static fallback on touch). */
+.pf-tier { background: transparent; perspective: 1000px; }
+
+/* Flip container — fills the grid cell and exposes the 3D context.
+   Hover or keyboard focus rotates the inner around the Y axis. */
+.pf-tier__flip {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+  cursor: default;
+  /* Default for non-hover devices: hide the flip mechanism entirely
+     and show the static fallback below instead. */
+  display: none;
+}
+.pf-tier__face {
+  position: absolute;
+  inset: 0;
+  background: var(--home-card);
+  border: 1px solid var(--home-line);
+  border-radius: 14px;
+  padding: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.pf-tier__face--front {
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.pf-tier__face--back {
+  transform: rotateY(180deg);
+  overflow-y: auto;
+}
+.pf-tier--rec .pf-tier__face { border-color: var(--home-clay); }
+
+/* Static fallback — what's shown on touch / non-hover devices.
+   Same visual as the flip BACK face (icon + name + chips). */
+.pf-tier__static {
   background: var(--home-card);
   border: 1px solid var(--home-line);
   border-radius: 14px;
   padding: 20px;
 }
-.pf-tier--rec { border-color: var(--home-clay); }
+.pf-tier--rec .pf-tier__static { border-color: var(--home-clay); }
+
+/* On hover-capable devices with a fine pointer, hide the static
+   fallback and enable the flip card. */
+@media (hover: hover) and (pointer: fine) {
+  .pf-tier__flip { display: block; }
+  .pf-tier__static { display: none; }
+  .pf-tier__flip:hover,
+  .pf-tier__flip:focus-visible {
+    transform: rotateY(180deg);
+  }
+  .pf-tier__flip:focus-visible {
+    box-shadow: 0 0 0 2px var(--home-clay) inset;
+    border-radius: 14px;
+  }
+}
+
 .pf-tier__head {
   display: flex;
   align-items: center;
@@ -4306,6 +4369,14 @@ h4, h5, h6 {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+/* Large icon variant — the dominant visual on the flip card FRONT
+   face. */
+.pf-tier__icon--lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+}
+.pf-tier__icon--lg svg { width: 40px; height: 40px; }
 .pf-tier--rec .pf-tier__icon { background: #F7E6D8; color: var(--home-clay); }
 .pf-tier__name {
   font-family: var(--font-serif);
@@ -4324,6 +4395,9 @@ h4, h5, h6 {
   color: var(--home-clay);
   margin-left: auto;
 }
+/* On the flip card's FRONT face the badge sits below the large icon
+   instead of trailing the header row. */
+.pf-tier__face--front .pf-tier__badge { margin-left: 0; }
 .pf-tier__chips {
   list-style: none;
   display: flex;
@@ -4354,6 +4428,12 @@ h4, h5, h6 {
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* Respect prefers-reduced-motion: disable the flip rotation but
+   keep the hover-state target swap so users still see the back. */
+@media (prefers-reduced-motion: reduce) {
+  .pf-tier__flip { transition: none; }
 }
 
 /* WHAT WE WON'T DO — dark green */
