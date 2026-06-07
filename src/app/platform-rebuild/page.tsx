@@ -10,7 +10,6 @@
 
 import type { Metadata } from "next";
 import PlatformHero from "@/components/platform/Hero";
-import PlatformWhatFinmagixIs from "@/components/platform/WhatFinmagixIs";
 import PlatformHowItWorks from "@/components/platform/HowItWorks";
 import PlatformWhatsInside from "@/components/platform/WhatsInside";
 import PlatformWhatWeWontDo from "@/components/platform/WhatWeWontDo";
@@ -34,7 +33,6 @@ export default function PlatformRebuildPreview() {
         <b>Free to start — no credit card</b>
       </div>
       <PlatformHero />
-      <PlatformWhatFinmagixIs />
       <PlatformHowItWorks />
       <PlatformWhatsInside />
       <PlatformWhatWeWontDo />
