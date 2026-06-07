@@ -81,7 +81,7 @@ export default function PlatformHowItWorks() {
         <ScrollReveal className="pf-sec-head">
           <span className="pf-eyebrow">How it works</span>
           <h2 className="pf-sec-head__h2">
-            Five small steps.{" "}
+            Six small steps.{" "}
             <span className="pf-serif-em">Nothing demanding.</span>
           </h2>
           <p className="pf-lede">
