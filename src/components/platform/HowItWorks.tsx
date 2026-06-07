@@ -90,16 +90,18 @@ export default function PlatformHowItWorks() {
           </p>
         </ScrollReveal>
 
-        {/* Step 1 — text-only strip */}
+        {/* Step 1 — text-only, matches the inline label pattern used by
+            the other steps (clay circle + "How it works", no card wrapper). */}
         <ScrollReveal className="pf-step-one">
-          <div className="pf-step-one__n">1</div>
-          <div>
-            <h3 className="pf-step-one__h3">Tell us a little.</h3>
-            <p className="pf-step-one__p">
-              Up to ten short questions. About three minutes. Skip what you
-              want.
-            </p>
-          </div>
+          <span className="pf-flabel">
+            <span className="pf-flabel__sn">1</span>
+            How it works
+          </span>
+          <h3 className="pf-step-one__h3">Tell us a little.</h3>
+          <p className="pf-step-one__p">
+            Up to ten short questions. About three minutes. Skip what you
+            want.
+          </p>
         </ScrollReveal>
       </div>
 
