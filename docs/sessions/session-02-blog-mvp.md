@@ -109,3 +109,21 @@ Each is flagged **CONFIRMED** or **VERIFY** (Claude Code confirms before writing
 
 *Approved by founder: ____________  Date: ________*
 *PR: __________ (append this brief to the PR description on open, per §6.1.)*
+
+---
+
+## Pre-build confirmation (Claude Code — 2026-06-20)
+
+Stack verified on the `session-02-blog-mvp` branch before any feature code, resolving the brief's VERIFY items above:
+
+- **VERIFY #2 → CONFIRMED.** `finmagix-com` is **Next.js 16.2.4, App Router**, React 19.2.4, TypeScript. The Sanity-into-the-front-end plan holds as written; no rescope.
+- **VERIFY #3 → CONFIRMED.** **Tailwind v4** (CSS-first; no `tailwind.config.*`). Design tokens live in `src/app/globals.css` (declared the marketing site's design-system source of truth); shared UI primitives in `src/components/ui/` (`Button`, `Badge`, `SectionLabel`). `@tailwindcss/typography` is already installed — available for post-body prose.
+- **VERIFY #4 → CONFIRMED.** `finmagix-com` is its **own Vercel project** (`prj_3oObfcsmPKH2qovvzY4UN2kKTm4J`, team `finmagix`), separate from the app's `finmagix-lite` project. Sanity env vars and the revalidation webhook belong on **this** project. Per-branch preview deploys are available (`preview.finmagix.com` tracks the `preview` branch).
+- **VERIFY #5 → CONFIRMED.** `/blog` and `/studio` are **free** — no route collision. The only `blog` references in the repo are historical comments in `src/app/sitemap.ts` and `src/components/Footer.tsx` noting the old blog was removed.
+
+**Build notes (carry into the build phase):**
+
+1. **Paths nest under `src/`.** The brief's expected paths map to `src/app/blog/...`, `src/app/studio/[[...tool]]/page.tsx`, and `src/lib/sanity/...` — not root-level `app/` / `lib/`.
+2. **Read the local Next 16 docs first.** Per `AGENTS.md`, read `node_modules/next/dist/docs/` before writing any Next code (Next 16 diverges from training data).
+
+**Branch base:** this branch is based on `preview` (the session-01 home redesign is already merged there), independent of the `session-01-*` branch, per the normal `session-NN → preview → main` flow.
