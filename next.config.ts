@@ -8,6 +8,18 @@ import type { NextConfig } from "next";
 // to search engines that the old URLs have moved permanently.
 
 const nextConfig: NextConfig = {
+  images: {
+    // Sanity serves post / author imagery from its global image CDN.
+    // Scope the allow-list to that single host (standards §: be as
+    // specific as possible with remote image patterns).
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/**",
+      },
+    ],
+  },
   async redirects() {
     return [
       {
