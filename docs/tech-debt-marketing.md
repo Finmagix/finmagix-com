@@ -93,6 +93,18 @@ This file tracks deferred work, design-system shortcuts, and cleanup items speci
 
 ## Strategy / compliance — deliberate overrides to revisit
 
+### Blog publishing has no enforced pre-publish review gate (Session 02, by design)
+
+**What.** The Sanity blog (`/blog`, `/studio`) has no software gate on publishing. When the author flips a post's `status` to `published` (or publishes the document in the Studio), it goes live on the next revalidation. No checklist, classifier, or confirmation step can refuse the action.
+
+**Where.** `src/sanity/schemaTypes/post.ts` (`status` field is an editorial convenience, not a gate); `src/lib/sanity/queries.ts` (public queries filter `status == "published"`).
+
+**Why it matters.** Compliance of published content rests on author judgment (optionally assisted by running a draft against Claude on the Part 4 lines + Part 7 voice). This mirrors the strategy's preference for surfaces the user reaches for over obligation surfaces — but it means a non-compliant post *can* be published.
+
+**Why it's not silent drift.** Deliberate founder decision, recorded in the session-02 brief's Tech-debt + Compliance sections.
+
+**Revisit when.** Authorship expands beyond the founder, or publishing cadence increases. Likely mitigation: a non-blocking pre-publish *warning* that flags a sentinel pattern (author can click past it), plus automated sentinel linting on blog content (the strategy §5.2 / standards §5.2 pattern checks) — neither exists today. **Effort.** ~1 day for a warning + lint pass. **Cleanup session.** When authorship/volume grows.
+
 ### "AI by design" proof point on home — overrides strategy.md Part 7
 
 **What.** The 2026-05-24 mini-brief rebuild of the home top sections introduced a 4-item ProofStrip immediately below the hero. Proof point 3 is "AI by design" with the supporting line *"Modern technology does the heavy lifting; you make every call."*
@@ -220,6 +232,16 @@ This file tracks deferred work, design-system shortcuts, and cleanup items speci
 ---
 
 ## Low priority (post-launch polish)
+
+### Sanity dependency tree — npm advisories + peer override (Session 02)
+
+**What.** Installing `sanity` + `next-sanity` added ~825 packages. `npm audit` reports 15 advisories (14 moderate, 1 high), and install logged one `ERESOLVE` peer-dependency override (resolved automatically; the build, typecheck, and lint all pass).
+
+**Where.** `package.json` / `package-lock.json` (Sanity Studio dependency tree).
+
+**Why it matters.** Most advisories live in Studio/build-time tooling rather than the shipped public-blog runtime, but they should be reviewed and tracked rather than ignored. `npm audit fix --force` was deliberately NOT run (it can apply breaking changes to a working build).
+
+**Effort.** ~30–60 min to triage `npm audit` and apply safe, non-breaking fixes; re-run build. **Cleanup session.** Periodic dependency hygiene, or when Sanity ships updates.
 
 ### CI grep gate for Part 4 forbidden patterns
 
