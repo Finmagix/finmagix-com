@@ -23,6 +23,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/platform", label: "Finmagix Platform" },
   { href: "/#modules", label: "Modules" },
+  { href: "/blog", label: "Blog" },
   { href: "/partners", label: "For partners" },
 ] as const;
 
