@@ -205,6 +205,18 @@ This file tracks deferred work, design-system shortcuts, and cleanup items speci
 
 **Effort.** 30 minutes when sitemap is built. **Cleanup session.** Sitemap update task, likely part of Session 01 verification.
 
+### Dead MDX blog dependencies left in package.json
+
+**What.** `package.json` still lists three dependencies from the old MDX-based `/blog` (removed before the redesign): `next-mdx-remote`, `gray-matter`, and `reading-time`. The Session 02 blog (Sanity-based) does not use them, and they are unreferenced anywhere in `src/` (verified by grep).
+
+**Where.** `package.json` `dependencies`. (The old MDX blog routes were already deleted; their content is preserved in git history.)
+
+**Why it matters.** Dead dependencies add install weight and supply-chain surface for no benefit, and imply an MDX content pipeline that no longer exists. Harmless at runtime — nothing imports them — so not launch-blocking.
+
+**Why not removed in Session 02.** Founder direction: note only, do not remove this session, to keep the blog-MVP diff scoped to net-new Sanity work.
+
+**Effort.** ~5 minutes (`npm uninstall next-mdx-remote gray-matter reading-time`, then confirm `next build`). **Cleanup session.** Any future session touching `package.json`; pairs naturally with the blog session's dependency changes once it lands.
+
 ---
 
 ## Low priority (post-launch polish)
