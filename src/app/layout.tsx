@@ -7,8 +7,7 @@ import {
   Geist_Mono,
 } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
+import SiteShell from "@/components/SiteShell";
 
 // Primary serif — headlines, section titles, card titles
 // Variable font with opsz axis enables size-appropriate optical sizing
@@ -104,12 +103,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${hankenGrotesk.variable} ${dmSans.variable} ${dmSerif.variable} ${geistMono.variable}`}
     >
       <body>
-        <a className="skip" href="#main">
-          Skip to content
-        </a>
-        <NavBar />
-        <main id="main">{children}</main>
-        <Footer />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

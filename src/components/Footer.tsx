@@ -6,7 +6,8 @@
 // Per Session 01 founder decisions (May 2026):
 //   - No Pricing link in Product column (page dropped for beta; see
 //     docs/tech-debt-marketing.md for restoration plan)
-//   - No Blog link in Company column (page removed; data preserved)
+//   - Blog link restored to Company column (Session 02 — Sanity-backed
+//     blog at /blog)
 //   - No standalone Security link — merged into /privacy-and-security
 //   - No How-we-make-money link — substance now in About §03 +
 //     Platform "What we won't do"
@@ -38,6 +39,7 @@ const columns = [
     links: [
       { href: "/about", label: "About us" },
       { href: "/advisors", label: "Our advisors" },
+      { href: "/blog", label: "Blog" },
       { href: "/contact", label: "Contact" },
     ],
   },
