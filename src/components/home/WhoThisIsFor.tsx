@@ -1,16 +1,16 @@
-// Section 7 — "Who this is for" with photo LEFT (per brief inversion
-// from the mockup's right) and bullet checklist RIGHT.
+// "Built for the 85%" — moved to home section #2 (right after the
+// hero) per session-03 founder brief. Photo LEFT, bullets RIGHT.
 // Stacks on mobile: heading → bullets → photo.
 
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const BULLETS = [
-  "You plan without an advisor — or only see one now and then.",
-  "You're not sure whether you're actually on track for retirement.",
-  "You want more than a budgeting app that tallies the past.",
-  "You'd like taxes, debt, insurance, estate, and Social Security in one place.",
-  "You want structure before a big financial decision — not a sales call.",
+  "Industrial-grade tools to get a complete picture of your financial life.",
+  "Modules anchored in CFP planning principles.",
+  "Taxes, debt, insurance, estate, and Social Security — thought through in one place, not scattered across five apps.",
+  "Built for the ~85% of households below the asset minimum most advisors require — not just six-figure portfolios.",
+  "Structure before a big financial decision — not a sales call.",
 ];
 
 export default function HomeWhoThisIsFor() {
@@ -19,7 +19,9 @@ export default function HomeWhoThisIsFor() {
       <div className="home-wrap">
         <ScrollReveal className="home-sec__head" >
           <span className="home-eyebrow">Built for the 85%</span>
-          <h2 style={{ marginTop: 14 }}>This is for you if…</h2>
+          <h2 style={{ marginTop: 14 }}>
+            Six-figure thinking, no six-figure minimum
+          </h2>
         </ScrollReveal>
 
         <div className="home-who__grid">
@@ -40,9 +42,14 @@ export default function HomeWhoThisIsFor() {
               }}
             />
             <figcaption className="home-who__stat">
+              {/* "85%" = share of US households below the investable-asset
+                  minimum planning-focused advisors typically require
+                  ($100K–$1M+; only ~4% of households hold $2M+). Defensible
+                  as an asset-gate claim, NOT as "don't use an advisor"
+                  (~two-thirds). Reviewed against strategy.md Part 4. */}
               <span className="big">85%</span>
               <span className="cap">
-                of households plan without an advisor
+                of households fall below the minimum advisors require
               </span>
               <p>
                 Finmagix gives that majority the structured thinking usually
