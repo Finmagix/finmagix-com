@@ -2,11 +2,9 @@
 
 **Branch:** `session-02-blog-mvp` (based on `preview`)
 **Scope brief:** [session-02-blog-mvp.md](./session-02-blog-mvp.md)
-**Status:** ✅ **SHIPPED TO PRODUCTION** — live at finmagix.com/blog + /studio
-(Deploy commit `fc1f404`, 2026-06-21). Verified on preview, then promoted to
-`main` via a curated `Deploy:` commit. One item remains: the founder registers
-the Sanity publish webhook (needs Sanity admin) — see §10.
-**Date:** 2026-06-20 (built) · 2026-06-21 (shipped to production)
+**Status:** Built and locally verified. **Not merged.** Awaiting founder review +
+the env-var setup below, then preview-deploy verification, then merge.
+**Date:** 2026-06-20
 
 ---
 
@@ -124,43 +122,15 @@ Seed categories: `npx sanity exec scripts/seed-categories.ts --with-user-token`
 
 | Criterion | Status |
 |---|---|
-| Studio embedded at `/studio` | ✅ live at finmagix.com/studio (200) |
+| Studio embedded at `/studio` | ✅ built (reachable once env + CORS set) |
 | `post.status` draft/published (convenience, not a gate) | ✅ |
-| `category` schema + seed list (8) | ✅ seeded; all 8 render as filter chips in prod |
-| `/blog` + `/blog/[slug]` in the design system, mobile-first, §4.5 floor | ✅ live; verified desktop + mobile on preview |
-| Category filter + `/blog/category/[slug]` | ✅ live |
-| Photo upload via Sanity image pipeline | ✅ post + photo published end-to-end |
-| SEO + social tags; RSS feed | ✅ live (`/blog/rss.xml` → 200) |
-| Publish webhook revalidates live site | ⏳ code shipped; **founder registers the webhook** (Sanity admin) — not yet tested in prod |
-| Verified on Vercel **preview** before prod | ✅ founder preview check passed |
-| One real post end-to-end on a phone | ✅ published, reviewed, approved |
-| Code copy §5.1 review at merge | ✅ reviewed — clean (infra only) |
+| `category` schema + seed list (8) | ✅ schema + seed script (run pending) |
+| `/blog` + `/blog/[slug]` in the design system, mobile-first, §4.5 floor | ✅ built |
+| Category filter + `/blog/category/[slug]` | ✅ |
+| Photo upload via Sanity image pipeline | ✅ schema + render path (E2E pending content) |
+| SEO + social tags; RSS feed | ✅ |
+| Publish webhook revalidates live site | ✅ built (needs secret + webhook config) |
+| Verified on Vercel **preview** before prod | ⏳ pending env + deploy |
+| One real post end-to-end on a phone | ⏳ pending content |
+| Code copy §5.1 review at merge | ⏳ at merge |
 | Session report + reviewer checklist | ✅ this doc |
-
-## 10. Production deployment (shipped 2026-06-21)
-
-**What shipped.** The blog was promoted to production as a single curated
-`Deploy:` commit — `fc1f404` "Deploy: blog MVP — Sanity-backed blog at /blog +
-Studio at /studio" — onto `main`. It is the **blog delta only** (41 files), which
-landed cleanly because `main` was byte-identical to the pre-blog preview baseline
-(`bb47312`). Not a raw `preview → main` merge. The full session-01 redesign was
-already live in production; this commit is purely additive.
-
-**Production deploy.** Vercel `dpl_DMgMnhpUkyoSpTjv3AU1PTvM6xw5`, target
-production, **READY** (clean build, ~63s), aliased to `finmagix.com` +
-`www.finmagix.com`.
-
-**Verified live (2026-06-21):**
-- `finmagix.com/blog` → 200 (via the apex→www redirect): blog chrome renders, all seeded categories show as filter chips, and the published post(s) render (not the empty state).
-- `finmagix.com/studio` → 200 (Studio shell).
-- `finmagix.com/blog/rss.xml` → 200.
-- `finmagix.com/` (home) → 200 — no regression to the existing site.
-- Local `next build` / `tsc` / `eslint` were clean; the production build matched.
-- Earlier on preview (founder): renders desktop + mobile, 8 categories seeded, one real post reviewed + approved.
-
-**Still NOT verified / outstanding:**
-- **Publish → revalidate webhook.** The `/api/revalidate` route shipped, but the Sanity webhook must be registered by the founder (Sanity admin: Manage → API → Webhooks → `https://finmagix.com/api/revalidate`, POST, secret = `SANITY_REVALIDATE_SECRET`, trigger on `post`/`category`/`author`, projection `{ _type }`). Until then, published edits go live via the **60-second ISR fallback**, not instantly. The instant publish→live path is unverified in production until the webhook is registered and a publish is observed.
-- **No automated content compliance gate** (by design) — see `tech-debt-marketing.md`.
-- The 15 npm advisories in the Sanity dependency tree (tracked in `tech-debt-marketing.md`) were not triaged this session.
-
-**Apex→www note.** `finmagix.com` 307-redirects to `www.finmagix.com` (pre-existing domain config); all blog URLs resolve correctly through it. `https://finmagix.com/api/revalidate` is a fine webhook target (the POST follows through).

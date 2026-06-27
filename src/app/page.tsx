@@ -38,11 +38,14 @@ export default function Home() {
   return (
     <div className="home-rebuild">
       <HomeHero />
+      {/* "Built for the 85%" moved to position #2 directly below
+          the hero per session-03 founder brief. Order of every
+          other section preserved. */}
+      <HomeWhoThisIsFor />
       <HomeSampleOutput />
       <HomeWhatYouGet />
       <HomeSocialProof />
       <HomeTrustBand />
-      <HomeWhoThisIsFor />
       <HomeHowItWorks />
       <HomeComparisonTable />
       <HomeJourneyStages />
