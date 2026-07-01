@@ -13,6 +13,7 @@
 // skips it. Consistent with Session 01 pricing-drop across surfaces.
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRightIcon,
@@ -186,6 +187,43 @@ export default function PartnersPage() {
             </div>
           </div>
         ))}
+
+        {/* Integration partner — added session-04. Distinct from the
+            four channel-partner sections above (this one lives further
+            down the stack: a delivery/implementation partner, not a
+            distribution channel). Same .partner-section chrome (border-
+            top + padding) so it visually belongs to the same page
+            rhythm; the inner layout is logo-left / prose-right with
+            no CTA. */}
+        <div className="partner-section" id="integration-partner">
+          <h2 style={{ marginBottom: 32 }}>Meet our Integration Partner</h2>
+          <div className="integration-partner">
+            <div className="integration-partner__logo">
+              <Image
+                src="/partners/star-knowledge.png"
+                alt="Star Knowledge — IT consulting firm specializing in enterprise identity modernization and access management."
+                width={512}
+                height={512}
+                sizes="(max-width: 900px) 240px, 320px"
+                priority={false}
+              />
+            </div>
+            <div className="integration-partner__body">
+              <p>
+                Star Knowledge is a leading IT consulting firm with deep
+                expertise in enterprise identity modernization and access
+                management. The firm architects and delivers end-to-end
+                identity solutions — from large-scale customer identity
+                migrations spanning hundreds of thousands of users and
+                multi-application federations, to modern authentication
+                frameworks using open standards like OIDC and SAML. Star
+                Knowledge partners with Microsoft, Okta, Quest, Salesforce,
+                and SAP to deliver solutions across leading enterprise
+                platforms.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

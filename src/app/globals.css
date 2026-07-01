@@ -2443,6 +2443,41 @@ h4, h5, h6 {
   .partner-section__inner { grid-template-columns: 1fr; gap: 24px; }
 }
 
+/* Integration partner block (Star Knowledge on /partners) — added
+   session-04. Logo left, prose right; stacks on mobile. Kept as its
+   own layout because the four channel-partner sections above have a
+   different information shape (icon + framing + benefit checklist +
+   CTA) and reusing .partner-section__inner would either force a
+   pointless empty column or bloat the shared grid rule. */
+.integration-partner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 48px;
+  align-items: center;
+}
+.integration-partner__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.integration-partner__logo img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.integration-partner__body p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  margin: 0;
+  max-width: 60ch;
+}
+@media (max-width: 900px) {
+  .integration-partner { grid-template-columns: 1fr; gap: 32px; }
+  .integration-partner__logo img { max-width: 240px; }
+}
+
 /* ============================================================
    Advisor feature card (William Tincup on /advisors)
    ============================================================ */
