@@ -41,6 +41,9 @@ function Feature({
   const shot = (
     <ScrollReveal className="pf-feature__shot">
       <figure className="pf-shot">
+        <span className="pf-sample" aria-label="Sample data, for illustration">
+          Sample
+        </span>
         <div className="pf-shot__bar">
           <i />
           <i />
@@ -144,6 +147,9 @@ export default function PlatformHowItWorks() {
           </p>
           <div className="pf-phones">
             <div className="pf-phone">
+              <span className="pf-sample" aria-label="Sample data, for illustration">
+                Sample
+              </span>
               <Image
                 src="/platform/phone-1.png"
                 alt="Phone screen showing Net Worth — $70,000 — with a Score Breakdown listing Savings Rate 22/22, Liquidity 6/15, Net Worth 4/20, Retirement 8/25, Risk Protection 0/10, and Estate Planning 0/8."
@@ -153,6 +159,9 @@ export default function PlatformHowItWorks() {
               />
             </div>
             <div className="pf-phone">
+              <span className="pf-sample" aria-label="Sample data, for illustration">
+                Sample
+              </span>
               <Image
                 src="/platform/phone-2.png"
                 alt="Phone screen showing Projected Portfolio at Retirement — $738,846 at age 65 in today's dollars — with a Portfolio Growth Projection chart and an Applied withdrawal rate of 3.75% (25–35 year horizon)."

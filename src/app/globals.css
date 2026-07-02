@@ -3422,6 +3422,12 @@ h4, h5, h6 {
   margin-top: 8px;
 }
 @media (max-width: 760px) { .home-proof__grid { grid-template-columns: 1fr; } }
+.home-proof__disclosure {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--home-ink-mute);
+}
 .home-tcard {
   background: var(--home-card);
   border: 1px solid var(--home-line);
@@ -4072,6 +4078,30 @@ h4, h5, h6 {
   color: var(--home-ink-mute);
 }
 .pf-shot img { display: block; width: 100%; height: auto; }
+
+/* "Sample" chip on product screenshots — marks the figures shown on
+   /platform as illustrative sample data, not representative outcomes.
+   Parity with the home Quiet-Index snapshot's .home-sample__data-label.
+   Added session-06 (legal/compliance copy pass). */
+.pf-sample {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 2;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--home-clay);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+/* On the two device shots the wrapper is transparent/overflow-visible,
+   so give it a positioning context for the chip. */
+.pf-phone { position: relative; }
+.pf-phone .pf-sample { top: 6px; right: 6px; }
 
 /* HERO */
 .pf-hero { padding: 62px 0 64px; }

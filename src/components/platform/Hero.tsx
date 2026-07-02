@@ -12,6 +12,9 @@ export default function PlatformHero() {
       <div className="pf-wrap pf-hero__grid">
         <div className="pf-hero__shot">
           <figure className="pf-shot">
+            <span className="pf-sample" aria-label="Sample data, for illustration">
+              Sample
+            </span>
             <div className="pf-shot__bar">
               <i />
               <i />

@@ -51,6 +51,9 @@ export default function HomeSocialProof() {
             </div>
           </div>
         </ScrollReveal>
+        <p className="home-proof__disclosure">
+          Individual member experiences. Not a guarantee of results.
+        </p>
       </div>
     </section>
   );

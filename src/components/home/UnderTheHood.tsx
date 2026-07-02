@@ -33,9 +33,9 @@ export default function HomeUnderTheHood() {
             </span>
           </h2>
           <p className="home-lede" style={{ marginTop: 16 }}>
-            A frontier AI does the analysis. CFP and CFA advisors wrote the
-            rules it has to follow. You get a planner&apos;s structured
-            thinking — without the six-figure minimum.
+            A frontier AI does the analysis. Its rules are grounded in CFP and
+            CFA principles. You get a planner&apos;s structured thinking —
+            without the six-figure minimum.
           </p>
         </ScrollReveal>
         <ScrollReveal as="ul" className="home-engine__list">

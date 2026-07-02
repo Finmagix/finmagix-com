@@ -32,7 +32,7 @@ export default function AdvisorsPage() {
           className="t-page-title"
           style={{ marginTop: 16, marginBottom: 24, maxWidth: 820 }}
         >
-          The professionals who shape our principles — and challenge our thinking.
+          The professionals who advise us — and challenge our thinking.
         </h1>
         <p className="t-lede" style={{ maxWidth: 720 }}>
           Our advisors make us better every day, helping us build on our mission.

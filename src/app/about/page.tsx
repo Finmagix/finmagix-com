@@ -136,7 +136,7 @@ export default function AboutPage() {
             </div>
             <div className="about-block__body">
               <p>
-                <strong>Finmagix covers what actually drives outcomes</strong> — financial health, taxes, debt, retirement, longevity, insurance, college, Social Security, FIRE, estate, and wealth building. Each is a structured module that produces a real analysis.
+                <strong>Finmagix covers the areas that actually shape financial decisions</strong> — financial health, taxes, debt, retirement, longevity, insurance, college, Social Security, FIRE, estate, and wealth building. Each is a structured module that produces a real analysis.
               </p>
               <p>
                 <strong>Every analysis shows the work.</strong> What we looked at. What we assumed. What the options are. What each one trades off. You get a structured way to think — not a verdict.
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 </strong>
               </p>
               <p>
-                We work with experienced financial advisory professionals who keep our planning principles grounded and our boundaries honest.
+                We work with experienced advisors who challenge our thinking and help us keep the line between education and advice clear.
               </p>
               <div className="about-advisor-cta">
                 <div>
@@ -184,7 +184,7 @@ export default function AboutPage() {
                     Meet our advisors
                   </div>
                   <p className="about-advisor-cta__body">
-                    The professionals who shape our principles, review our framework, and challenge our thinking.
+                    The professionals who advise us, challenge our thinking, and help keep us honest.
                   </p>
                 </div>
                 <Link href="/advisors" className="btn btn--secondary">

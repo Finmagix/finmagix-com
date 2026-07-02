@@ -6,7 +6,7 @@ import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const BULLETS = [
-  "Industrial-grade tools to get a complete picture of your financial life.",
+  "Thorough tools to get a complete picture of your financial life.",
   "Modules anchored in CFP planning principles.",
   "Taxes, debt, insurance, estate, and Social Security — thought through in one place, not scattered across five apps.",
   "Built for the ~85% of households below the asset minimum most advisors require — not just six-figure portfolios.",
